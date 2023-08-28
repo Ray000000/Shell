@@ -20,13 +20,13 @@ read -p "Please input:" choice
 
 case $choice in
   1)
-    curl -sS -O https://ray000000.github.io/Shell/en.sh && chmod +x en.sh && sudo ./en.sh
+    curl -sS -O https://ray000000.github.io/Shell/main/en.sh && chmod +x en.sh && sudo ./en.sh
     ;;
   2)
-    curl -sS -O https://ray000000.github.io/Shell/zh-hant.sh && chmod +x zh-hant.sh && sudo ./zh-hant.sh
+    curl -sS -O https://ray000000.github.io/Shell/main/zh-hant.sh && chmod +x zh-hant.sh && sudo ./zh-hant.sh
     ;;
   3)
-    curl -sS -O https://ray000000.github.io/Shell/zh-hans.sh && chmod +x zh-hans.sh && sudo ./zh-hans.sh
+    curl -sS -O https://ray000000.github.io/Shell/main/zh-hans.sh && chmod +x zh-hans.sh && sudo ./zh-hans.sh
     ;;
   0)
     exit
