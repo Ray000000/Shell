@@ -10,124 +10,26 @@ _/      _/  _/    _/    _/_/_/    _/_/_/           ____|_/ |_|  |_| |_|____ |_|_
                                      _/       
                                 _/_/"
 
-echo "請選擇您要執行的任務："
+echo "Choose your language:"
 echo "1. English"
 echo "2. 繁體中文"
 echo "3. 简体中文"
 echo "0. Exit"
 
-read -p "請輸入：" choice
+read -p "Please input:" choice
 
 case $choice in
   1)
-    ls
+    curl -sS -O https://ray000000.github.io/Shell/en.sh && chmod +x en.sh && sudo ./en.sh
     ;;
   2)
-    gnome-terminal
+    curl -sS -O https://ray000000.github.io/Shell/zh-hant.sh && chmod +x zh-hant.sh && sudo ./zh-hant.sh
     ;;
   3)
+    curl -sS -O https://ray000000.github.io/Shell/zh-hans.sh && chmod +x zh-hans.sh && sudo ./zh-hans.sh
+    ;;
+  0)
     exit
-    ;;
-  *)
-    echo "Error: Ineffective choices"
-    ;;
-esac
-
-#!/bin/bash
-
-first_menu_options=(
-  "1. English"
-  "2. 繁體中文"
-  "3. 简体中文"
-)
-
-second_menu_options=(
-  "1. 檔案管理"
-  "2. 程式管理"
-  "3. 網路管理"
-)
-
-echo "Choose your language:"
-for option in "${first_menu_options[@]}"; do
-  echo "$option"
-done
-read choice
-
-case $choice in
-  1)
-    echo "Please select the action you want to perform:"
-    for option in "${second_menu_options[@]}"; do
-      echo "$option"
-    done
-    read second_choice
-
-    case $second_choice in
-      1)
-        # 執行檔案管理
-        echo "執行檔案管理"
-        ;;
-      2)
-        # 執行程式管理
-        echo "執行程式管理"
-        ;;
-      3)
-        # 執行網路管理
-        echo "執行網路管理"
-        ;;
-      *)
-        echo "Error: Ineffective choices"
-        ;;
-    esac
-    ;;
-  2)
-    echo "請選擇您要執行的操作："
-    for option in "${second_menu_options[@]}"; do
-      echo "$option"
-    done
-    read second_choice
-
-    case $second_choice in
-      1)
-        # 執行檔案管理
-        echo "執行檔案管理"
-        ;;
-      2)
-        # 執行程式管理
-        echo "執行程式管理"
-        ;;
-      3)
-        # 執行網路管理
-        echo "執行網路管理"
-        ;;
-      *)
-        echo "錯誤：無效選擇"
-        ;;
-    esac
-    ;;
-  3)
-    echo "请选择您要执行的操作："
-    for option in "${second_menu_options[@]}"; do
-      echo "$option"
-    done
-    read second_choice
-
-    case $second_choice in
-      1)
-        # 執行檔案管理
-        echo "執行檔案管理"
-        ;;
-      2)
-        # 執行程式管理
-        echo "執行程式管理"
-        ;;
-      3)
-        # 執行網路管理
-        echo "執行網路管理"
-        ;;
-      *)
-        echo "错误：无效选择"
-        ;;
-    esac
     ;;
   *)
     echo "Error: Ineffective choices"
