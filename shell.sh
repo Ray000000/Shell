@@ -10,7 +10,9 @@ _/      _/  _/    _/    _/_/_/    _/_/_/           ____|_/ |_|  |_| |_|____ |_|_
                                      _/       
                                 _/_/ \e[0m"
 
-echo "Choose your language:"
+echo -e "\e[1m\e[93m
+Choose your language:
+\e[0m"
 echo "1. English"
 echo "2. 繁體中文"
 echo "3. 简体中文"
