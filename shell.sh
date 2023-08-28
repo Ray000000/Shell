@@ -1,5 +1,42 @@
 #!/bin/bash
 
+echo "Welcome to                  
+    _/      _/   
+     _/  _/      
+      _/         
+   _/  _/        
+_/      _/       
+                 
+                 "
+
+echo "請選擇您要執行的任務："
+echo "1. 列出當前目錄中的檔案"
+echo "2. 打開終端"
+echo "3. Exit"
+
+# 讀取用戶輸入
+
+read choice
+
+# 根據用戶選擇執行操作
+
+case $choice in
+  1)
+    ls
+    ;;
+  2)
+    gnome-terminal
+    ;;
+  3)
+    exit
+    ;;
+  *)
+    echo "Error: Ineffective choices"
+    ;;
+esac
+
+#!/bin/bash
+
 first_menu_options=(
   "1. English"
   "2. 繁體中文"
