@@ -81,6 +81,6 @@ case $choice in
     exit
     ;;
   *)
-    echo "錯誤：無效選項"
+    echo -e "\e[1m\e[31錯誤：無效選項\e[0m"
     ;;
 esac
