@@ -40,7 +40,7 @@ case $choice in
         echo "執行網路管理"
         ;;
       *)
-        echo "無效選擇"
+        echo "Error: Ineffective choices"
         ;;
     esac
     ;;
@@ -65,7 +65,7 @@ case $choice in
         echo "執行網路管理"
         ;;
       *)
-        echo "無效選擇"
+        echo "錯誤：無效選擇"
         ;;
     esac
     ;;
@@ -90,7 +90,7 @@ case $choice in
         echo "執行網路管理"
         ;;
       *)
-        echo "無效選擇"
+        echo "错误：无效选择"
         ;;
     esac
     ;;
