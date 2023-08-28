@@ -68,7 +68,7 @@ case $choice in
     echo "您的系統資訊如下："
     echo "CPU 型號：`cat /proc/cpuinfo | grep 'model name' | head -n1 | tr -d 'model name    : ' | tr -s ' ' '-'`"
     echo -e "\e[1m\e[93m記憶體大小：\e[0m`cat /proc/meminfo | grep MemTotal | tr -d 'MemTotal:        '`"
-    echo -e "\e[1m\e[93m`df -h`\e[0m"
+    echo -e "硬碟容量：`printf '\033[31mFilesystem                         Size  Used Avail Use% Mounted on\033[0m' | df -h`"
     ;;
   4)
     echo "請輸入您要執行的命令："
