@@ -16,8 +16,7 @@ echo "2. 繁體中文"
 echo "3. 简体中文"
 echo "0. Exit"
 
-echo "請輸入："
-read choice
+read -p "請輸入：" choice
 
 case $choice in
   1)
