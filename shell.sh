@@ -11,15 +11,13 @@ _/      _/  _/    _/    _/_/_/    _/_/_/           ____|_/ |_|  |_| |_|____ |_|_
                                 _/_/"
 
 echo "請選擇您要執行的任務："
-echo "1. 列出當前目錄中的檔案"
-echo "2. 打開終端"
-echo "3. Exit"
+echo "1. English"
+echo "2. 繁體中文"
+echo "3. 简体中文"
+echo "0. Exit"
 
-# 讀取用戶輸入
-
+echo "請輸入："
 read choice
-
-# 根據用戶選擇執行操作
 
 case $choice in
   1)
