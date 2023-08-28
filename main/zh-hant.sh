@@ -66,7 +66,7 @@ case $choice in
     ;;
   3)
     echo "您的系統資訊如下："
-    echo -e "\e[1m\e[93mCPU 型號：\e[0m`cat /proc/cpuinfo | grep 'model name' | head -n1 | tr -d 'model name        : '`"
+    echo "CPU 型號：`cat /proc/cpuinfo | grep 'model name' | head -n1 | tr -d 'model name    : ' | tr -s ' ' '-'`"
     echo -e "\e[1m\e[93m記憶體大小：\e[0m`cat /proc/meminfo | grep MemTotal | tr -d 'MemTotal:        '`"
     echo -e "\e[1m\e[93m`df -h`\e[0m"
     ;;
