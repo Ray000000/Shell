@@ -1,100 +1,13 @@
 #!/bin/bash
 
-first_menu_options=(
-  "1. English"
-  "2. 繁體中文"
-  "3. 简体中文"
-)
+clear
+echo -e "\e[1m\e[34m
+    _/      _/  _/_/_/                        
+     _/  _/    _/    _/    _/_/_/  _/    _/        ______   _    _   ______  ______  _       
+      _/      _/_/_/    _/    _/  _/    _/        / |      | |  | | | |     | |     | |      
+   _/  _/    _/    _/  _/    _/  _/    _/         '------. | |--| | | |---- | |---- | |   _  
+_/      _/  _/    _/    _/_/_/    _/_/_/           ____|_/ |_|  |_| |_|____ |_|____ |_|__|_| 
+                                     _/       
+                                _/_/ \e[0m"
+echo "繁體中文版"
 
-second_menu_options=(
-  "1. 檔案管理"
-  "2. 程式管理"
-  "3. 網路管理"
-)
-
-echo "Choose your language:"
-for option in "${first_menu_options[@]}"; do
-  echo "$option"
-done
-read choice
-
-case $choice in
-  1)
-    echo "Please select the action you want to perform:"
-    for option in "${second_menu_options[@]}"; do
-      echo "$option"
-    done
-    read second_choice
-
-    case $second_choice in
-      1)
-        # 執行檔案管理
-        echo "執行檔案管理"
-        ;;
-      2)
-        # 執行程式管理
-        echo "執行程式管理"
-        ;;
-      3)
-        # 執行網路管理
-        echo "執行網路管理"
-        ;;
-      *)
-        echo "Error: Ineffective choices"
-        ;;
-    esac
-    ;;
-  2)
-    echo "請選擇您要執行的操作："
-    for option in "${second_menu_options[@]}"; do
-      echo "$option"
-    done
-    read second_choice
-
-    case $second_choice in
-      1)
-        # 執行檔案管理
-        echo "執行檔案管理"
-        ;;
-      2)
-        # 執行程式管理
-        echo "執行程式管理"
-        ;;
-      3)
-        # 執行網路管理
-        echo "執行網路管理"
-        ;;
-      *)
-        echo "錯誤：無效選擇"
-        ;;
-    esac
-    ;;
-  3)
-    echo "请选择您要执行的操作："
-    for option in "${second_menu_options[@]}"; do
-      echo "$option"
-    done
-    read second_choice
-
-    case $second_choice in
-      1)
-        # 執行檔案管理
-        echo "執行檔案管理"
-        ;;
-      2)
-        # 執行程式管理
-        echo "執行程式管理"
-        ;;
-      3)
-        # 執行網路管理
-        echo "執行網路管理"
-        ;;
-      *)
-        echo "错误：无效选择"
-        ;;
-    esac
-    ;;
-  *)
-    echo "Error: Ineffective choices"
-    ;;
-esac
