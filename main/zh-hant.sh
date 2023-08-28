@@ -16,7 +16,6 @@ echo -e "\e[1m\e[93m
 echo "1. 檢測並更新系統"
 echo "2. 檔案管理"
 echo "3. 系統資訊"
-echo "4. 自訂命令"
 echo -e "\e[1m\e[32m0. Exit\e[0m"
 
 read -p "請輸入：" choice
@@ -27,14 +26,16 @@ case $choice in
     lsb_release -d
     ;;
   2)
-    echo "您想執行哪個操作？"
+    echo -e "\e[1m\e[93m
+    請選擇您要執行的任務：
+    \e[0m"
     echo "1. 列出檔案"
     echo "2. 查看檔案內容"
     echo "3. 創建檔案"
     echo "4. 刪除檔案"
     echo "5. 壓縮檔案"
     echo "6. 解壓縮檔案"
-    echo "7. 返回上一級菜單"
+    echo -e "\e[1m\e[32m0. 返回上一級菜單\e[0m"
     read next_choice
 
     case $next_choice in
@@ -56,8 +57,8 @@ case $choice in
       6)
         unzip file.zip
         ;;
-      7)
-        #Back
+      0)
+        sudo ./zh-hant.sh
         ;;
       *)
         echo "錯誤：無效選項"
@@ -65,15 +66,10 @@ case $choice in
     esac
     ;;
   3)
-    echo "您的系統資訊如下："
+    echo -e "\e[1m\e[93m您的系統資訊如下：\e[0m"
     cat /proc/cpuinfo | grep 'model name' | head -n1
     cat /proc/meminfo | grep MemTotal
     df -h
-    ;;
-  4)
-    echo "請輸入您要執行的命令："
-    read command
-    eval $command
     ;;
   0)
     exit
