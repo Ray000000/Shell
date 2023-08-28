@@ -14,8 +14,9 @@ echo -e "\e[1m\e[93m
 請選擇您要執行的任務：
 \e[0m"
 echo "1. 檢測並更新系統"
-echo "2. 檔案管理"
-echo "3. 系統資訊"
+echo "2. 系統資訊"
+echo "3. 應用商店"
+echo "4. 進階選項"
 echo -e "\e[1m\e[32m0. Exit\e[0m"
 
 read -p "請輸入：" choice
@@ -26,6 +27,16 @@ case $choice in
     lsb_release -d
     ;;
   2)
+    echo -e "\e[1m\e[93m您的系統資訊如下：\e[0m"
+    cat /proc/cpuinfo | grep 'model name' | head -n1
+    cat /proc/meminfo | grep MemTotal
+    df -h
+    ;;
+  3)
+    apt update -y && apt full-upgrade -y && apt upgrade -y && apt autoremove -y && apt autoclean -y
+    lsb_release -d
+    ;;
+  4)
     echo -e "\e[1m\e[93m
     請選擇您要執行的任務：
     \e[0m"
@@ -65,12 +76,7 @@ case $choice in
         ;;
     esac
     ;;
-  3)
-    echo -e "\e[1m\e[93m您的系統資訊如下：\e[0m"
-    cat /proc/cpuinfo | grep 'model name' | head -n1
-    cat /proc/meminfo | grep MemTotal
-    df -h
-    ;;
+  
   0)
     exit
     ;;
