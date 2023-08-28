@@ -14,8 +14,9 @@ echo -e "\e[1m\e[93m
 請選擇您要執行的任務：:
 \e[0m"
 echo "1. 檢測並更新系統"
-echo "2. ***"
-echo "3. ***"
+echo "2. 檔案管理"
+echo "3. 系統資訊"
+echo "4. 自訂命令"
 echo -e "\e[1m\e[32m0. Exit\e[0m"
 
 read -p "請輸入：" choice
@@ -29,7 +30,11 @@ case $choice in
     echo "您想執行哪個操作？"
     echo "1. 列出檔案"
     echo "2. 查看檔案內容"
-    echo "0. 返回上一級菜單"
+    echo "3. 創建檔案"
+    echo "4. 刪除檔案"
+    echo "5. 壓縮檔案"
+    echo "6. 解壓縮檔案"
+    echo "7. 返回上一級菜單"
     read next_choice
 
     case $next_choice in
@@ -39,7 +44,19 @@ case $choice in
       2)
         cat file.txt
         ;;
-      0)
+      3)
+        touch new_file.txt
+        ;;
+      4)
+        rm file.txt
+        ;;
+      5)
+        zip file.zip file.txt
+        ;;
+      6)
+        unzip file.zip
+        ;;
+      7)
         #Back
         ;;
       *)
@@ -47,8 +64,16 @@ case $choice in
         ;;
     esac
     ;;
-  2)
-    gnome-terminal
+  3)
+    echo "您的系統資訊如下："
+    echo "CPU 型號：`cat /proc/cpuinfo | grep 'model name' | head -n1`"
+    echo "記憶體大小：`cat /proc/meminfo | grep MemTotal`"
+    echo "硬碟容量：`df -h`"
+    ;;
+  4)
+    echo "請輸入您要執行的命令："
+    read command
+    eval $command
     ;;
   0)
     exit
