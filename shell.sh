@@ -16,7 +16,7 @@ Choose your language:
 echo "1. English"
 echo "2. 繁體中文"
 echo "3. 简体中文"
-echo -e "\e[1m\e[36m0. Exit\e[0m"
+echo -e "\e[1m\e[32m0. Exit\e[0m"
 
 read -p "Please input:" choice
 
