@@ -23,7 +23,7 @@ read -p "請輸入：" choice
 
 case $choice in
   1)
-    apt update -y && apt full-upgrade -y && apt upgrade -y && apt autoremove -y && apt autoclean -y
+    sudo apt update -y && apt full-upgrade -y && apt upgrade -y && apt autoremove -y && apt autoclean -y
     lsb_release -d
     ;;
   2)
@@ -77,7 +77,7 @@ case $choice in
       *)
         echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
         read -n 1 -p "按任意按鍵，回到菜單"
-        ./xray-zh-hant.sh
+        sudo ./xray-zh-hant.sh
         ;;
     esac
     ;;
@@ -88,6 +88,6 @@ case $choice in
   *)
     echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
     read -n 1 -p "按任意按鍵，回到菜單"
-    ./xray-zh-hant.sh
+    sudo ./xray-zh-hant.sh
     ;;
 esac
