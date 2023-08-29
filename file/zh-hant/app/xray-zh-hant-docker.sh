@@ -32,7 +32,7 @@ case $choice in
     read -p "請輸入：" yn_choice
     ;;
   2)
-    sudo apt-get update && sudo apt-get upgrade docker-ce && sudo apt-get upgrade docker-compose
+    sudo apt-get update -y && sudo apt-get upgrade docker-ce -y && sudo apt-get upgrade docker-compose -y
     ;;
   3)
     echo -e "\e[1m\e[34mY. 確認解除安裝\e[0m"
