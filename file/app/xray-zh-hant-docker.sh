@@ -23,7 +23,7 @@ echo "1. 安裝"
 echo "2. 更新"
 echo "3. 解除安裝（保存資料）"
 echo -e "\e[1m\e[31m4. 解除安裝（不保存資料）\e[0m"
-echo -e "\e[1m\e[32m0. Exit\e[0m"
+echo -e "\e[1m\e[32m0. 回到菜單\e[0m"
 
 read -p "請輸入：" choice
 
@@ -54,6 +54,8 @@ case $choice in
     read -n 1 -p "按任意按鍵，回到菜單"
     sudo ./xray-zh-hant-docker.sh
     ;;
+  esac
+  ;;
 
   case $yn_choice in
     Y)
