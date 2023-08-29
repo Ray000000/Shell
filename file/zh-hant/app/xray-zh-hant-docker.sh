@@ -62,22 +62,13 @@ esac
 ;;
 
 case $yn_choice in
-  Y)
+  Yy)
     sudo apt update -y && apt full-upgrade -y && apt upgrade -y && apt autoremove -y && apt autoclean -y
     curl -fsSL https://get.docker.com | sh
     curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     chmod +x /usr/local/bin/docker-compose
     ;;
-  y)
-    sudo apt update -y && apt full-upgrade -y && apt upgrade -y && apt autoremove -y && apt autoclean -y
-    curl -fsSL https://get.docker.com | sh
-    curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-    chmod +x /usr/local/bin/docker-compose
-    ;;
-  N)
-    sudo ./xray-zh-hant-docker.sh
-    ;;
-  n)
+  Nn)
     sudo ./xray-zh-hant-docker.sh
     ;;
   *)
@@ -89,24 +80,14 @@ esac
 ;;
   
 case $yn2_choice in
-  Y)
+  Yy)
     sudo apt-get remove docker
     sudo apt-get remove docker-ce
     sudo apt-get purge docker-ce
     sudo rm -rf /var/lib/docker
     sudo rm /usr/local/bin/docker-compose
     ;;
-  y)
-    sudo apt-get remove docker
-    sudo apt-get remove docker-ce
-    sudo apt-get purge docker-ce
-    sudo rm -rf /var/lib/docker
-    sudo rm /usr/local/bin/docker-compose
-    ;;
-  N)
-    sudo ./xray-zh-hant-docker.sh
-    ;;
-  n)
+  Nn)
     sudo ./xray-zh-hant-docker.sh
     ;;
   *)
@@ -118,7 +99,7 @@ esac
 ;;
 
 case $yn3_choice in
-  Y)
+  Yy)
     docker rm $(docker ps -a -q) && docker rmi $(docker images -q) && docker network prune
     sudo apt-get remove docker
     sudo apt-get remove docker-ce
@@ -126,18 +107,7 @@ case $yn3_choice in
     sudo rm -rf /var/lib/docker
     sudo rm /usr/local/bin/docker-compose
     ;;
-  y)
-    docker rm $(docker ps -a -q) && docker rmi $(docker images -q) && docker network prune
-    sudo apt-get remove docker
-    sudo apt-get remove docker-ce
-    sudo apt-get purge docker-ce
-    sudo rm -rf /var/lib/docker
-    sudo rm /usr/local/bin/docker-compose
-    ;;
-  N)
-    sudo ./xray-zh-hant-docker.sh
-    ;;
-  n)
+  Nn)
     sudo ./xray-zh-hant-docker.sh
     ;;
   *)
