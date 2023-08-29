@@ -1,6 +1,5 @@
 #!/bin/bash
 clear
-
 echo -e "\e[1m\e[93m〔Docker〕\e[0m"
 echo "
 Docker 是一種開源軟體平台，可讓您快速地建立、測試和部署應用程式。Docker 將軟體封裝到名為容器的標準化單位，其中包含程式庫、系統工具、程式碼和執行時間等執行軟體所需的所有項目。使用Docker，您可以將應用程式快速地部署到各種環境並加以擴展，而且知道程式碼可以執行。
@@ -111,7 +110,7 @@ case $choice in
   esac
   ;;
 
-    case $yn3_choice in
+  case $yn3_choice in
     Y)
       docker rm $(docker ps -a -q) && docker rmi $(docker images -q) && docker network prune
       sudo apt-get remove docker
