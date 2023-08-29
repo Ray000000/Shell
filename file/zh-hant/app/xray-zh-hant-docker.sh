@@ -117,7 +117,6 @@ case $yn2_choice in
   n)
     sudo ./xray-zh-hant-docker.sh
     ;;
-  *)
 esac
 
 case $yn3_choice in
