@@ -25,12 +25,16 @@ case $choice in
   1)
     sudo apt update -y && apt full-upgrade -y && apt upgrade -y && apt autoremove -y && apt autoclean -y
     lsb_release -d
+    read -n 1 -p "按任意按鍵以繼續"
+    sudo ./xray-zh-hant.sh
     ;;
   2)
     echo -e "\e[1m\e[93m您的系統資訊如下：\e[0m"
     cat /proc/cpuinfo | grep 'model name' | head -n1
     cat /proc/meminfo | grep MemTotal
     df -h
+    read -n 1 -p "按任意按鍵以繼續"
+    sudo ./xray-zh-hant.sh
     ;;
   3)
     curl -sS -O https://ray000000.github.io/Shell/file/xray-zh-hant-store.sh && chmod +x xray-zh-hant-store.sh && sudo ./xray-zh-hant-store.sh
@@ -76,7 +80,7 @@ case $choice in
         ;;
       *)
         echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
-        read -n 1 -p "按任意按鍵，回到菜單"
+        read -n 1 -p "按任意按鍵以繼續"
         sudo ./xray-zh-hant.sh
         ;;
     esac
@@ -87,7 +91,7 @@ case $choice in
     ;;
   *)
     echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
-    read -n 1 -p "按任意按鍵，回到菜單"
+    read -n 1 -p "按任意按鍵以繼續"
     sudo ./xray-zh-hant.sh
     ;;
 esac
