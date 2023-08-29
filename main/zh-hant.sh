@@ -38,7 +38,7 @@ case $choice in
     ;;
   4)
     echo -e "\e[1m\e[93m
-    請選擇您要執行的任務：
+請選擇您要執行的任務：
     \e[0m"
     echo "1. 列出檔案"
     echo "2. 查看檔案內容"
@@ -47,7 +47,7 @@ case $choice in
     echo "5. 壓縮檔案"
     echo "6. 解壓縮檔案"
     echo -e "\e[1m\e[32m0. 返回上一級菜單\e[0m"
-    read next_choice
+    read -p "請輸入：" next_choice
 
     case $next_choice in
       1)
@@ -73,6 +73,7 @@ case $choice in
         ;;
       *)
         echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
+        read -n 1 -p "按任意按鍵，回到菜單"
         ;;
     esac
     ;;
