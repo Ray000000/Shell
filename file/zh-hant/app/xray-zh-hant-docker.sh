@@ -86,11 +86,6 @@ case $yn_choice in
   n)
     sudo ./xray-zh-hant-docker.sh
     ;;
-  *)
-    echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
-    read -n 1 -p "按任意按鍵，回到菜單"
-    sudo ./xray-zh-hant-docker.sh
-    ;;
 esac
   
 case $yn2_choice in
@@ -121,10 +116,6 @@ case $yn2_choice in
     sudo ./xray-zh-hant-docker.sh
     ;;
   *)
-    echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
-    read -n 1 -p "按任意按鍵，回到菜單"
-    sudo ./xray-zh-hant-docker.sh
-    ;;
 esac
 
 case $yn3_choice in
@@ -154,11 +145,6 @@ case $yn3_choice in
     sudo ./xray-zh-hant-docker.sh
     ;;
   n)
-    sudo ./xray-zh-hant-docker.sh
-    ;;
-  *)
-    echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
-    read -n 1 -p "按任意按鍵，回到菜單"
     sudo ./xray-zh-hant-docker.sh
     ;;
 esac
