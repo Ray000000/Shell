@@ -72,7 +72,7 @@ case $choice in
         sudo ./zh-hant.sh
         ;;
       *)
-        echo "錯誤：無效選項"
+        echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
         ;;
     esac
     ;;
