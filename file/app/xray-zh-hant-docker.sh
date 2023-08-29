@@ -52,7 +52,7 @@ case $choice in
   *)
     echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
     read -n 1 -p "按任意按鍵，回到菜單"
-    sudo ./xray-zh-hant-store.sh
+    sudo ./xray-zh-hant-docker.sh
     ;;
 
   case $yn_choice in
@@ -69,15 +69,15 @@ case $choice in
       chmod +x /usr/local/bin/docker-compose
       ;;
     N)
-      sudo ./xray-zh-hant-store.sh
+      sudo ./xray-zh-hant-docker.sh
       ;;
     n)
-      sudo ./xray-zh-hant-store.sh
+      sudo ./xray-zh-hant-docker.sh
       ;;
     *)
       echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
       read -n 1 -p "按任意按鍵，回到菜單"
-      sudo ./xray-zh-hant-store.sh
+      sudo ./xray-zh-hant-docker.sh
       ;;
   esac
   ;;
@@ -98,15 +98,15 @@ case $choice in
       sudo rm /usr/local/bin/docker-compose
       ;;
     N)
-      sudo ./xray-zh-hant-store.sh
+      sudo ./xray-zh-hant-docker.sh
       ;;
     n)
-      sudo ./xray-zh-hant-store.sh
+      sudo ./xray-zh-hant-docker.sh
       ;;
     *)
       echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
       read -n 1 -p "按任意按鍵，回到菜單"
-      sudo ./xray-zh-hant-store.sh
+      sudo ./xray-zh-hant-docker.sh
       ;;
   esac
   ;;
@@ -129,15 +129,15 @@ case $choice in
       sudo rm /usr/local/bin/docker-compose
       ;;
     N)
-      sudo ./xray-zh-hant-store.sh
+      sudo ./xray-zh-hant-docker.sh
       ;;
     n)
-      sudo ./xray-zh-hant-store.sh
+      sudo ./xray-zh-hant-docker.sh
       ;;
     *)
       echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
       read -n 1 -p "按任意按鍵，回到菜單"
-      sudo ./xray-zh-hant-store.sh
+      sudo ./xray-zh-hant-docker.sh
       ;;
   esac
   ;;
