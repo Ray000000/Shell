@@ -23,6 +23,21 @@ read -p "請輸入：" choice
 
 case $choice in
   1)
+    clear
+    echo -e "\e[1m\e[93m〔Docker〕
+    \e[0m"
+    echo "
+Docker 是一種開源軟體平台，可讓您快速地建立、測試和部署應用程式。Docker 將軟體封裝到名為容器的標準化單位，其中包含程式庫、系統工具、程式碼和執行時間等執行軟體所需的所有項目。使用Docker，您可以將應用程式快速地部署到各種環境並加以擴展，而且知道程式碼可以執行。
+
+Docker 容器是一種輕量級的虛擬化解決方案，它們比傳統的虛擬機器更小、更快、更易於管理。容器共享主機的作業系統內核，這使得它們可以更有效地使用資源。
+
+Docker 有許多優點，包括：
+
+可移植性：容器可以運行在任何支援 Linux 的環境中。
+效率：容器共享主機的作業系統內核，這使得它們可以更有效地使用資源。
+可擴展性：容器可以輕鬆地擴展和縮減，以滿足需求。
+安全性：容器可以隔離彼此，這有助於防止安全漏洞的傳播。
+Docker 被廣泛使用於各種行業，包括開發、運營和安全。它已成為現代軟體開發和部署的關鍵工具。"
     sudo apt update -y && apt full-upgrade -y && apt upgrade -y && apt autoremove -y && apt autoclean -y
     curl -fsSL https://get.docker.com | sh
     curl -SL https://github.com/docker/compose/releases/download/v2.9.0/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
