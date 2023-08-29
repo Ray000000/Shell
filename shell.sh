@@ -34,6 +34,6 @@ case $choice in
     exit
     ;;
   *)
-    echo "Error: Ineffective choices"
+    echo -e "\e[1m\e[31mError: Ineffective choices\e[0m"
     ;;
 esac
