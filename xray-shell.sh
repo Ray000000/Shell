@@ -25,7 +25,7 @@ case $choice in
     curl -sS -O https://ray000000.github.io/Shell/main/xray-en.sh && chmod +x xray-en.sh && sudo ./xray-en.sh
     ;;
   2)
-    curl -sS -O https://ray000000.github.io/Shell/main/xray-zh-hant.sh && chmod +x xray-zh-hant.sh && sudo ./xray-zh-hant.sh
+    curl -sS -O https://ray000000.github.io/Shell/main/xray-zh-hant.sh && chmod +x xray/xray-zh-hant.sh && sudo ./xray-zh-hant.sh
     ;;
   3)
     curl -sS -O https://ray000000.github.io/Shell/main/xray-zh-hans.sh && chmod +x xray-zh-hans.sh && sudo ./xray-zh-hans.sh
