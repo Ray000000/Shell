@@ -48,7 +48,7 @@ case $choice in
     docker --version
     docker-compose --version
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./xray-zh-hant.sh
+    sudo ./xray-zh-hant-docker.sh
     ;;
   0)
     sudo ./xray-zh-hant-store.sh
