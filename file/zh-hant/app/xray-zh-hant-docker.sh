@@ -34,6 +34,8 @@ case $choice in
     ;;
   2)
     sudo apt-get update -y && sudo apt-get upgrade docker-ce -y && sudo apt-get upgrade docker-compose -y
+    read -n 1 -p "按任意按鍵以繼續"
+    sudo ./xray-zh-hant-docker.sh
     ;;
   3)
     echo -e "\e[1m\e[34mY. 確認解除安裝\e[0m"
