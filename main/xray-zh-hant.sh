@@ -16,7 +16,7 @@ echo -e "\e[1m\e[93m
 echo "1. 檢測並更新系統"
 echo "2. 系統資訊"
 echo "3. 應用商店"
-echo "4. 進階選項"
+echo "00. 進階選項"
 echo -e "\e[1m\e[32m0. Exit\e[0m"
 
 read -p "請輸入：" choice
@@ -35,7 +35,7 @@ case $choice in
   3)
     curl -sS -O https://ray000000.github.io/Shell/file/xray-zh-hant-store.sh && chmod +x xray-zh-hant-store.sh && sudo ./xray-zh-hant-store.sh
     ;;
-  4)
+  00)
     echo -e "\e[1m\e[93m
 請選擇您要執行的任務：
     \e[0m"
