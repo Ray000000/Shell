@@ -90,9 +90,9 @@ esac
   
 case $yn2_choice in
   Y)
-    sudo apt-get remove docker
-    sudo apt-get remove docker-ce
-    sudo apt-get purge docker-ce
+    sudo apt-get remove docker -y
+    sudo apt-get remove docker-ce -y
+    sudo apt-get purge docker-ce -y
     sudo rm -rf /var/lib/docker
     sudo rm /usr/local/bin/docker-compose
 
@@ -100,9 +100,9 @@ case $yn2_choice in
     sudo ./xray-zh-hant-docker.sh
     ;;
   y)
-    sudo apt-get remove docker
-    sudo apt-get remove docker-ce
-    sudo apt-get purge docker-ce
+    sudo apt-get remove docker -y
+    sudo apt-get remove docker-ce -y
+    sudo apt-get purge docker-ce -y
     sudo rm -rf /var/lib/docker
     sudo rm /usr/local/bin/docker-compose
 
@@ -121,9 +121,9 @@ esac
 case $yn3_choice in
   Y)
     docker rm $(docker ps -a -q) && docker rmi $(docker images -q) && docker network prune
-    sudo apt-get remove docker
-    sudo apt-get remove docker-ce
-    sudo apt-get purge docker-ce
+    sudo apt-get remove docker -y
+    sudo apt-get remove docker-ce -y
+    sudo apt-get purge docker-ce -y
     sudo rm -rf /var/lib/docker
     sudo rm /usr/local/bin/docker-compose
 
@@ -132,9 +132,9 @@ case $yn3_choice in
     ;;
   y)
     docker rm $(docker ps -a -q) && docker rmi $(docker images -q) && docker network prune
-    sudo apt-get remove docker
-    sudo apt-get remove docker-ce
-    sudo apt-get purge docker-ce
+    sudo apt-get remove docker -y
+    sudo apt-get remove docker-ce -y
+    sudo apt-get purge docker-ce -y
     sudo rm -rf /var/lib/docker
     sudo rm /usr/local/bin/docker-compose
 
