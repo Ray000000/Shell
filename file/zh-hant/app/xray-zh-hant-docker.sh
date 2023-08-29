@@ -1,4 +1,5 @@
 #!/bin/bash
+
 clear
 echo -e "\e[1m\e[93m〔Docker〕\e[0m"
 echo "
@@ -66,12 +67,18 @@ case $yn_choice in
     curl -fsSL https://get.docker.com | sh
     curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     chmod +x /usr/local/bin/docker-compose
+
+    read -n 1 -p "按任意按鍵以繼續"
+    sudo ./xray-zh-hant-docker.sh
     ;;
   y)
     sudo apt update -y && apt full-upgrade -y && apt upgrade -y && apt autoremove -y && apt autoclean -y
     curl -fsSL https://get.docker.com | sh
     curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     chmod +x /usr/local/bin/docker-compose
+
+    read -n 1 -p "按任意按鍵以繼續"
+    sudo ./xray-zh-hant-docker.sh
     ;;
   N)
     sudo ./xray-zh-hant-docker.sh
@@ -93,6 +100,9 @@ case $yn2_choice in
     sudo apt-get purge docker-ce
     sudo rm -rf /var/lib/docker
     sudo rm /usr/local/bin/docker-compose
+
+    read -n 1 -p "按任意按鍵以繼續"
+    sudo ./xray-zh-hant-docker.sh
     ;;
   y)
     sudo apt-get remove docker
@@ -100,6 +110,9 @@ case $yn2_choice in
     sudo apt-get purge docker-ce
     sudo rm -rf /var/lib/docker
     sudo rm /usr/local/bin/docker-compose
+
+    read -n 1 -p "按任意按鍵以繼續"
+    sudo ./xray-zh-hant-docker.sh
     ;;
   N)
     sudo ./xray-zh-hant-docker.sh
@@ -122,6 +135,9 @@ case $yn3_choice in
     sudo apt-get purge docker-ce
     sudo rm -rf /var/lib/docker
     sudo rm /usr/local/bin/docker-compose
+
+    read -n 1 -p "按任意按鍵以繼續"
+    sudo ./xray-zh-hant-docker.sh
     ;;
   y)
     docker rm $(docker ps -a -q) && docker rmi $(docker images -q) && docker network prune
@@ -130,6 +146,9 @@ case $yn3_choice in
     sudo apt-get purge docker-ce
     sudo rm -rf /var/lib/docker
     sudo rm /usr/local/bin/docker-compose
+
+    read -n 1 -p "按任意按鍵以繼續"
+    sudo ./xray-zh-hant-docker.sh
     ;;
   N)
     sudo ./xray-zh-hant-docker.sh
