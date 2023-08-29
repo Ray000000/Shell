@@ -59,7 +59,6 @@ case $choice in
     sudo ./xray-zh-hant-docker.sh
     ;;
 esac
-;;
 
 case $yn_choice in
   Yy)
@@ -77,7 +76,6 @@ case $yn_choice in
     sudo ./xray-zh-hant-docker.sh
     ;;
 esac
-;;
   
 case $yn2_choice in
   Yy)
@@ -96,7 +94,6 @@ case $yn2_choice in
     sudo ./xray-zh-hant-docker.sh
     ;;
 esac
-;;
 
 case $yn3_choice in
   Yy)
