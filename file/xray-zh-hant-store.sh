@@ -23,7 +23,7 @@ read -p "請輸入：" choice
 
 case $choice in
   1)
-    curl -sS -O https://ray000000.github.io/Shell/file/xray-zh-hant-docker.sh && chmod +x xray-zh-hant-docker.sh && sudo ./xray-zh-hant-docker.sh
+    curl -sS -O https://ray000000.github.io/Shell/file/app/xray-zh-hant-docker.sh && chmod +x xray-zh-hant-docker.sh && sudo ./xray-zh-hant-docker.sh
     ;;
   2)
     ;;
