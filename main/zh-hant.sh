@@ -69,11 +69,12 @@ case $choice in
         unzip file.zip
         ;;
       0)
-        sudo ./zh-hant.sh
+        sudo ./xray-zh-hant.sh
         ;;
       *)
         echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
         read -n 1 -p "按任意按鍵，回到菜單"
+        ./xray-zh-hant.sh
         ;;
     esac
     ;;
