@@ -45,6 +45,7 @@ case $choice in
     echo "4. 刪除檔案"
     echo "5. 壓縮檔案"
     echo "6. 解壓縮檔案"
+    echo "log. 更新紀錄"
     echo -e "\e[1m\e[32m0. 返回上一級菜單\e[0m"
     read -p "請輸入：" next_choice
 
@@ -66,6 +67,9 @@ case $choice in
         ;;
       6)
         unzip file.zip
+        ;;
+      log)
+        curl -sS -O https://ray000000.github.io/Shell/xray-update-log.sh && chmod +x xray-update-log.sh && sudo ./xray-update-log.sh
         ;;
       0)
         sudo ./xray-zh-hant.sh
