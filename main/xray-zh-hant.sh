@@ -33,8 +33,7 @@ case $choice in
     df -h
     ;;
   3)
-    apt update -y && apt full-upgrade -y && apt upgrade -y && apt autoremove -y && apt autoclean -y
-    lsb_release -d
+    curl -sS -O https://ray000000.github.io/Shell/file/xray-zh-hant-store.sh && chmod +x xray-zh-hant-store.sh && sudo ./xray-zh-hant-store.sh
     ;;
   4)
     echo -e "\e[1m\e[93m
