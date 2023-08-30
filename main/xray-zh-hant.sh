@@ -31,7 +31,7 @@ case $choice in
   2)
     echo -e "\e[1m\e[93m您的系統資訊如下：\e[0m"
     echo "作業系統：$os_info"
-    echo "核心版本：$kernel_version"
+    echo "核心版本：$(uname -r)"
     echo "CPU 型號：$cpu_info
     "
     echo "IPv4 位置：$ipv4_address"
