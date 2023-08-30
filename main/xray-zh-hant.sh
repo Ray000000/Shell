@@ -30,8 +30,12 @@ case $choice in
     ;;
   2)
     echo -e "\e[1m\e[93m您的系統資訊如下：\e[0m"
-    cat /proc/cpuinfo | grep 'model name' | head -n1
-    cat /proc/meminfo | grep MemTotal
+    echo "作業系統：$os_info"
+    echo "核心版本：$kernel_version"
+    echo "CPU 型號：$cpu_info
+    "
+    echo "IPv4 位置：$ipv4_address"
+    echo "IPv6 位置：$ipv6_address"
     df -h
     read -n 1 -p "按任意按鍵以繼續"
     sudo ./xray-zh-hant.sh
@@ -43,8 +47,8 @@ case $choice in
     echo -e "\e[1m\e[93m
 請選擇您要執行的任務：
     \e[0m"
-    echo "1. 列出檔案"
-    echo "2. 查看檔案內容"
+    echo "1. 查看系統日誌"
+    echo "2. 查看用戶和群組"
     echo "3. 創建檔案"
     echo "4. 刪除檔案"
     echo "5. 壓縮檔案"
@@ -55,10 +59,18 @@ case $choice in
 
     case $next_choice in
       1)
-        ls
+        echo -e "\e[1m\e[93m您的系統日誌如下：\e[0m"
+        cat /var/log/syslog
+        read -n 1 -p "按任意按鍵以繼續"
+        sudo ./xray-zh-hant.sh
         ;;
       2)
-        cat file.txt
+        echo -e "\e[1m\e[93m您的所有用戶資訊如下：\e[0m"
+        cat /etc/passwd
+        echo -e "\e[1m\e[93m您的所有群組資訊如下：\e[0m"
+        cat /etc/group
+        read -n 1 -p "按任意按鍵以繼續"
+        sudo ./xray-zh-hant.sh
         ;;
       3)
         touch new_file.txt
