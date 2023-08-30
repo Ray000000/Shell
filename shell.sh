@@ -36,6 +36,6 @@ case $choice in
   *)
     echo -e "\e[1m\e[31mError: Ineffective choices\e[0m"
     read -n 1 -p "Press any key to return to the menu."
-    sudo ./xray-shell.sh
+    sudo ./shell.sh
     ;;
 esac
