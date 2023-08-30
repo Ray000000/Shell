@@ -69,10 +69,10 @@ case $choice in
     \e[0m"
     echo "1. 查看系統日誌"
     echo "2. 查看用戶和群組"
-    echo "3. 創建檔案"
-    echo "4. 刪除檔案"
-    echo "5. 壓縮檔案"
-    echo "6. 解壓縮檔案"
+    echo "3. 修改系統語言"
+    echo "4. "
+    echo "5. "
+    echo "6. "
     echo "log. 更新紀錄"
     echo -e "\e[1m\e[32m0. 返回上一級菜單\e[0m"
     read -p "請輸入：" next_choice
@@ -93,16 +93,13 @@ case $choice in
         sudo ./xray-zh-hant.sh
         ;;
       3)
-        touch new_file.txt
+        export LC_ALL=zh_TW.UTF-8
         ;;
       4)
-        rm file.txt
         ;;
       5)
-        zip file.zip file.txt
         ;;
       6)
-        unzip file.zip
         ;;
       log)
         curl -sS -O https://ray000000.github.io/Shell/xray-update-log.sh && chmod +x xray-update-log.sh && sudo ./xray-update-log.sh
