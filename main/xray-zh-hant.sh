@@ -21,6 +21,26 @@ echo -e "\e[1m\e[32m0. Exit\e[0m"
 
 read -p "請輸入：" choice
 
+if [ "$(uname -m)" == "x86_64" ]; then
+  cpu_info=$(cat /proc/cpuinfo | grep 'model name' | uniq | sed -e 's/model name[[:space:]]*: //')
+else
+  cpu_info=$(lscpu | grep 'Model name' | sed -e 's/Model name[[:space:]]*: //')
+fi
+
+os_info=$(lsb_release -ds 2>/dev/null)
+
+if [ -z "$os_info" ]; then
+  if [ -f "/etc/os-release" ]; then
+    os_info=$(source /etc/os-release && echo "$PRETTY_NAME")
+  elif [ -f "/etc/debian_version" ]; then
+    os_info="Debian $(cat /etc/debian_version)"
+  elif [ -f "/etc/redhat-release" ]; then
+    os_info=$(cat /etc/redhat-release)
+  else
+    os_info="Unknown"
+  fi
+fi
+
 case $choice in
   1)
     sudo apt update -y && apt full-upgrade -y && apt upgrade -y && apt autoremove -y && apt autoclean -y
@@ -34,8 +54,8 @@ case $choice in
     echo "核心版本：$(uname -r)"
     echo "CPU 型號：$cpu_info
     "
-    echo "IPv4 位置：$ipv4_address"
-    echo "IPv6 位置：$ipv6_address"
+    echo "IPv4 位置：$(curl -s ipv4.ip.sb)"
+    echo "IPv6 位置：$(curl -s ipv6.ip.sb)"
     df -h
     read -n 1 -p "按任意按鍵以繼續"
     sudo ./xray-zh-hant.sh
