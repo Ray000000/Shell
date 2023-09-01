@@ -23,7 +23,7 @@ read -p "請輸入：" choice
 
 if [[ $choice == "1" ]]; then
   curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/app/xray-zh-hant-docker.sh && chmod +x xray-zh-hant-docker.sh && sudo ./xray-zh-hant-docker.sh
-  
+
 elif [[ $choice == "00" ]]; then
   echo -e "\e[1m\e[93m
 請選擇您要執行的任務：
@@ -52,12 +52,6 @@ elif [[ $choice == "00" ]]; then
     sudo ./xray-zh-hant.sh
   elif [[ $next_choice == "3" ]]; then
     export LANG=zh_TW.UTF-8
-  elif [[ $next_choice == "4" ]]; then
-
-  elif [[ $next_choice == "5" ]]; then
-
-  elif [[ $next_choice == "6" ]]; then
-
   elif [[ $next_choice == "log" ]]; then
     curl -sS -O https://ray000000.github.io/Shell/xray-update-log.sh && chmod +x xray-update-log.sh && sudo ./xray-update-log.sh
   elif [[ $next_choice == "0" ]]; then
