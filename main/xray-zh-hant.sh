@@ -43,8 +43,31 @@ fi
 
 case $choice in
   1)
+    commands1=(
     sudo apt update -y && apt full-upgrade -y && apt upgrade -y && apt autoremove -y && apt autoclean -y
     lsb_release -d
+    )
+
+    total_commands1=${#commands1[@]}
+    for ((i = 0; i < total_commands1; i++)); do
+      command1="${commands1[i]}"
+      eval $command1
+
+      percentage1=$(( (i + 1) * 100 / total_commands1 ))
+      completed1=$(( percentage1 / 2 ))
+      remaining1=$(( 50 - completed1 ))
+      progressBar1="["
+      for ((j = 0; j < completed1; j++)); do
+        progressBar1+="#"
+      done
+      for ((j = 0; j < remaining1; j++)); do
+        progressBar1+="."
+      done
+      progressBar1+="]"
+      echo -ne "\r[$percentage1%] $progressBar1"
+    done
+    echo
+
     read -n 1 -p "按任意按鍵以繼續"
     sudo ./xray-zh-hant.sh
     ;;
@@ -93,7 +116,6 @@ case $choice in
         sudo ./xray-zh-hant.sh
         ;;
       3)
-        export LC_ALL=zh_TW.UTF-8
         export LANG=zh_TW.UTF-8
         ;;
       4)
