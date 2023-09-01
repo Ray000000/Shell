@@ -44,8 +44,8 @@ fi
 case $choice in
   1)
     commands1=(
-    sudo apt update -y && apt full-upgrade -y && apt upgrade -y && apt autoremove -y && apt autoclean -y
-    lsb_release -d
+    "sudo apt update -y && apt full-upgrade -y && apt upgrade -y && apt autoremove -y && apt autoclean -y"
+    "lsb_release -d"
     )
 
     total_commands1=${#commands1[@]}
