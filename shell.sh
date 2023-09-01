@@ -20,22 +20,16 @@ echo -e "\e[1m\e[32m0. Exit\e[0m"
 
 read -p "Please input:" choice
 
-case $choice in
-  1)
-    curl -sS -O https://ray000000.github.io/Shell/main/xray-en.sh && chmod +x xray-en.sh && sudo ./xray-en.sh
-    ;;
-  2)
-    curl -sS -O https://ray000000.github.io/Shell/main/xray-zh-hant.sh && chmod +x xray-zh-hant.sh && sudo ./xray-zh-hant.sh
-    ;;
-  3)
-    curl -sS -O https://ray000000.github.io/Shell/main/xray-zh-hans.sh && chmod +x xray-zh-hans.sh && sudo ./xray-zh-hans.sh
-    ;;
-  0)
-    exit
-    ;;
-  *)
-    echo -e "\e[1m\e[31mError: Ineffective choices\e[0m"
-    read -n 1 -p "Press any key to return to the menu."
-    sudo ./shell.sh
-    ;;
-esac
+if [[ $choice == "1" ]]; then
+  curl -sS -O https://ray000000.github.io/Shell/main/xray-en.sh && chmod +x xray-en.sh && sudo ./xray-en.sh
+elif [[ $choice == "2" ]]; then
+  curl -sS -O https://ray000000.github.io/Shell/main/xray-zh-hant.sh && chmod +x xray-zh-hant.sh && sudo ./xray-zh-hant.sh
+elif [[ $choice == "3" ]]; then
+  curl -sS -O https://ray000000.github.io/Shell/main/xray-zh-hans.sh && chmod +x xray-zh-hans.sh && sudo ./xray-zh-hans.sh
+elif [[ $choice == "0" ]]; then
+  exit
+else
+  echo -e "\e[1m\e[31mError: Ineffective choices\e[0m"
+  read -n 1 -p "Press any key to return to the menu."
+  sudo ./shell.sh
+fi

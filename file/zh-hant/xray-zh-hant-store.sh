@@ -21,67 +21,57 @@ echo -e "\e[1m\e[32m0. Exit\e[0m"
 
 read -p "請輸入：" choice
 
-case $choice in
-  1)
-    curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/app/xray-zh-hant-docker.sh && chmod +x xray-zh-hant-docker.sh && sudo ./xray-zh-hant-docker.sh
-    ;;
-  2)
-    ;;
-  3)
-    ;;
-  0)
-    exit
-    ;;
-  00)
-    echo -e "\e[1m\e[93m
+if [[ $choice == "1" ]]; then
+  curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/app/xray-zh-hant-docker.sh && chmod +x xray-zh-hant-docker.sh && sudo ./xray-zh-hant-docker.sh
+  
+elif [[ $choice == "00" ]]; then
+  echo -e "\e[1m\e[93m
 請選擇您要執行的任務：
     \e[0m"
-    echo "1. 列出檔案"
-    echo "2. 查看檔案內容"
-    echo "3. 創建檔案"
-    echo "4. 刪除檔案"
-    echo "5. 壓縮檔案"
-    echo "6. 解壓縮檔案"
-    echo "log. 更新紀錄"
-    echo -e "\e[1m\e[32m0. 返回上一級菜單\e[0m"
-    read -p "請輸入：" next_choice
+  echo "1. 查看系統日誌"
+  echo "2. 查看用戶和群組"
+  echo "3. 修改系統語言"
+  echo "4. "
+  echo "5. "
+  echo "6. "
+  echo "log. 更新紀錄"
+  echo -e "\e[1m\e[32m0. 返回上一級菜單\e[0m"
+  read -p "請輸入：" next_choice
 
-    case $next_choice in
-      1)
-        ls
-        ;;
-      2)
-        cat file.txt
-        ;;
-      3)
-        touch new_file.txt
-        ;;
-      4)
-        rm file.txt
-        ;;
-      5)
-        zip file.zip file.txt
-        ;;
-      6)
-        unzip file.zip
-        ;;
-      log)
-        curl -sS -O https://ray000000.github.io/Shell/xray-update-log.sh && chmod +x xray-update-log.sh && sudo ./xray-update-log.sh
-        ;;
-      0)
-        sudo ./xray-zh-hant-store.sh
-        ;;
-      *)
-        echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
-        read -n 1 -p "按任意按鍵，回到菜單"
-        sudo ./xray-zh-hant-store.sh
-        ;;
-    esac
-    ;;
+  if [[ $next_choice == "1" ]]; then
+    echo -e "\e[1m\e[93m您的系統日誌如下：\e[0m"
+    cat /var/log/syslog
+    read -n 1 -p "按任意按鍵以繼續"
+    sudo ./xray-zh-hant.sh
+  elif [[ $next_choice == "2" ]]; then
+    echo -e "\e[1m\e[93m您的所有用戶資訊如下：\e[0m"
+    cat /etc/passwd
+    echo -e "\e[1m\e[93m您的所有群組資訊如下：\e[0m"
+    cat /etc/group
+    read -n 1 -p "按任意按鍵以繼續"
+    sudo ./xray-zh-hant.sh
+  elif [[ $next_choice == "3" ]]; then
+    export LANG=zh_TW.UTF-8
+  elif [[ $next_choice == "4" ]]; then
 
-  *)
+  elif [[ $next_choice == "5" ]]; then
+
+  elif [[ $next_choice == "6" ]]; then
+
+  elif [[ $next_choice == "log" ]]; then
+    curl -sS -O https://ray000000.github.io/Shell/xray-update-log.sh && chmod +x xray-update-log.sh && sudo ./xray-update-log.sh
+  elif [[ $next_choice == "0" ]]; then
+    sudo ./xray-zh-hant.sh
+  else
     echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
-    read -n 1 -p "按任意按鍵，回到菜單"
-    sudo ./xray-zh-hant-store.sh
-    ;;
-esac
+    read -n 1 -p "按任意按鍵以繼續"
+    sudo ./xray-zh-hant.sh
+  fi
+
+elif [[ $choice == "0" ]]; then
+  exit
+else
+  echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
+  read -n 1 -p "按任意按鍵以繼續"
+  sudo ./xray-zh-hant.sh
+fi

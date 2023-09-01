@@ -22,42 +22,34 @@ echo -e "\e[1m\e[32m0. Back\e[0m"
 
 read -p "Please input:" choice
 
-case $choice in
-  1)
+if [[ $choice == "1" ]]; then
     echo -e "\e[1m\e[34mY. Confirm install\e[0m"
     echo -e "\e[1m\e[31mN. Cancel install\e[0m"
     read -p "Please input:" yn_choice
-    ;;
-  2)
-    sudo apt-get update -y && sudo apt-get upgrade docker-ce -y && sudo apt-get upgrade docker-compose -y
-    read -n 1 -p "Press any key to continue."
-    sudo ./xray-zh-hant-docker.sh
-    ;;
-  3)
-    echo -e "\e[1m\e[34mY. Confirm uninstall\e[0m"
-    echo -e "\e[1m\e[31mN. Cancel uninstall\e[0m"
-    read -p "Please input:" yn2_choice
-    ;;
-  4)
-    echo -e "\e[1m\e[34mY. Confirm uninstall\e[0m"
-    echo -e "\e[1m\e[31mN. Cancel uninstall\e[0m"
-    read -p "Please input:" yn3_choice
-    ;;
-  5)
-    docker --version
-    docker-compose --version
-    read -n 1 -p "Press any key to continue."
-    sudo ./app.sh
-    ;;
-  0)
-    sudo ./app.sh
-    ;;
-  *)
-    echo -e "\e[1m\e[31mError: Ineffective choices\e[0m"
-    read -n 1 -p "Press any key to return to the menu."
-    sudo ./app.sh
-    ;;
-esac
+elif [[ $choice == "2" ]]; then
+  sudo apt-get update -y && sudo apt-get upgrade docker-ce -y && sudo apt-get upgrade docker-compose -y
+  read -n 1 -p "Press any key to continue."
+  sudo ./xray-zh-hant-docker.sh
+elif [[ $choice == "3" ]]; then
+  echo -e "\e[1m\e[34mY. Confirm uninstall\e[0m"
+  echo -e "\e[1m\e[31mN. Cancel uninstall\e[0m"
+  read -p "Please input:" yn2_choice
+elif [[ $choice == "4" ]]; then
+  echo -e "\e[1m\e[34mY. Confirm uninstall\e[0m"
+  echo -e "\e[1m\e[31mN. Cancel uninstall\e[0m"
+  read -p "Please input:" yn3_choice
+elif [[ $choice == "5" ]]; then
+  docker --version
+  docker-compose --version
+  read -n 1 -p "Press any key to continue."
+  sudo ./app.sh
+elif [[ $choice == "0" ]]; then
+  sudo ./app.sh
+else
+  echo -e "\e[1m\e[31mError: Ineffective choices\e[0m"
+  read -n 1 -p "Press any key to return to the menu."
+  sudo ./app.sh
+fi
 
 case $yn_choice in
   [Yy])
