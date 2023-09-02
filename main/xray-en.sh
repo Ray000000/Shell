@@ -42,8 +42,8 @@ if [ -z "$os_info" ]; then
 fi
 
 if [[ $choice == "1" ]]; then
-  sudo apt update -y && apt full-upgrade -y && apt upgrade -y && apt autoremove -y && apt autoclean -y
-  lsb_release -d
+  sudo apt update -y && apt full-upgrade -y && apt upgrade -y && apt autoremove -y && apt autoclean -y && apt-get install -y curl wget sudo nano htop socat neofetch
+  sudo neofetch
 
   read -n 1 -p "Press any key to continue."
   sudo ./xray-en.sh
