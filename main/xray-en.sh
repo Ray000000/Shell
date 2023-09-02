@@ -43,6 +43,7 @@ fi
 
 if [[ $choice == "1" ]]; then
   sudo apt update -y && apt full-upgrade -y && apt upgrade -y && apt autoremove -y && apt autoclean -y && apt-get install -y curl wget sudo nano htop socat neofetch
+  clear
   sudo neofetch
 
   read -n 1 -p "Press any key to continue."
