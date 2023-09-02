@@ -42,7 +42,7 @@ if [ -z "$os_info" ]; then
 fi
 
 if [[ $choice == "1" ]]; then
-  sudo apt update -y && apt full-upgrade -y && apt upgrade -y && apt autoremove -y && apt autoclean -y && apt-get install curl wget sudo nano htop socat neofetch -y
+  sudo apt update -y && apt full-upgrade -y && apt upgrade -y && apt autoremove -y && apt autoclean -y && apt-get install -y curl wget sudo nano htop socat neofetch
   clear
   sudo neofetch
 
