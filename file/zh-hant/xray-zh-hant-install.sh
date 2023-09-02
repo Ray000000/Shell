@@ -6,28 +6,22 @@ if [[ $EUID -ne 0 ]]; then
   exit 1
 fi
 
-# 檢查是否已安裝 dd
+# 檢查是否已安裝所需套件
 if ! command -v dd > /dev/null; then
   echo "dd 工具未安裝"
-  exit 1
+  sudo apt install dd
 fi
-
-# 檢查是否已安裝 wget
 if ! command -v wget > /dev/null; then
   echo "wget 工具未安裝"
-  exit 1
+  sudo apt install wget
 fi
-
-# 檢查是否已安裝 parted
 if ! command -v parted > /dev/null; then
   echo "parted 工具未安裝"
-  exit 1
+  sudo apt install parted
 fi
-
-# 檢查是否已安裝 cfdisk
 if ! command -v cfdisk > /dev/null; then
   echo "cfdisk 工具未安裝"
-  exit 1
+  sudo apt install cfdisk
 fi
 
 # 選擇要安裝的系統
