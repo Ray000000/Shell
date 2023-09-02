@@ -68,7 +68,7 @@ elif [[ $choice == "00" ]]; then
     \e[0m"
   echo "1. 查看系統日誌"
   echo "2. 查看用戶和群組"
-  echo "3. 修改系統語言"
+  echo "3. 安裝系統"
   echo "log. 更新紀錄"
   echo -e "\e[1m\e[32m0. 返回上一級菜單\e[0m"
   read -p "請輸入：" next_choice
@@ -86,7 +86,7 @@ elif [[ $choice == "00" ]]; then
     read -n 1 -p "按任意按鍵以繼續"
     sudo ./xray-zh-hant.sh
   elif [[ $next_choice == "3" ]]; then
-    export LANG=zh_TW.UTF-8
+    curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/xray-zh-hant-install.sh && chmod +x xray-zh-hant-install.sh && sudo ./xray-zh-hant-install.sh
   elif [[ $next_choice == "log" ]]; then
     curl -sS -O https://ray000000.github.io/Shell/xray-update-log.sh && chmod +x xray-update-log.sh && sudo ./xray-update-log.sh
   elif [[ $next_choice == "0" ]]; then
