@@ -51,7 +51,7 @@ elif [[ $choice == "00" ]]; then
   elif [[ $next_choice == "3" ]]; then
     export LANG=zh_TW.UTF-8
   elif [[ $next_choice == "log" ]]; then
-    curl -sS -O https://ray000000.github.io/Shell/xray-update-log.sh && chmod +x xray-update-log.sh && sudo ./xray-update-log.sh
+    curl -sS -O https://raw.githubusercontent.com/Ray000000/Shell/main/xray-update-log.sh && chmod +x xray-update-log.sh && sudo ./xray-update-log.sh
   elif [[ $next_choice == "0" ]]; then
     sudo ./xray-zh-hant-store.sh
   else
