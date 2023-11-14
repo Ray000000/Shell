@@ -53,11 +53,6 @@ fi
 
 case $yn_choice in
   [Yy])
-    sudo apt update -y && apt full-upgrade -y && apt upgrade -y && apt autoremove -y && apt autoclean -y
-    curl -fsSL https://get.docker.com | sh
-    curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-    chmod +x /usr/local/bin/docker-compose
-
     commands==(
       'if [ -f "/etc/debian_version" ]; then'
       'DEBIAN_FRONTEND=noninteractive apt update -y'
