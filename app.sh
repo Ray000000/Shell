@@ -53,8 +53,6 @@ fi
 
 case $yn_choice in
   [Yy])
-  #!/bin/bash
-
 function progress() {
   local total=$1
   local current=$2
