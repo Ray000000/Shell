@@ -53,7 +53,7 @@ fi
 
 case $yn_choice in
   [Yy])
-    commands==(
+    commands=(
       "if [ -f "/etc/debian_version" ]; then"
       "DEBIAN_FRONTEND=noninteractive apt update -y"
       "DEBIAN_FRONTEND=noninteractive apt full-upgrade -y"
