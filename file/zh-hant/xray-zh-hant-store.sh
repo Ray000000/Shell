@@ -14,6 +14,7 @@ echo -e "\e[1m\e[93m
 請選擇您要安裝的應用程式：
 \e[0m"
 echo "1. Docker"
+echo "2. Nginx Proxy Manager"
 echo "00. 進階選項"
 echo -e "\e[1m\e[32m0. Exit\e[0m"
 
@@ -21,6 +22,8 @@ read -p "請輸入：" choice
 
 if [[ $choice == "1" ]]; then
   curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/app/xray-zh-hant-docker.sh && chmod +x xray-zh-hant-docker.sh && sudo ./xray-zh-hant-docker.sh
+if [[ $choice == "1" ]]; then
+  curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/app/xray-zh-hant-nginx-proxy-manager.sh && chmod +x xray-zh-hant-nginx-proxy-manager.sh && sudo ./xray-zh-hant-nginx-proxy-manager.sh
 
 elif [[ $choice == "00" ]]; then
   echo -e "\e[1m\e[93m
