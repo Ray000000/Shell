@@ -77,7 +77,12 @@ case $yn_choice in
 
       echo
 
-      echo -e "網址：http://127.0.0.1:81/"
+      echo -e "登入網址：
+      http://127.0.0.1:81/"
+      echo -e "電子郵件地址：
+      admin@example.com"
+      echo -e "密碼：
+      changeme"
 
     read -n 1 -p "按任意按鍵以繼續"
     sudo ./xray-zh-hant-nginx-proxy-manager.sh
