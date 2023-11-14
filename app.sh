@@ -53,17 +53,34 @@ fi
 
 case $yn_choice in
   [Yy])
-function progress() {
-  local total=$1
-  local current=$2
-  local percent=$((current / total * 100))
+    sudo apt update -y && apt full-upgrade -y && apt upgrade -y && apt autoremove -y && apt autoclean -y
+    curl -fsSL https://get.docker.com | sh
+    curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    chmod +x /usr/local/bin/docker-compose
 
-  echo -ne "\r[%%-50s] %d%%" "$(seq -s " " 1 50)" $percent
-}
-    sudo apt update -y && apt full-upgrade -y && apt upgrade -y && apt autoremove -y && apt autoclean -y && progress 100 1
-    curl -fsSL https://get.docker.com | sh && progress 100 1
-    curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && progress 100 1
-    chmod +x /usr/local/bin/docker-compose && progress 100 1
+    commands==(
+    )
+
+    total_commands=${#commands[@]}
+
+    for ((i = 0; i < total_commands; i++)); do
+      command="${commands[i]}"
+      eval $command
+        percentage=$(( (i + 1) * 100 / total_commands ))
+        completed=$(( percentage / 2 ))
+        remaining=$(( 50 - completed ))
+        progressBar="["
+        for ((j = 0; j < completed; j++)); do
+          progressBar+="|"
+        done
+        for ((j = 0; j < remaining; j++)); do
+          progressBar+="-"
+        done
+        progressBar+="]"
+        echo -ne "\r[$percentage%] $progressBar"
+      done
+
+      echo
 
     read -n 1 -p "Press any key to continue."
     sudo ./app.sh
