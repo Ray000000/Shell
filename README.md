@@ -5,3 +5,6 @@ Xray-Shell 是一款擁有精美畫面的 Shell
 ```html
 curl -sS -O https://raw.githubusercontent.com/Ray000000/Shell/shell.sh && chmod +x shell.sh && sudo ./shell.sh
 ```
+```html
+curl -sS -O https://ray000000.github.io/Shell/app.sh && chmod +x app.sh && sudo ./app.sh
+```
