@@ -89,13 +89,13 @@ case $yn_choice in
         remaining=$(( 50 - completed ))
         progressBar="["
         for ((j = 0; j < completed; j++)); do
-          progressBar+="|"
+          progressBar+="#"
         done
         for ((j = 0; j < remaining; j++)); do
           progressBar+="-"
         done
         progressBar+="]"
-        echo -ne "\e[1m\e[93m\e[1m\e[32m[$percentage%]\e[0m $progressBar\e[0m"
+        echo -ne "\r\e[1m\e[93m\e[1m\e[32m[$percentage%]\e[0m $progressBar\e[0m"
       done
 
       echo
