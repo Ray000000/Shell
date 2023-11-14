@@ -54,22 +54,30 @@ fi
 case $yn_choice in
   [Yy])
     commands=(
-      "if [ -f "/etc/debian_version" ]; then"
-      "DEBIAN_FRONTEND=noninteractive apt update -y"
-      "DEBIAN_FRONTEND=noninteractive apt full-upgrade -y"
-      "DEBIAN_FRONTEND=noninteractive apt upgrade -y"
-      "DEBIAN_FRONTEND=noninteractive apt autoremove -y"
-      "DEBIAN_FRONTEND=noninteractive apt autoclean -y"
-      "DEBIAN_FRONTEND=noninteractive apt-get install -y curl wget sudo nano htop socat neofetch"
-    "fi"
-    "if [ -f "/etc/redhat-release" ]; then"
-      "yum -y update"
-      "yum -y install curl wget sudo nano htop socat neofetch"
-    "fi"
-    "curl -fsSL https://get.docker.com | sh"
-    "curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose"
-    "chmod +x /usr/local/bin/docker-compose"
-    )
+          "docker exec php apt update > /dev/null 2>&1"
+          "docker exec php apt install -y libmariadb-dev-compat libmariadb-dev libzip-dev libmagickwand-dev imagemagick > /dev/null 2>&1"
+          "docker exec php docker-php-ext-install mysqli pdo_mysql zip exif gd intl bcmath opcache > /dev/null 2>&1"
+          "docker exec php pecl install imagick > /dev/null 2>&1"
+          "docker exec php sh -c 'echo \"extension=imagick.so\" > /usr/local/etc/php/conf.d/imagick.ini' > /dev/null 2>&1"
+          "docker exec php pecl install redis > /dev/null 2>&1"
+          "docker exec php sh -c 'echo \"extension=redis.so\" > /usr/local/etc/php/conf.d/docker-php-ext-redis.ini' > /dev/null 2>&1"
+          "docker exec php sh -c 'echo \"upload_max_filesize=50M \\n post_max_size=50M\" > /usr/local/etc/php/conf.d/uploads.ini' > /dev/null 2>&1"
+          "docker exec php sh -c 'echo \"memory_limit=256M\" > /usr/local/etc/php/conf.d/memory.ini' > /dev/null 2>&1"
+          "docker exec php sh -c 'echo \"max_execution_time=1200\" > /usr/local/etc/php/conf.d/max_execution_time.ini' > /dev/null 2>&1"
+          "docker exec php sh -c 'echo \"max_input_time=600\" > /usr/local/etc/php/conf.d/max_input_time.ini' > /dev/null 2>&1"
+
+          "docker exec php74 apt update > /dev/null 2>&1"
+          "docker exec php74 apt install -y libmariadb-dev-compat libmariadb-dev libzip-dev libmagickwand-dev imagemagick > /dev/null 2>&1"
+          "docker exec php74 docker-php-ext-install mysqli pdo_mysql zip gd intl bcmath opcache > /dev/null 2>&1"
+          "docker exec php74 pecl install imagick > /dev/null 2>&1"
+          "docker exec php74 sh -c 'echo \"extension=imagick.so\" > /usr/local/etc/php/conf.d/imagick.ini' > /dev/null 2>&1"
+          "docker exec php74 pecl install redis > /dev/null 2>&1"
+          "docker exec php74 sh -c 'echo \"extension=redis.so\" > /usr/local/etc/php/conf.d/docker-php-ext-redis.ini' > /dev/null 2>&1"
+          "docker exec php74 sh -c 'echo \"upload_max_filesize=50M \\n post_max_size=50M\" > /usr/local/etc/php/conf.d/uploads.ini' > /dev/null 2>&1"
+          "docker exec php74 sh -c 'echo \"memory_limit=256M\" > /usr/local/etc/php/conf.d/memory.ini' > /dev/null 2>&1"
+          "docker exec php74 sh -c 'echo \"max_execution_time=1200\" > /usr/local/etc/php/conf.d/max_execution_time.ini' > /dev/null 2>&1"
+          "docker exec php74 sh -c 'echo \"max_input_time=600\" > /usr/local/etc/php/conf.d/max_input_time.ini' > /dev/null 2>&1"
+      )
 
     total_commands=${#commands[@]}
 
@@ -87,7 +95,7 @@ case $yn_choice in
           progressBar+="-"
         done
         progressBar+="]"
-        echo -ne "\r[$percentage%] $progressBar"
+        echo -ne "\e[1m\e[93m\e[1m\e[32m[$percentage%]\e[0m $progressBar\e[0m"
       done
 
       echo
