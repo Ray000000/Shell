@@ -77,6 +77,8 @@ case $yn_choice in
 
       echo
 
+      echo -e "網址：http://127.0.0.1:81/"
+
     read -n 1 -p "按任意按鍵以繼續"
     sudo ./xray-zh-hant-nginx-proxy-manager.sh
     ;;
