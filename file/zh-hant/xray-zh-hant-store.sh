@@ -67,3 +67,4 @@ else
   read -n 1 -p "按任意按鍵以繼續"
   sudo ./xray-zh-hant-store.sh
 fi
+;;
