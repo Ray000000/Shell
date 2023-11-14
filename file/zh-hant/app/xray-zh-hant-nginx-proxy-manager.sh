@@ -89,8 +89,9 @@ case $yn2_choice in
   [Yy])
     commands=(
         "sudo docker update --restart=no nginx-proxy-manager"
-        "sudo docker stop nginx-proxy-manager:latest"
-        "sudo docker rm nginx-proxy-manager:latest"
+        "sudo docker pause nginx-proxy-manager"
+        "sudo docker stop nginx-proxy-manager"
+        "sudo docker rm nginx-proxy-manager"
       )
 
     total_commands=${#commands[@]}
