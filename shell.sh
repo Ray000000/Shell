@@ -33,4 +33,3 @@ else
   read -n 1 -p "Press any key to return to the menu."
   sudo ./shell.sh
 fi
-;;

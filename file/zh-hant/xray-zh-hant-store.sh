@@ -22,7 +22,7 @@ read -p "請輸入：" choice
 
 if [[ $choice == "1" ]]; then
   curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/app/xray-zh-hant-docker.sh && chmod +x xray-zh-hant-docker.sh && sudo ./xray-zh-hant-docker.sh
-if [[ $choice == "1" ]]; then
+if [[ $choice == "2" ]]; then
   curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/app/xray-zh-hant-nginx-proxy-manager.sh && chmod +x xray-zh-hant-nginx-proxy-manager.sh && sudo ./xray-zh-hant-nginx-proxy-manager.sh
 
 elif [[ $choice == "00" ]]; then
@@ -67,4 +67,3 @@ else
   read -n 1 -p "按任意按鍵以繼續"
   sudo ./xray-zh-hant-store.sh
 fi
-;;
