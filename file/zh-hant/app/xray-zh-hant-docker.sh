@@ -57,21 +57,44 @@ fi
 
 case $yn_choice in
   [Yy])
-    if [ -f "/etc/debian_version" ]; then
-      DEBIAN_FRONTEND=noninteractive apt update -y
-      DEBIAN_FRONTEND=noninteractive apt full-upgrade -y
-      DEBIAN_FRONTEND=noninteractive apt upgrade -y
-      DEBIAN_FRONTEND=noninteractive apt autoremove -y
-      DEBIAN_FRONTEND=noninteractive apt autoclean -y
-      DEBIAN_FRONTEND=noninteractive apt-get install -y curl wget sudo nano htop socat neofetch
-    fi
-    if [ -f "/etc/redhat-release" ]; then
-      yum -y update
-      yum -y install curl wget sudo nano htop socat neofetch
-    fi
-    curl -fsSL https://get.docker.com | sh
-    curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-    chmod +x /usr/local/bin/docker-compose
+    commands=(
+      "if [ -f "/etc/debian_version" ]; then"
+        "DEBIAN_FRONTEND=noninteractive apt update -y"
+        "DEBIAN_FRONTEND=noninteractive apt full-upgrade -y"
+        "DEBIAN_FRONTEND=noninteractive apt upgrade -y"
+        "DEBIAN_FRONTEND=noninteractive apt autoremove -y"
+        "DEBIAN_FRONTEND=noninteractive apt autoclean -y"
+        "DEBIAN_FRONTEND=noninteractive apt-get install -y curl wget sudo nano htop socat neofetch"
+      "fi"
+      "if [ -f "/etc/redhat-release" ]; then"
+        "yum -y update"
+        "yum -y install curl wget sudo nano htop socat neofetch"
+      "fi"
+      "curl -fsSL https://get.docker.com | sh"
+      "curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose"
+      "chmod +x /usr/local/bin/docker-compose"
+    )
+
+    total_commands=${#commands[@]}
+
+    for ((i = 0; i < total_commands; i++)); do
+      command="${commands[i]}"
+      eval $command
+        percentage=$(( (i + 1) * 100 / total_commands ))
+        completed=$(( percentage / 2 ))
+        remaining=$(( 50 - completed ))
+        progressBar="["
+        for ((j = 0; j < completed; j++)); do
+          progressBar+="#"
+        done
+        for ((j = 0; j < remaining; j++)); do
+          progressBar+="-"
+        done
+        progressBar+="]"
+        echo -ne "\r\e[1m\e[93m\e[1m\e[32m[$percentage%]\e[0m $progressBar\e[0m"
+      done
+
+      echo
 
     read -n 1 -p "按任意按鍵以繼續"
     sudo ./xray-zh-hant-docker.sh
@@ -83,11 +106,34 @@ esac
   
 case $yn2_choice in
   [Yy])
-    sudo apt-get remove docker -y
-    sudo apt-get remove docker-ce -y
-    sudo apt-get purge docker-ce -y
-    sudo rm -rf /var/lib/docker
-    sudo rm /usr/local/bin/docker-compose
+    commands1=(
+      "sudo apt-get remove docker -y"
+      "sudo apt-get remove docker-ce -y"
+      "sudo apt-get purge docker-ce -y"
+      "sudo rm -rf /var/lib/docker"
+      "sudo rm /usr/local/bin/docker-compose"
+    )
+
+    total_commands1=${#commands1[@]}
+
+    for ((i = 0; i < total_commands; i++)); do
+      command1="${commands1[i]}"
+      eval $command1
+        percentage1=$(( (i + 1) * 100 / total_commands ))
+        completed1=$(( percentage / 2 ))
+        remaining1=$(( 50 - completed ))
+        progressBar1="["
+        for ((j = 0; j < completed; j++)); do
+          progressBar1+="#"
+        done
+        for ((j = 0; j < remaining; j++)); do
+          progressBar1+="-"
+        done
+        progressBar1+="]"
+        echo -ne "\r\e[1m\e[93m\e[1m\e[32m[$percentage1%]\e[0m $progressBar1\e[0m"
+      done
+
+      echo
 
     read -n 1 -p "按任意按鍵以繼續"
     sudo ./xray-zh-hant-docker.sh
@@ -99,12 +145,35 @@ esac
 
 case $yn3_choice in
   [Yy])
-    docker rm $(docker ps -a -q) && docker rmi $(docker images -q) && docker network prune
-    sudo apt-get remove docker -y
-    sudo apt-get remove docker-ce -y
-    sudo apt-get purge docker-ce -y
-    sudo rm -rf /var/lib/docker
-    sudo rm /usr/local/bin/docker-compose
+    commands2=(
+      "docker rm $(docker ps -a -q) && docker rmi $(docker images -q) && docker network prune"
+      "sudo apt-get remove docker -y"
+      "sudo apt-get remove docker-ce -y"
+      "sudo apt-get purge docker-ce -y"
+      "sudo rm -rf /var/lib/docker"
+      "sudo rm /usr/local/bin/docker-compose"
+    )
+
+    total_commands2=${#commands2[@]}
+
+    for ((i = 0; i < total_commands; i++)); do
+      command2="${commands2[i]}"
+      eval $command2
+        percentage2=$(( (i + 1) * 100 / total_commands ))
+        completed2=$(( percentage / 2 ))
+        remaining2=$(( 50 - completed ))
+        progressBar2="["
+        for ((j = 0; j < completed; j++)); do
+          progressBar2+="#"
+        done
+        for ((j = 0; j < remaining; j++)); do
+          progressBar2+="-"
+        done
+        progressBar2+="]"
+        echo -ne "\r\e[1m\e[93m\e[1m\e[32m[$percentage2%]\e[0m $progressBar2\e[0m"
+      done
+
+      echo
 
     read -n 1 -p "按任意按鍵以繼續"
     sudo ./xray-zh-hant-docker.sh
