@@ -43,16 +43,16 @@ fi
 
 if [[ $choice == "1" ]]; then
   if [ -f "/etc/debian_version" ]; then
-    DEBIAN_FRONTEND=noninteractive apt update -y > /dev/null
-    DEBIAN_FRONTEND=noninteractive apt full-upgrade -y > /dev/null
-    DEBIAN_FRONTEND=noninteractive apt upgrade -y > /dev/null
-    DEBIAN_FRONTEND=noninteractive apt autoremove -y > /dev/null
-    DEBIAN_FRONTEND=noninteractive apt autoclean -y > /dev/null
-    DEBIAN_FRONTEND=noninteractive apt-get install -y curl wget sudo nano htop socat neofetch > /dev/null
+    DEBIAN_FRONTEND=noninteractive apt update -y
+    DEBIAN_FRONTEND=noninteractive apt full-upgrade -y
+    DEBIAN_FRONTEND=noninteractive apt upgrade -y
+    DEBIAN_FRONTEND=noninteractive apt autoremove -y
+    DEBIAN_FRONTEND=noninteractive apt autoclean -y
+    DEBIAN_FRONTEND=noninteractive apt-get install -y curl wget sudo nano htop socat neofetch
   fi
   if [ -f "/etc/redhat-release" ]; then
-    yum -y update > /dev/null
-    yum -y install curl wget sudo nano htop socat neofetch > /dev/null
+    yum -y update
+    yum -y install curl wget sudo nano htop socat neofetch
   fi
   clear
   sudo neofetch
