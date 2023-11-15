@@ -119,8 +119,8 @@ case $yn2_choice in
     for ((i = 0; i < total_commands; i++)); do
       command1="${commands1[i]}"
       eval $command1
-        percentage1=$(( (i + 1) * 100 / total_commands ))
-        completed1=$(( percentage / 2 ))
+        percentage1=$(( (i + 1) * 100 / total_commands1 ))
+        completed1=$(( percentage1 / 2 ))
         remaining1=$(( 50 - completed ))
         progressBar1="["
         for ((j = 0; j < completed; j++)); do
@@ -159,8 +159,8 @@ case $yn3_choice in
     for ((i = 0; i < total_commands; i++)); do
       command2="${commands2[i]}"
       eval $command2
-        percentage2=$(( (i + 1) * 100 / total_commands ))
-        completed2=$(( percentage / 2 ))
+        percentage2=$(( (i + 1) * 100 / total_commands2 ))
+        completed2=$(( percentage1 / 2 ))
         remaining2=$(( 50 - completed ))
         progressBar2="["
         for ((j = 0; j < completed; j++)); do
