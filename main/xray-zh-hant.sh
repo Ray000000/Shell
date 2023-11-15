@@ -42,42 +42,18 @@ if [ -z "$os_info" ]; then
 fi
 
 if [[ $choice == "1" ]]; then
-  commands=(
-    "if [ -f "/etc/debian_version" ]; then"
-      "DEBIAN_FRONTEND=noninteractive apt update -y"
-      "DEBIAN_FRONTEND=noninteractive apt full-upgrade -y"
-      "DEBIAN_FRONTEND=noninteractive apt upgrade -y"
-      "DEBIAN_FRONTEND=noninteractive apt autoremove -y"
-      "DEBIAN_FRONTEND=noninteractive apt autoclean -y"
-      "DEBIAN_FRONTEND=noninteractive apt-get install -y curl wget sudo nano htop socat neofetch"
-    "fi"
-    "if [ -f "/etc/redhat-release" ]; then"
-      "yum -y update"
-      "yum -y install curl wget sudo nano htop socat neofetch"
-    "fi"
-  )
-
-  total_commands=${#commands[@]}
-
-    for ((i = 0; i < total_commands; i++)); do
-      command="${commands[i]}"
-      eval $command
-        percentage=$(( (i + 1) * 100 / total_commands ))
-        completed=$(( percentage / 2 ))
-        remaining=$(( 50 - completed ))
-        progressBar="["
-        for ((j = 0; j < completed; j++)); do
-          progressBar+="#"
-        done
-        for ((j = 0; j < remaining; j++)); do
-          progressBar+="-"
-        done
-        progressBar+="]"
-        echo -ne "\r\e[1m\e[93m\e[1m\e[32m[$percentage%]\e[0m $progressBar\e[0m"
-      done
-
-      echo
-
+  if [ -f "/etc/debian_version" ]; then
+    DEBIAN_FRONTEND=noninteractive apt update -y > /dev/null
+    DEBIAN_FRONTEND=noninteractive apt full-upgrade -y > /dev/null
+    DEBIAN_FRONTEND=noninteractive apt upgrade -y > /dev/null
+    DEBIAN_FRONTEND=noninteractive apt autoremove -y > /dev/null
+    DEBIAN_FRONTEND=noninteractive apt autoclean -y > /dev/null
+    DEBIAN_FRONTEND=noninteractive apt-get install -y curl wget sudo nano htop socat neofetch > /dev/null
+  fi
+  if [ -f "/etc/redhat-release" ]; then
+    yum -y update > /dev/null
+    yum -y install curl wget sudo nano htop socat neofetch > /dev/null
+  fi
   clear
   sudo neofetch
 
