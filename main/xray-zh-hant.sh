@@ -16,6 +16,7 @@ echo -e "\e[1m\e[93m
 echo "1. 檢測並更新系統"
 echo "2. 系統資訊"
 echo "3. 應用商店"
+echo "4. 允許管理員帳號登入"
 echo "00. 進階選項"
 echo -e "\e[1m\e[32m0. Exit\e[0m"
 
@@ -73,6 +74,13 @@ elif [[ $choice == "2" ]]; then
   sudo ./xray-zh-hant.sh
 elif [[ $choice == "3" ]]; then
   curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/xray-zh-hant-store.sh && chmod +x xray-zh-hant-store.sh && sudo ./xray-zh-hant-store.sh
+
+elif [[ $choice == "4" ]]; then
+  echo "PermitRootLogin yes
+PasswordAuthentication yes
+" >> /etc/ssh/sshd_config
+/etc/init.d/ssh restart
+
 elif [[ $choice == "00" ]]; then
   echo -e "\e[1m\e[93m
 請選擇您要執行的任務：

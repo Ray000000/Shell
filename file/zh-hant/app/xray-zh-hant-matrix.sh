@@ -16,12 +16,11 @@ Nginx Proxy Manager 適用於各種用途，包括：
 Nginx Proxy Manager 的安裝和配置非常簡單。它可以安裝在各種操作系統上，包括 Linux、Windows 和 macOS。"
 echo "----------------------------------------"
 echo "官方網站：
-https://nginxproxymanager.com/"
+https://element.io/"
 echo -e "\e[1m\e[93m
 請選擇您要執行的任務：
 \e[0m"
 echo "1. 安裝"
-echo "2. 更新"
 echo -e "\e[1m\e[31m2. 解除安裝（不保存資料）\e[0m"
 echo -e "\e[1m\e[32m0. 回到菜單\e[0m"
 
@@ -32,13 +31,9 @@ if [[ $choice == "1" ]]; then
   echo -e "\e[1m\e[31mN. 取消安裝\e[0m"
   read -p "請輸入：" yn_choice
 elif [[ $choice == "2" ]]; then
-  echo -e "\e[1m\e[34mY. 確認更新\e[0m"
-  echo -e "\e[1m\e[31mN. 取消更新\e[0m"
-  read -p "請輸入：" yn2_choice
-elif [[ $choice == "3" ]]; then
   echo -e "\e[1m\e[34mY. 確認解除安裝\e[0m"
   echo -e "\e[1m\e[31mN. 取消解除安裝\e[0m"
-  read -p "請輸入：" yn3_choice
+  read -p "請輸入：" yn2_choice
 elif [[ $choice == "0" ]]; then
   sudo ./xray-zh-hant-store.sh
 else
@@ -70,50 +65,13 @@ case $yn_choice in
     else
       echo "Docker 已安裝"
     fi
-      sudo -i
-      mkdir -p /root/data/docker/nginx-proxy-manager
-      cd /root/data/docker/nginx-proxy-manager
-      echo "
-version: '3'
-services:
-  app:
-    image: 'jc21/nginx-proxy-manager:latest'
-    restart: unless-stopped
-    ports:
-      - '80:80'
-      - '881:881'
-      - '443:443'
-    volumes:
-      - ./data:/data
-      - ./letsencrypt:/etc/letsencrypt" >> docker-compose.yml
-      cd /root/data/docker/nginx-proxy-manager
-      docker-compose up -d
-      docker update --restart=yes nginx-proxy-manager
-
-      external_ip=$(curl -s ipv4.ip.sb)
-      echo -e "登入網址：
-      http://$external_ip:881"
-      echo -e "
-      Email: admin@example.com"
-      echo -e "
-      Password: changeme"
-
-    read -n 1 -p "按任意按鍵以繼續"
-    sudo ./xray-zh-hant-nginx-proxy-manager.sh
-    ;;
-  [Nn])
-    sudo ./xray-zh-hant-nginx-proxy-manager.sh
-    ;;
-esac
-
-case $yn2_choice in
-  [Yy])
-    cd /root/data/docker/nginx-proxy-manager
-    docker-compose down 
-    cp /root/data/docker/nginx-proxy-manager /root/data/docker/nginx-proxy-manager.bak
-    docker-compose pull
-    docker-compose up -d
-    docker update --restart=yes nginx-proxy-manager
+    sudo apt install -y lsb-release wget apt-transport-https
+    sudo wget -O /usr/share/keyrings/matrix-org-archive-keyring.gpg https://packages.matrix.org/debian/matrix-org-archive-keyring.gpg
+    echo "deb [signed-by=/usr/share/keyrings/matrix-org-archive-keyring.gpg] https://packages.matrix.org/debian/ $(lsb_release -cs) main" |
+    sudo tee /etc/apt/sources.list.d/matrix-org.list
+    sudo apt update
+    sudo apt install -y matrix-synapse-py3
+    sudo apt install -y libpq5
 
     read -n 1 -p "按任意按鍵以繼續"
     sudo ./xray-zh-hant-nginx-proxy-manager.sh
@@ -123,11 +81,9 @@ case $yn2_choice in
     ;;
 esac
   
-case $yn3_choice in
+case $yn2_choice in
   [Yy])
-    cd /root/data/docker/nginx-proxy-manager
-    docker-compose down
-    rm -rf /root/data/docker/nginx-proxy-manager
+    
 
     read -n 1 -p "按任意按鍵以繼續"
     sudo ./xray-zh-hant-nginx-proxy-manager.sh
