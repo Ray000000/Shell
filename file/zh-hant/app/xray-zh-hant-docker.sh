@@ -48,7 +48,7 @@ elif [[ $choice == "5" ]]; then
   read -n 1 -p "按任意按鍵以繼續"
   sudo ./xray-zh-hant-docker.sh
 elif [[ $choice == "0" ]]; then
-  sudo ./xray-zh-hant-store.sh
+  sudo ./xray-zh-hant-store-d.sh
 else
   echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
   read -n 1 -p "按任意按鍵，回到菜單"

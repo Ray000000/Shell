@@ -40,7 +40,7 @@ elif [[ $choice == "3" ]]; then
   echo -e "\e[1m\e[31mN. 取消解除安裝\e[0m"
   read -p "請輸入：" yn3_choice
 elif [[ $choice == "0" ]]; then
-  sudo ./xray-zh-hant-store.sh
+  sudo ./xray-zh-hant-store-n.sh
 else
   echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
   read -n 1 -p "按任意按鍵，回到菜單"
