@@ -17,6 +17,7 @@ echo "1. 檢測並更新系統"
 echo "2. 系統資訊"
 echo "3. 應用商店"
 echo "4. 允許管理員帳號登入"
+echo "5. 設定 Shell 快捷方式"
 echo "00. 進階選項"
 echo -e "\e[1m\e[32m0. Exit\e[0m"
 
@@ -80,6 +81,12 @@ elif [[ $choice == "4" ]]; then
 PasswordAuthentication yes
 " >> /etc/ssh/sshd_config
 /etc/init.d/ssh restart
+
+elif [[ $choice == "5" ]]; then
+  read -p "請輸入快捷鍵：" choice1
+  echo "alias $choice1='curl -sS -O https://raw.githubusercontent.com/Ray000000/Shell/main/xray-shell.sh && chmod +x xray-shell.sh && sudo ./xray-shell.sh'
+" >> ~/.bashrc
+  source ~/.bashrc
 
 elif [[ $choice == "00" ]]; then
   echo -e "\e[1m\e[93m
