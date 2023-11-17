@@ -44,57 +44,57 @@ echo -e "\e[1m\e[32m0. Exit\e[0m"
 
 read -p "請輸入：" choice
 
-if [[ $choice == "A" ]]; then
+if [[ $choice == "1" ]]; then
   curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/xray-zh-hant-store-a.sh && chmod +x xray-zh-hant-store-a.sh && sudo ./xray-zh-hant-store-a.sh
-elif [[ $choice == "B" ]]; then
+elif [[ $choice == "2" ]]; then
   curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/xray-zh-hant-store-b.sh && chmod +x xray-zh-hant-store-b.sh && sudo ./xray-zh-hant-store-b.sh
-elif [[ $choice == "C" ]]; then
+elif [[ $choice == "3" ]]; then
   curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/xray-zh-hant-store-c.sh && chmod +x xray-zh-hant-store-c.sh && sudo ./xray-zh-hant-store-c.sh
-elif [[ $choice == "D" ]]; then
+elif [[ $choice == "4" ]]; then
   curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/xray-zh-hant-store-d.sh && chmod +x xray-zh-hant-store-d.sh && sudo ./xray-zh-hant-store-d.sh
-elif [[ $choice == "E" ]]; then
+elif [[ $choice == "5" ]]; then
   curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/xray-zh-hant-store-e.sh && chmod +x xray-zh-hant-store-e.sh && sudo ./xray-zh-hant-store-e.sh
-elif [[ $choice == "F" ]]; then
+elif [[ $choice == "6" ]]; then
   curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/xray-zh-hant-store-f.sh && chmod +x xray-zh-hant-store-f.sh && sudo ./xray-zh-hant-store-f.sh
-elif [[ $choice == "G" ]]; then
+elif [[ $choice == "7" ]]; then
   curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/xray-zh-hant-store-g.sh && chmod +x xray-zh-hant-store-g.sh && sudo ./xray-zh-hant-store-g.sh
-elif [[ $choice == "H" ]]; then
+elif [[ $choice == "8" ]]; then
   curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/xray-zh-hant-store-h.sh && chmod +x xray-zh-hant-store-h.sh && sudo ./xray-zh-hant-store-h.sh
-elif [[ $choice == "I" ]]; then
+elif [[ $choice == "9" ]]; then
   curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/xray-zh-hant-store-i.sh && chmod +x xray-zh-hant-store-i.sh && sudo ./xray-zh-hant-store-i.sh
-elif [[ $choice == "J" ]]; then
+elif [[ $choice == "10" ]]; then
   curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/xray-zh-hant-store-j.sh && chmod +x xray-zh-hant-store-j.sh && sudo ./xray-zh-hant-store-j.sh
-elif [[ $choice == "K" ]]; then
+elif [[ $choice == "11" ]]; then
   curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/xray-zh-hant-store-k.sh && chmod +x xray-zh-hant-store-k.sh && sudo ./xray-zh-hant-store-k.sh
-elif [[ $choice == "L" ]]; then
+elif [[ $choice == "12" ]]; then
   curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/xray-zh-hant-store-l.sh && chmod +x xray-zh-hant-store-l.sh && sudo ./xray-zh-hant-store-l.sh
-elif [[ $choice == "M" ]]; then
+elif [[ $choice == "13" ]]; then
   curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/xray-zh-hant-store-m.sh && chmod +x xray-zh-hant-store-m.sh && sudo ./xray-zh-hant-store-m.sh
-elif [[ $choice == "N" ]]; then
+elif [[ $choice == "14" ]]; then
   curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/xray-zh-hant-store-n.sh && chmod +x xray-zh-hant-store-n.sh && sudo ./xray-zh-hant-store-n.sh
-elif [[ $choice == "O" ]]; then
+elif [[ $choice == "15" ]]; then
   curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/xray-zh-hant-store-o.sh && chmod +x xray-zh-hant-store-o.sh && sudo ./xray-zh-hant-store-o.sh
-elif [[ $choice == "P" ]]; then
+elif [[ $choice == "16" ]]; then
   curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/xray-zh-hant-store-p.sh && chmod +x xray-zh-hant-store-p.sh && sudo ./xray-zh-hant-store-p.sh
-elif [[ $choice == "Q" ]]; then
+elif [[ $choice == "17" ]]; then
   curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/xray-zh-hant-store-q.sh && chmod +x xray-zh-hant-store-q.sh && sudo ./xray-zh-hant-store-q.sh
-elif [[ $choice == "R" ]]; then
+elif [[ $choice == "18" ]]; then
   curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/xray-zh-hant-store-r.sh && chmod +x xray-zh-hant-store-r.sh && sudo ./xray-zh-hant-store-r.sh
-elif [[ $choice == "S" ]]; then
+elif [[ $choice == "19" ]]; then
   curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/xray-zh-hant-store-s.sh && chmod +x xray-zh-hant-store-s.sh && sudo ./xray-zh-hant-store-s.sh
-elif [[ $choice == "T" ]]; then
+elif [[ $choice == "20" ]]; then
   curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/xray-zh-hant-store-t.sh && chmod +x xray-zh-hant-store-t.sh && sudo ./xray-zh-hant-store-t.sh
-elif [[ $choice == "U" ]]; then
+elif [[ $choice == "21" ]]; then
   curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/xray-zh-hant-store-u.sh && chmod +x xray-zh-hant-store-u.sh && sudo ./xray-zh-hant-store-u.sh
-elif [[ $choice == "V" ]]; then
+elif [[ $choice == "22" ]]; then
   curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/xray-zh-hant-store-v.sh && chmod +x xray-zh-hant-store-v.sh && sudo ./xray-zh-hant-store-v.sh
-elif [[ $choice == "W" ]]; then
+elif [[ $choice == "23" ]]; then
   curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/xray-zh-hant-store-w.sh && chmod +x xray-zh-hant-store-w.sh && sudo ./xray-zh-hant-store-w.sh
-elif [[ $choice == "X" ]]; then
+elif [[ $choice == "24" ]]; then
   curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/xray-zh-hant-store-x.sh && chmod +x xray-zh-hant-store-x.sh && sudo ./xray-zh-hant-store-x.sh
-elif [[ $choice == "Y" ]]; then
+elif [[ $choice == "25" ]]; then
   curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/xray-zh-hant-store-y.sh && chmod +x xray-zh-hant-store-y.sh && sudo ./xray-zh-hant-store-y.sh
-elif [[ $choice == "Z" ]]; then
+elif [[ $choice == "26" ]]; then
   curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/xray-zh-hant-store-z.sh && chmod +x xray-zh-hant-store-z.sh && sudo ./xray-zh-hant-store-z.sh
 
 elif [[ $choice == "log" ]]; then
