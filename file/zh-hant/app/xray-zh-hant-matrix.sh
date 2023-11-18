@@ -59,7 +59,7 @@ case $yn_choice in
       echo "Docker 已安裝"
     fi
     read -p "請輸入您的網址(Ex: chat.example.com)：" choice1
-      su
+      sudo -i
       mkdir -p /root/data/docker/matrix
       cd /root/data/docker/matrix
       sudo docker run -it --rm \
