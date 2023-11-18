@@ -74,9 +74,9 @@ enable_registration_without_verification: true" >> homeserver.yaml
       echo "
 version: '3.3'
 services:
-  synapse:
+    synapse:
       image: 'matrixdotorg/synapse:latest'
-      container_name: "matrix"
+      container_name: 'matrix'
       ports:
         - 8008:8008
       volumes:
@@ -87,12 +87,12 @@ services:
       LETSENCRYPT_HOST: '$choice1'
       SYNAPSE_SERVER_NAME: '$choice1'
       SYNAPSE_REPORT_STATS: 'yes'
-  element-web:
-    image: 'vectorim/element-web'
-    container_name: 'element-web'
-    ports:
-      - '8009:80'
-    restart: unless-stopped" >> docker-compose.yml
+    element-web:
+      image: 'vectorim/element-web'
+      container_name: 'element-web'
+      ports:
+        - '8009:80'
+      restart: unless-stopped" >> docker-compose.yml
     docker-compose up -d
     cd
 
