@@ -101,7 +101,7 @@ case $yn2_choice in
     cp /root/data/docker/nginx-proxy-manager /root/data/docker/nginx-proxy-manager.bak
     docker-compose pull
     docker-compose up -d
-    docker update --restart=yes nginx-proxy-manager
+    docker update --restart=always nginx-proxy-manager
 
     read -n 1 -p "按任意按鍵以繼續"
     sudo ./xray-zh-hant-nginx-proxy-manager.sh
