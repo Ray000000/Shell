@@ -59,7 +59,6 @@ case $yn_choice in
       echo "Docker 已安裝"
     fi
       read -p "請輸入網址：" choice1
-      su
       mkdir -p /root/data/docker/matrix
       cd /root/data/docker/matrix
       sudo docker run -it --rm \
@@ -98,6 +97,7 @@ services:
     #    - '/etc/element-web/config.json:/app/config.json'
     restart: unless-stopped" >> docker-compose.yml
     docker-compose up -d
+    cd
 
     read -n 1 -p "按任意按鍵以繼續"
     sudo ./xray-zh-hant-matrix.sh
