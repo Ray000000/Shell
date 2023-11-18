@@ -80,7 +80,7 @@ services:
     container_name: 'matrix'
     restart: unless-stopped
     ports:
-      - 8008:8008
+      - '8008:8008'
     volumes:
       - './data:/data'
     environment:
@@ -90,11 +90,12 @@ services:
       SYNAPSE_SERVER_NAME: '$choice1'
       SYNAPSE_REPORT_STATS: 'yes'
   element-web:
+    image: 'vectorim/element-web'
+    container_name: 'element-web'
     ports:
       - '8009:80'
     #volumes:
     #    - '/etc/element-web/config.json:/app/config.json'
-    image: vectorim/element-web
     restart: unless-stopped" >> docker-compose.yml
     docker-compose up -d
 
