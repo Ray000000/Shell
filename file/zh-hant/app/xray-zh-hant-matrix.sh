@@ -82,10 +82,10 @@ services:
       volumes:
         - './data:/data'
     environment:
-      VIRTUAL_HOST: "$choice1"
+      VIRTUAL_HOST: '$choice1'
       VIRTUAL_PORT: 8008
-      LETSENCRYPT_HOST: "$choice1"
-      SYNAPSE_SERVER_NAME: "$choice1"
+      LETSENCRYPT_HOST: '$choice1'
+      SYNAPSE_SERVER_NAME: '$choice1'
       SYNAPSE_REPORT_STATS: 'yes'
     element-web:
       image: 'vectorim/element-web'
