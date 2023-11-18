@@ -45,18 +45,6 @@ fi
 case $yn_choice in
   [Yy])
     if ! command -v docker &>/dev/null; then
-      if [ -f "/etc/debian_version" ]; then
-        DEBIAN_FRONTEND=noninteractive apt update -y
-        DEBIAN_FRONTEND=noninteractive apt full-upgrade -y
-        DEBIAN_FRONTEND=noninteractive apt upgrade -y
-        DEBIAN_FRONTEND=noninteractive apt autoremove -y
-        DEBIAN_FRONTEND=noninteractive apt autoclean -y
-        DEBIAN_FRONTEND=noninteractive apt-get install -y curl wget sudo nano htop socat neofetch
-      fi
-      if [ -f "/etc/redhat-release" ]; then
-        yum -y update
-        yum -y install curl wget sudo nano htop socat neofetch
-      fi
       curl -fsSL https://get.docker.com | sh
       curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
       chmod +x /usr/local/bin/docker-compose
