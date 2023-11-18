@@ -21,7 +21,8 @@ echo -e "\e[1m\e[93m
 請選擇您要執行的任務：
 \e[0m"
 echo "1. 安裝"
-echo -e "\e[1m\e[31m2. 解除安裝（不保存資料）\e[0m"
+echo "2. 更新"
+echo -e "\e[1m\e[31m3. 解除安裝（不保存資料）\e[0m"
 echo -e "\e[1m\e[32m0. 回到菜單\e[0m"
 
 read -p "請輸入：" choice
@@ -31,15 +32,19 @@ if [[ $choice == "1" ]]; then
   echo -e "\e[1m\e[31mN. 取消安裝\e[0m"
   read -p "請輸入：" yn_choice
 elif [[ $choice == "2" ]]; then
+  echo -e "\e[1m\e[34mY. 確認更新\e[0m"
+  echo -e "\e[1m\e[31mN. 取消更新\e[0m"
+  read -p "請輸入：" yn2_choice
+elif [[ $choice == "3" ]]; then
   echo -e "\e[1m\e[34mY. 確認解除安裝\e[0m"
   echo -e "\e[1m\e[31mN. 取消解除安裝\e[0m"
-  read -p "請輸入：" yn2_choice
+  read -p "請輸入：" yn3_choice
 elif [[ $choice == "0" ]]; then
   sudo ./xray-zh-hant-store.sh
 else
   echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
   read -n 1 -p "按任意按鍵，回到菜單"
-  sudo ./xray-zh-hant-nginx-proxy-manager.sh
+  sudo ./xray-zh-hant-martix.sh
 fi
 
 case $yn_choice in
@@ -53,30 +58,80 @@ case $yn_choice in
     else
       echo "Docker 已安裝"
     fi
-    sudo apt install -y lsb-release wget apt-transport-https
-    sudo wget -O /usr/share/keyrings/matrix-org-archive-keyring.gpg https://packages.matrix.org/debian/matrix-org-archive-keyring.gpg
-    echo "deb [signed-by=/usr/share/keyrings/matrix-org-archive-keyring.gpg] https://packages.matrix.org/debian/ $(lsb_release -cs) main" |
-    sudo tee /etc/apt/sources.list.d/matrix-org.list
-    sudo apt update
-    sudo apt install -y matrix-synapse-py3
-    sudo apt install -y libpq5
+    read -p "請輸入您的網址(Ex: chat.example.com)：" choice1
+      su
+      mkdir -p /root/data/docker/martix
+      cd /root/data/docker/martix
+      sudo docker run -it --rm \
+      -v /root/data/docker/matrix/data:/data \
+      -e SYNAPSE_SERVER_NAME=$choice1 \
+      -e SYNAPSE_REPORT_STATS=yes \
+      matrixdotorg/synapse:latest generate
+      cd /root/data/docker/matrix/data
+      echo "
+enable_registration: true
+enable_registration_without_verification: true" >> homeserver.yaml
+      cd /root/data/docker/martix
+      echo "
+version: '3.3'
+services:
+  synapse:
+    image: 'matrixdotorg/synapse:latest'
+    container_name: 'matrix'
+    restart: unless-stopped
+    ports:
+      - 8008:8008
+    volumes:
+      - './data:/data'
+    environment:
+      VIRTUAL_HOST: '$choice1'
+      VIRTUAL_PORT: 8008
+      LETSENCRYPT_HOST: '$choice1'
+      SYNAPSE_SERVER_NAME: '$choice1'
+      SYNAPSE_REPORT_STATS: 'yes'
+  element-web:
+    ports:
+      - '8009:80'
+    #volumes:
+    #    - '/etc/element-web/config.json:/app/config.json'
+    image: vectorim/element-web
+    restart: unless-stopped" >> docker-compose.yml
+    docker-compose up -d
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./xray-zh-hant-nginx-proxy-manager.sh
+    sudo ./xray-zh-hant-martix.sh
     ;;
   [Nn])
-    sudo ./xray-zh-hant-nginx-proxy-manager.sh
+    sudo ./xray-zh-hant-martix.sh
     ;;
 esac
   
 case $yn2_choice in
   [Yy])
-    
+    cd /root/data/docker/martix
+    docker-compose down
+    cp /root/data/docker/martix /root/data/docker/martix.bak
+    docker-compose pull
+    docker-compose up -d
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./xray-zh-hant-nginx-proxy-manager.sh
+    sudo ./xray-zh-hant-martix.sh
     ;;
   [Nn])
-    sudo ./xray-zh-hant-nginx-proxy-manager.sh
+    sudo ./xray-zh-hant-martix.sh
+    ;;
+esac
+
+case $yn3_choice in
+  [Yy])
+    cd /root/data/docker/martix
+    docker-compose down
+    rm -rf /root/data/docker/martix
+
+    read -n 1 -p "按任意按鍵以繼續"
+    sudo ./xray-zh-hant-martix.sh
+    ;;
+  [Nn])
+    sudo ./xray-zh-hant-martix.sh
     ;;
 esac
