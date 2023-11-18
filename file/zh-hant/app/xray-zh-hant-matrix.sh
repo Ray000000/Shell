@@ -75,13 +75,12 @@ enable_registration_without_verification: true" >> homeserver.yaml
 version: '3.3'
 services:
   synapse:
-    image: 'matrixdotorg/synapse:latest'
-    container_name: 'matrix'
-    restart: unless-stopped
-    ports:
-      - '8008:8008'
-    volumes:
-      - './data:/data'
+      image: 'matrixdotorg/synapse:latest'
+      container_name: "matrix"
+      ports:
+        - 8008:8008
+      volumes:
+        - './data:/data'
     environment:
       VIRTUAL_HOST: '$choice1'
       VIRTUAL_PORT: 8008
@@ -93,8 +92,6 @@ services:
     container_name: 'element-web'
     ports:
       - '8009:80'
-    #volumes:
-    #    - '/etc/element-web/config.json:/app/config.json'
     restart: unless-stopped" >> docker-compose.yml
     docker-compose up -d
     cd
