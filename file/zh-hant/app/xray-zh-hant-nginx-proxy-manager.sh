@@ -66,21 +66,21 @@ version: '3'
 services:
   app:
     image: 'jc21/nginx-proxy-manager:latest'
+    container_name: 'nginx-proxy-manager'
     restart: unless-stopped
     ports:
       - '80:80'
-      - '881:881'
+      - '81:81'
       - '443:443'
     volumes:
       - ./data:/data
       - ./letsencrypt:/etc/letsencrypt" >> docker-compose.yml
-      cd /root/data/docker/nginx-proxy-manager
       docker-compose up -d
-      docker update --restart=yes nginx-proxy-manager
+      docker update --restart=always nginx-proxy-manager
 
       external_ip=$(curl -s ipv4.ip.sb)
       echo -e "登入網址：
-      http://$external_ip:881"
+      http://$external_ip:81"
       echo -e "
       Email: admin@example.com"
       echo -e "
