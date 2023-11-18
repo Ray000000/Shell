@@ -59,7 +59,7 @@ case $yn_choice in
       echo "Docker 已安裝"
     fi
       read -p "請輸入網址：" choice1
-      sudo -i
+      su
       mkdir -p /root/data/docker/matrix
       cd /root/data/docker/matrix
       sudo docker run -it --rm \
@@ -128,6 +128,7 @@ case $yn3_choice in
     cd /root/data/docker/matrix
     docker-compose down
     rm -rf /root/data/docker/matrix
+    cd
 
     read -n 1 -p "按任意按鍵以繼續"
     sudo ./xray-zh-hant-matrix.sh
