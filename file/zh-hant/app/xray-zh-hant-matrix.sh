@@ -44,7 +44,7 @@ elif [[ $choice == "0" ]]; then
 else
   echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
   read -n 1 -p "按任意按鍵，回到菜單"
-  sudo ./xray-zh-hant-martix.sh
+  sudo ./xray-zh-hant-matrix.sh
 fi
 
 case $yn_choice in
@@ -60,8 +60,8 @@ case $yn_choice in
     fi
     read -p "請輸入您的網址(Ex: chat.example.com)：" choice1
       su
-      mkdir -p /root/data/docker/martix
-      cd /root/data/docker/martix
+      mkdir -p /root/data/docker/matrix
+      cd /root/data/docker/matrix
       sudo docker run -it --rm \
       -v /root/data/docker/matrix/data:/data \
       -e SYNAPSE_SERVER_NAME=$choice1 \
@@ -71,7 +71,7 @@ case $yn_choice in
       echo "
 enable_registration: true
 enable_registration_without_verification: true" >> homeserver.yaml
-      cd /root/data/docker/martix
+      cd /root/data/docker/matrix
       echo "
 version: '3.3'
 services:
@@ -99,39 +99,39 @@ services:
     docker-compose up -d
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./xray-zh-hant-martix.sh
+    sudo ./xray-zh-hant-matrix.sh
     ;;
   [Nn])
-    sudo ./xray-zh-hant-martix.sh
+    sudo ./xray-zh-hant-matrix.sh
     ;;
 esac
   
 case $yn2_choice in
   [Yy])
-    cd /root/data/docker/martix
+    cd /root/data/docker/matrix
     docker-compose down
-    cp /root/data/docker/martix /root/data/docker/martix.bak
+    cp /root/data/docker/matrix /root/data/docker/matrix.bak
     docker-compose pull
     docker-compose up -d
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./xray-zh-hant-martix.sh
+    sudo ./xray-zh-hant-matrix.sh
     ;;
   [Nn])
-    sudo ./xray-zh-hant-martix.sh
+    sudo ./xray-zh-hant-matrix.sh
     ;;
 esac
 
 case $yn3_choice in
   [Yy])
-    cd /root/data/docker/martix
+    cd /root/data/docker/matrix
     docker-compose down
-    rm -rf /root/data/docker/martix
+    rm -rf /root/data/docker/matrix
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./xray-zh-hant-martix.sh
+    sudo ./xray-zh-hant-matrix.sh
     ;;
   [Nn])
-    sudo ./xray-zh-hant-martix.sh
+    sudo ./xray-zh-hant-matrix.sh
     ;;
 esac
