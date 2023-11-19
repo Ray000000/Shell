@@ -1,21 +1,31 @@
 #!/bin/bash
 
 clear
-echo -e "\e[1m\e[93m〔Nginx Proxy Manager〕\e[0m"
+echo -e "\e[1m\e[93m〔Matrix - Element〕\e[0m"
 echo "
-Nginx Proxy Manager 是一個用於管理和監控 Nginx 代理的開放原始碼軟體。它提供一個簡潔的圖形化介面，使管理 Nginx 代理變得更加容易。
-Nginx Proxy Manager 具有以下功能：
-*管理 Nginx 代理的 HTTP 和 HTTPS 流量。
-*為 Nginx 代理配置 SSL/TLS 憑證，包括 Let's Encrypt 自動化。
-*監控 Nginx 代理的性能和狀態。
-*提供日誌分析功能。
-Nginx Proxy Manager 適用於各種用途，包括：
-*托管網站和應用程式。
-*提供代理服務。
-*測試和開發環境。
-Nginx Proxy Manager 的安裝和配置非常簡單。它可以安裝在各種操作系統上，包括 Linux、Windows 和 macOS。"
+Matrix 是一個開放原始碼的即時通訊協議，由 New Vector 公司開發。它是一個去中心化的協議，這意味著它不依賴於任何單一實體來運作。相反，Matrix 網路由許多不同的伺服器組成，這些伺服器相互連接。
+
+Matrix 具有許多優點，包括：
+*去中心化：Matrix 網路不依賴於任何單一實體，這使得它更難被審查或關閉。
+*安全性：Matrix 使用端到端加密來保護用戶的隱私。
+*可擴展性：Matrix 網路可以輕鬆擴展以容納更多的用戶和數據。
+
+Matrix 可以用於各種用途，包括：
+*個人聊天
+*群組聊天
+*文件共享
+*音訊和視訊通話
+
+Matrix 有許多不同的客戶端，可在桌上型電腦、行動裝置和網頁上使用。
+以下是 Matrix 的一些具體功能：
+*聊天：Matrix 可以用於與其他用戶進行一對一聊天。
+*群組聊天：Matrix 可以用於與多個用戶進行群聊。
+*文件共享：Matrix 可以用於共享文件。
+*音訊和視訊通話：Matrix 可以用於進行音訊和視訊通話。
+Matrix 是一個功能強大的即時通訊協議，具有許多優點。它是一種去中心化的、安全的和可擴展的聊天服務，可以用於各種用途。"
 echo "----------------------------------------"
 echo "官方網站：
+https://matrix.org/
 https://element.io/"
 echo -e "\e[1m\e[93m
 請選擇您要執行的任務：
