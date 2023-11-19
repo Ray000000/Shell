@@ -78,7 +78,7 @@ services:
       image: 'matrixdotorg/synapse:latest'
       container_name: 'matrix'
       ports:
-        - 9009:8008
+        - 8010:8008
       volumes:
         - './data:/data'
       environment:
@@ -91,7 +91,7 @@ services:
       image: 'vectorim/element-web'
       container_name: 'element-web'
       ports:
-        - '8008:80'" >> docker-compose.yml
+        - '8009:80'" >> docker-compose.yml
     docker-compose up -d
     cd
 
