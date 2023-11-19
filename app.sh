@@ -22,7 +22,7 @@ echo "5. View Version"
 echo -e "\e[1m\e[32m0. Back\e[0m"
 
 read -p "Please input:" choice
-
+#--------------------------------------------------choice-------------------------------------------------------#
 if [[ $choice == "1" ]]; then
     echo -e "\e[1m\e[34mY. Confirm install\e[0m"
     echo -e "\e[1m\e[31mN. Cancel install\e[0m"
@@ -50,7 +50,7 @@ else
   read -n 1 -p "Press any key to return to the menu."
   sudo ./app.sh
 fi
-
+#--------------------------------------------------yn_choice----------------------------------------------------#
 case $yn_choice in
   [Yy])
 
@@ -61,7 +61,7 @@ case $yn_choice in
     sudo ./app.sh
     ;;
 esac
-  
+#--------------------------------------------------yn2_choice---------------------------------------------------#
 case $yn2_choice in
   [Yy])
 
@@ -72,7 +72,7 @@ case $yn2_choice in
     sudo ./app.sh
     ;;
 esac
-
+#--------------------------------------------------yn3_choice---------------------------------------------------#
 case $yn3_choice in
   [Yy])
 
