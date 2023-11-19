@@ -48,7 +48,7 @@ elif [[ $choice == "5" ]]; then
   docker-compose --version
   read -n 1 -p "按任意按鍵以繼續"
   sudo ./xray-zh-hant-docker.sh
-elif [[ $choice == "5" ]]; then
+elif [[ $choice == "6" ]]; then
   echo -e "\e[1m\e[93m
 請選擇您要執行的操作：
 \e[0m"
@@ -181,7 +181,7 @@ else
   read -n 1 -p "按任意按鍵，回到菜單"
   sudo ./xray-zh-hant-docker.sh
 fi
-
+#--------------------------------------------------yn_choice----------------------------------------------------#
 case $yn_choice in
   [Yy])
     if [ -f "/etc/debian_version" ]; then
@@ -209,7 +209,7 @@ case $yn_choice in
     sudo ./xray-zh-hant-docker.sh
     ;;
 esac
-  
+#--------------------------------------------------yn2_choice---------------------------------------------------#
 case $yn2_choice in
   [Yy])
     sudo apt-get remove docker -y
@@ -225,7 +225,7 @@ case $yn2_choice in
     sudo ./xray-zh-hant-docker.sh
     ;;
 esac
-
+#--------------------------------------------------yn3_choice---------------------------------------------------#
 case $yn3_choice in
   [Yy])
     docker rm $(docker ps -a -q) && docker rmi $(docker images -q) && docker network prune
