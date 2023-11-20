@@ -103,8 +103,17 @@ services:
       ports:
         - '8009:80'" >> docker-compose.yml
     docker-compose up -d
+    docker update --restart=always matrix
+    docker update --restart=always element-web
     cd
 
+    external_ip=$(curl -s ipv4.ip.sb)
+      echo -e "Martix 網址：
+      http://$external_ip:8010"
+      echo -e "Element 網址：
+      http://$external_ip:8009"
+      echo -e "建議使用 Nginx Proxy Manager 設定反向代理"
+  
     read -n 1 -p "按任意按鍵以繼續"
     sudo ./xray-zh-hant-matrix.sh
     ;;
@@ -131,6 +140,9 @@ esac
 
 case $yn3_choice in
   [Yy])
+    cd
+    docker stop matrix element-web
+    docker rm matrix element-web
     cd /root/data/docker/matrix
     docker-compose down
     rm -rf /root/data/docker/matrix
