@@ -19,7 +19,7 @@ echo -e "\e[1m\e[32m0. Exit\e[0m"
 read -p "請輸入：" choice
 
 if [[ $choice == "1" ]]; then
-  curl -sS -O https://example.com && chmod +x .sh && sudo ./.sh
+  curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/app/xray-zh-hant-alist.sh && chmod +x xray-zh-hant-alist.sh && sudo ./xray-zh-hant-alist.sh
 
 elif [[ $choice == "0" ]]; then
   exit
