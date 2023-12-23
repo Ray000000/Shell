@@ -18,11 +18,16 @@ English(Coming) | 繁體中文 | 简体中文(Coming)
 >Xray-Shell
 >>系統
 >>>Debian (10, 11, 12)
+
 >>>Ubuntu (20.04, 22.04)
+
 >>語言
 >>>English(Coming)
+
 >>>繁體中文
+
 >>>简体中文(Coming)
+
 ***
 
 ## 使用
