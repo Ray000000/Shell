@@ -23,6 +23,7 @@ echo "3. 解除安裝"
 echo -e "\e[1m\e[31m4. 解除安裝（不保存資料）\e[0m"
 echo "5. 查看版本"
 echo "6. 簡易操作"
+echo "00. 設定快捷方式"
 echo -e "\e[1m\e[32m0. 回到菜單\e[0m"
 
 read -p "請輸入：" choice
@@ -59,6 +60,11 @@ elif [[ $choice == "6" ]]; then
   echo -e "5. 刪除容器　｜　\e[1m\e[32m0. 返回\e[0m"
 
   read -p "請輸入：" next_choice
+elif [[ $choice == "00" ]]; then
+  read -p "請輸入快捷鍵：" choice1
+  echo "alias $choice1='curl -sS -O https://raw.githubusercontent.com/Ray000000/Shell/file\zh-hant\app\xray-zh-hant-docker.sh && chmod +x xray-zh-hant-docker.sh && sudo ./xray-zh-hant-docker.sh'
+" >> ~/.bashrc
+  source ~/.bashrc
 #--------------------------------------------------next_choice--------------------------------------------------#
   if [[ $next_choice == "1" ]]; then
     echo -e "\e[1m\e[93m您的容器如下：\e[0m"

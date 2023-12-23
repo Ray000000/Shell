@@ -14,6 +14,11 @@ Nginx Proxy Manager 適用於各種用途，包括：
 *提供代理服務。
 *測試和開發環境。
 Nginx Proxy Manager 的安裝和配置非常簡單。它可以安裝在各種操作系統上，包括 Linux、Windows 和 macOS。"
+external_ip=$(curl -s ipv4.ip.sb)
+echo -e "登入網址（安裝完成後可用）：
+http://$external_ip:81"
+echo -e "Email: admin@example.com"
+echo -e "Password: changeme"
 echo "----------------------------------------"
 echo "官方網站：
 https://nginxproxymanager.com/"
@@ -77,14 +82,6 @@ services:
       - ./letsencrypt:/etc/letsencrypt" >> docker-compose.yml
       docker-compose up -d
       docker update --restart=always nginx-proxy-manager
-
-      external_ip=$(curl -s ipv4.ip.sb)
-      echo -e "登入網址：
-      http://$external_ip:81"
-      echo -e "
-      Email: admin@example.com"
-      echo -e "
-      Password: changeme"
 
     read -n 1 -p "按任意按鍵以繼續"
     sudo ./xray-zh-hant-nginx-proxy-manager.sh

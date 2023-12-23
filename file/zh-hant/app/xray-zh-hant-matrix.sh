@@ -23,6 +23,12 @@ Matrix 有許多不同的客戶端，可在桌上型電腦、行動裝置和網�
 *文件共享：Matrix 可以用於共享文件。
 *音訊和視訊通話：Matrix 可以用於進行音訊和視訊通話。
 Matrix 是一個功能強大的即時通訊協議，具有許多優點。它是一種去中心化的、安全的和可擴展的聊天服務，可以用於各種用途。"
+external_ip=$(curl -s ipv4.ip.sb)
+echo -e "Martix 網址（安裝完成後可用）：
+http://$external_ip:8010"
+echo -e "Element 網址（安裝完成後可用）：
+http://$external_ip:8009"
+echo -e "建議使用 Nginx Proxy Manager 設定反向代理"
 echo "----------------------------------------"
 echo "官方網站：
 https://matrix.org/
@@ -106,13 +112,6 @@ services:
     docker update --restart=always matrix
     docker update --restart=always element-web
     cd
-
-    external_ip=$(curl -s ipv4.ip.sb)
-      echo -e "Martix 網址：
-      http://$external_ip:8010"
-      echo -e "Element 網址：
-      http://$external_ip:8009"
-      echo -e "建議使用 Nginx Proxy Manager 設定反向代理"
   
     read -n 1 -p "按任意按鍵以繼續"
     sudo ./xray-zh-hant-matrix.sh
