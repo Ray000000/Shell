@@ -1,10 +1,32 @@
 # Xray-Shell
-Xray-Shell 是一款擁有精美畫面的 Shell
-目前可以使用：英文、繁體中文、簡體中文
-### 使用指令
-```html
+English(Coming)|繁體中文|简体中文(Coming)
+***
+
+## 介紹
+### Xray-Shell 的優點如下：
+* 在地化
+* 輕量化
+* 模組化
+* 易使用
+* 公開
+* 開源
+* 免費
+* 社區
+***
+
+### Xray-Shell 的支援列表：
+>Xray-Shell
+>>系統
+>>>Debian (10, 11, 12)
+>>>Ubuntu (20.04, 22.04)
+>>語言
+>>>English(Coming)
+>>>繁體中文
+>>>简体中文(Coming)
+***
+
+## 使用
+```bash
+sudo apt install curl
 curl -sS -O https://raw.githubusercontent.com/Ray000000/Shell/main/xray-shell.sh && chmod +x xray-shell.sh && sudo ./xray-shell.sh
-```
-```html
-curl -sS -O https://ray000000.github.io/Shell/main/app.sh && chmod +x app.sh && sudo ./app.sh
 ```

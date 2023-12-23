@@ -74,7 +74,7 @@ elif [[ $choice == "2" ]]; then
   read -n 1 -p "按任意按鍵以繼續"
   sudo ./xray-zh-hant.sh
 elif [[ $choice == "3" ]]; then
-  curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/xray-zh-hant-store.sh && chmod +x xray-zh-hant-store.sh && sudo ./xray-zh-hant-store.sh
+  curl -sS -O https://raw.githubusercontent.com/Ray000000/Shell/main/file/zh-hant/xray-zh-hant-store.sh && chmod +x xray-zh-hant-store.sh && sudo ./xray-zh-hant-store.sh
 
 elif [[ $choice == "4" ]]; then
   echo "PermitRootLogin yes
@@ -110,7 +110,7 @@ elif [[ $choice == "00" ]]; then
     read -n 1 -p "按任意按鍵以繼續"
     sudo ./xray-zh-hant.sh
   elif [[ $next_choice == "log" ]]; then
-    curl -sS -O https://ray000000.github.io/Shell/xray-update-log.sh && chmod +x xray-update-log.sh && sudo ./xray-update-log.sh
+    curl -sS -O https://raw.githubusercontent.com/Ray000000/Shell/main/xray-update-log.sh && chmod +x xray-update-log.sh && sudo ./xray-update-log.sh
   elif [[ $next_choice == "0" ]]; then
     sudo ./xray-zh-hant.sh
   else

@@ -17,6 +17,7 @@ qBittorrent 的優點包括：
 *輕量級：qBittorrent 的體積小，運行速度快。
 *安全：qBittorrent 不包含任何廣告或間諜軟件。
 qBittorrent 是一個非常優秀的 BitTorrent 客戶端，它功能強大、使用簡單，是下載 BitTorrent 文件的理想選擇。"
+sleep 2
 container_id=$(docker ps -qf "name=qbittorrent")
 logs=$(docker logs "$container_id")
 password=$(echo "$logs" | awk '/session/ {print $NF}')

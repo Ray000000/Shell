@@ -62,7 +62,7 @@ elif [[ $choice == "6" ]]; then
   read -p "請輸入：" next_choice
 elif [[ $choice == "00" ]]; then
   read -p "請輸入快捷鍵：" choice1
-  echo "alias $choice1='curl -sS -O https://raw.githubusercontent.com/Ray000000/Shell/main/file/zh-hant/app/xray-zh-hant-docker.sh && chmod +x xray-zh-hant-docker.sh && sudo ./xray-zh-hant-docker.sh'" >> ~/.bashrc
+  echo "alias $choice1='curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/app/xray-zh-hant-docker.sh && chmod +x xray-zh-hant-docker.sh && sudo ./xray-zh-hant-docker.sh'" >> ~/.bashrc
   source ~/.bashrc
   read -n 1 -p "按任意按鍵以繼續"
   sudo ./xray-zh-hant-docker.sh
