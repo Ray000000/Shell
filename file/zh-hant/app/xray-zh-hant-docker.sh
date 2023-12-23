@@ -62,9 +62,18 @@ elif [[ $choice == "6" ]]; then
   read -p "請輸入：" next_choice
 elif [[ $choice == "00" ]]; then
   read -p "請輸入快捷鍵：" choice1
-  echo "alias $choice1='curl -sS -O https://raw.githubusercontent.com/Ray000000/Shell/file\zh-hant\app\xray-zh-hant-docker.sh && chmod +x xray-zh-hant-docker.sh && sudo ./xray-zh-hant-docker.sh'
-" >> ~/.bashrc
+  echo "alias $choice1='curl -sS -O https://raw.githubusercontent.com/Ray000000/Shell/file/zh-hant/app/xray-zh-hant-docker.sh && chmod +x xray-zh-hant-docker.sh && sudo ./xray-zh-hant-docker.sh'" >> ~/.bashrc
   source ~/.bashrc
+  read -n 1 -p "按任意按鍵以繼續"
+  sudo ./xray-zh-hant-docker.sh
+elif [[ $choice == "0" ]]; then
+  sudo ./xray-zh-hant-store-d.sh
+else
+  echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
+  read -n 1 -p "按任意按鍵，回到菜單"
+  sudo ./xray-zh-hant-docker.sh
+fi
+#--------------------------------------------------choice-------------------------------------------------------#
 #--------------------------------------------------next_choice--------------------------------------------------#
   if [[ $next_choice == "1" ]]; then
     echo -e "\e[1m\e[93m您的容器如下：\e[0m"
@@ -113,37 +122,12 @@ elif [[ $choice == "00" ]]; then
 
   elif [[ $next_choice == "6" ]]; then
     echo -e "\e[1m\e[93m
-  請選擇您要執行的任務：
+請選擇您要執行的任務：
       \e[0m"
-    echo "1. \e[1m\e[34m開啟開機自啟\e[0m"
-    echo "2. \e[1m\e[31m關閉開機自啟\e[0m"
+    echo -e "\e[1m\e[34m1. 開啟開機自啟\e[0m"
+    echo -e "\e[1m\e[31m2. \e[1m\e[31m關閉開機自啟\e[0m"
     echo -e "\e[1m\e[32m0. 返回\e[0m"
     read -p "請輸入：" next_choice2
-#--------------------------------------------------next_choice2-------------------------------------------------#
-    if [[ $next_choice2 == "1" ]]; then
-      echo -e "\e[1m\e[93m您的容器如下：\e[0m"
-      docker ps -a
-      read -p "請輸入開啟開機自啟容器的名稱：" choice_docker_auto_restart_on
-      docker update --restart=always $choice_docker_auto_restart_on
-
-      read -n 1 -p "按任意按鍵以繼續"
-      sudo ./xray-zh-hant-docker.sh
-    elif [[ $next_choice2 == "2" ]]; then
-      echo -e "\e[1m\e[93m您的容器如下：\e[0m"
-      docker ps -a
-      read -p "請輸入關閉開機自啟容器的名稱：" choice_docker_auto_restart_off
-      docker update --restart=no $choice_docker_auto_restart_off
-
-      read -n 1 -p "按任意按鍵以繼續"
-      sudo ./xray-zh-hant-docker.sh
-    elif [[ $next_choice == "0" ]]; then
-      sudo ./xray-zh-hant-docker.sh
-    else
-      echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
-      read -n 1 -p "按任意按鍵以繼續"
-      sudo ./xray-zh-hant-docker.sh
-    fi
-#--------------------------------------------------next_choice--------------------------------------------------#
   elif [[ $next_choice == "7" ]]; then
     echo -e "\e[1m\e[93m您的鏡像列表如下：\e[0m"
     docker image ls
@@ -174,19 +158,38 @@ elif [[ $choice == "00" ]]; then
 
   elif [[ $next_choice == "0" ]]; then
     sudo ./xray-zh-hant-docker.sh
+
   else
     echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
     read -n 1 -p "按任意按鍵以繼續"
     sudo ./xray-zh-hant-docker.sh
   fi
+#--------------------------------------------------next_choice--------------------------------------------------#
+#--------------------------------------------------next_choice2-------------------------------------------------#
+    if [[ $next_choice2 == "1" ]]; then
+      echo -e "\e[1m\e[93m您的容器如下：\e[0m"
+      docker ps -a
+      read -p "請輸入開啟開機自啟容器的名稱：" choice_docker_auto_restart_on
+      docker update --restart=always $choice_docker_auto_restart_on
 
-elif [[ $choice == "0" ]]; then
-  sudo ./xray-zh-hant-store-d.sh
-else
-  echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
-  read -n 1 -p "按任意按鍵，回到菜單"
-  sudo ./xray-zh-hant-docker.sh
-fi
+      read -n 1 -p "按任意按鍵以繼續"
+      sudo ./xray-zh-hant-docker.sh
+    elif [[ $next_choice2 == "2" ]]; then
+      echo -e "\e[1m\e[93m您的容器如下：\e[0m"
+      docker ps -a
+      read -p "請輸入關閉開機自啟容器的名稱：" choice_docker_auto_restart_off
+      docker update --restart=no $choice_docker_auto_restart_off
+
+      read -n 1 -p "按任意按鍵以繼續"
+      sudo ./xray-zh-hant-docker.sh
+    elif [[ $next_choice2 == "0" ]]; then
+      sudo ./xray-zh-hant-docker.sh
+    else
+      echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
+      read -n 1 -p "按任意按鍵以繼續"
+      sudo ./xray-zh-hant-docker.sh
+    fi
+#--------------------------------------------------next_choice2--------------------------------------------------#
 #--------------------------------------------------yn_choice----------------------------------------------------#
 case $yn_choice in
   [Yy])

@@ -84,8 +84,7 @@ PasswordAuthentication yes
 
 elif [[ $choice == "5" ]]; then
   read -p "請輸入快捷鍵：" choice1
-  echo "alias $choice1='curl -sS -O https://raw.githubusercontent.com/Ray000000/Shell/main/xray-shell.sh && chmod +x xray-shell.sh && sudo ./xray-shell.sh'
-" >> ~/.bashrc
+  echo "alias $choice1='curl -sS -O https://raw.githubusercontent.com/Ray000000/Shell/main/xray-shell.sh && chmod +x xray-shell.sh && sudo ./xray-shell.sh'" >> ~/.bashrc
   source ~/.bashrc
 
 elif [[ $choice == "00" ]]; then
