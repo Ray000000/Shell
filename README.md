@@ -1,5 +1,5 @@
 # Xray-Shell
-English(Coming)|繁體中文|简体中文(Coming)
+English(Coming) | 繁體中文 | 简体中文(Coming)
 ***
 
 ## 介紹
