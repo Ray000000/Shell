@@ -17,10 +17,14 @@ Alist 的優點包括：
 *易用：Alist 的使用非常簡單，只需添加文件，然後即可在網頁上瀏覽、下載或分享文件。
 *功能強大：Alist 支持多種存儲、瀏覽、下載、分享、搜索、權限管理等功能。"
 external_ip=$(curl -s ipv4.ip.sb)
+password_file="/root/data/docker/alist/password.txt"
+if [ -f "$password_file" ]; then
+    alist_password=$(cat "$password_file")
+fi
 echo -e "Alist 網址（安裝完成後可用）：
 http://$external_ip:5244"
 echo -e "Alist 登入帳號：admin"
-echo -e "Alist 登入密碼：$choice1"
+echo -e "Alist 登入密碼：$alist_password"
 echo -e "建議使用 Nginx Proxy Manager 設定反向代理"
 echo "----------------------------------------"
 echo "官方網站：
@@ -87,6 +91,7 @@ services:
     docker-compose up -d
     docker update --restart=always alist
     docker exec -it alist ./alist admin set $choice1
+    echo "$choice1" > "$password_file"
     cd
   
     read -n 1 -p "按任意按鍵以繼續"
