@@ -1,16 +1,12 @@
 #!/bin/bash
 
 clear
-echo -e "\e[1m\e[93m〔----- # Application Name # -----〕\e[0m"
+echo -e "\e[1m\e[93m〔Application Name〕\e[0m"
 echo "
------ # Application Introduction and Help # -----"
-
-# The dividing line
+Application Introduction and Help"
 echo "----------------------------------------"
-
-# Official Website:
-# https://example.com/
-echo "Official Website and Developer Help"
+echo "Official Website:
+https://example.com/"
 echo -e "\e[1m\e[93m
 Which operations do you want to perform:
 \e[0m"
@@ -22,12 +18,16 @@ echo "5. View Version"
 echo -e "\e[1m\e[32m0. Back\e[0m"
 
 read -p "Please input:" choice
+
 #--------------------------------------------------choice-------------------------------------------------------#
 if [[ $choice == "1" ]]; then
-    echo -e "\e[1m\e[34mY. Confirm install\e[0m"
-    echo -e "\e[1m\e[31mN. Cancel install\e[0m"
-    read -p "Please input:" yn_choice
+  echo -e "\e[1m\e[34mY. Confirm install\e[0m"
+  echo -e "\e[1m\e[31mN. Cancel install\e[0m"
+  read -p "Please input:" yn_choice
 elif [[ $choice == "2" ]]; then
+  stop
+  cp
+  cd
   read -n 1 -p "Press any key to continue."
   sudo ./app.sh
 elif [[ $choice == "3" ]]; then
@@ -39,8 +39,7 @@ elif [[ $choice == "4" ]]; then
   echo -e "\e[1m\e[31mN. Cancel uninstall\e[0m"
   read -p "Please input:" yn3_choice
 elif [[ $choice == "5" ]]; then
-  docker --version
-  docker-compose --version
+  version
   read -n 1 -p "Press any key to continue."
   sudo ./app.sh
 elif [[ $choice == "0" ]]; then
@@ -50,9 +49,11 @@ else
   read -n 1 -p "Press any key to return to the menu."
   sudo ./app.sh
 fi
+#--------------------------------------------------choice-------------------------------------------------------#
 #--------------------------------------------------yn_choice----------------------------------------------------#
 case $yn_choice in
   [Yy])
+    sudo apt install -y
 
     read -n 1 -p "Press any key to continue."
     sudo ./app.sh
@@ -61,9 +62,11 @@ case $yn_choice in
     sudo ./app.sh
     ;;
 esac
+#--------------------------------------------------yn_choice----------------------------------------------------#
 #--------------------------------------------------yn2_choice---------------------------------------------------#
 case $yn2_choice in
   [Yy])
+    sudo apt uninstall -y
 
     read -n 1 -p "Press any key to continue."
     sudo ./app.sh
@@ -72,9 +75,12 @@ case $yn2_choice in
     sudo ./app.sh
     ;;
 esac
+#--------------------------------------------------yn2_choice----------------------------------------------------#
 #--------------------------------------------------yn3_choice---------------------------------------------------#
 case $yn3_choice in
   [Yy])
+    sudo apt uninstall -y
+    rm
 
     read -n 1 -p "Press any key to continue."
     sudo ./app.sh
@@ -83,3 +89,4 @@ case $yn3_choice in
     sudo ./app.sh
     ;;
 esac
+#--------------------------------------------------yn3_choice----------------------------------------------------#

@@ -35,3 +35,8 @@ English(Coming) | 繁體中文 | 简体中文(Coming)
 sudo apt install curl
 curl -sS -O https://raw.githubusercontent.com/Ray000000/Shell/main/xray-shell.sh && chmod +x xray-shell.sh && sudo ./xray-shell.sh
 ```
+
+## 協助
+### 想為我們的社區出一份力嗎?
+您可以使用以下摹本，來為我們的 APP 商店增添更多 APP！
+[app.sh](/main/app.sh)
