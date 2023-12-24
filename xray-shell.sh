@@ -1,6 +1,16 @@
 #!/bin/bash
 
+script_name="${0##*/}"
+echo "${script_name} started: $(date)" >> ./xray-log.txt
+
 clear
+
+update_message=$(curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/xray-update-log.sh | awk '/echo -e ".*"/ {print}')
+
+if [[ -n "$update_message" ]]; then
+  eval "$update_message"
+fi
+
 echo -e "\e[1m\e[34m
     _/      _/  _/_/_/                        
      _/  _/    _/    _/    _/_/_/  _/    _/        ______   _    _   ______  ______  _       
@@ -31,5 +41,6 @@ elif [[ $choice == "0" ]]; then
 else
   echo -e "\e[1m\e[31mError: Ineffective choices\e[0m"
   read -n 1 -p "Press any key to return to the menu."
-  sudo ./shell.sh
+  sudo ./xray-shell.sh
 fi
+echo "${script_name} ended: $(date)" >> ./xray-log.txt
