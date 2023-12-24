@@ -39,4 +39,4 @@ curl -sS -O https://raw.githubusercontent.com/Ray000000/Shell/main/xray-shell.sh
 ## 協助
 ### 想為我們的社區出一份力嗎?
 您可以使用以下摹本，來為我們的 APP 商店增添更多 APP！
-[app.sh](/main/app.sh)
+[app.sh](/app.sh)
