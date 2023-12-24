@@ -5,7 +5,7 @@ echo "${script_name} started: $(date)" >> ./xray-log.txt
 
 clear
 
-update_message=$(curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/xray-update-log.sh | awk '/echo -e ".*"/ {print}')
+update_message=$(curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/xray-update-message.sh | awk '/echo -e ".*"/ {print}')
 
 if [[ -n "$update_message" ]]; then
   eval "$update_message"
