@@ -45,7 +45,7 @@ elif [[ $choice == "5" ]]; then
   read -n 1 -p "Press any key to continue."
   sudo ./${script_name}
 elif [[ $choice == "0" ]]; then
-  sudo ./${script_name}
+  exit
 else
   echo -e "\e[1m\e[31mError: Ineffective choices\e[0m"
   read -n 1 -p "Press any key to return to the menu."

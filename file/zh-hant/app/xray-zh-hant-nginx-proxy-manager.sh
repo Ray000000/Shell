@@ -1,5 +1,7 @@
 #!/bin/bash
 
+script_name="${0##*/}"
+
 clear
 echo -e "\e[1m\e[93m〔Nginx Proxy Manager〕\e[0m"
 echo "
@@ -45,11 +47,11 @@ elif [[ $choice == "3" ]]; then
   echo -e "\e[1m\e[31mN. 取消解除安裝\e[0m"
   read -p "請輸入：" yn3_choice
 elif [[ $choice == "0" ]]; then
-  sudo ./xray-zh-hant-store-n.sh
+  sudo ./xray-zh-hant-store.sh
 else
   echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
   read -n 1 -p "按任意按鍵，回到菜單"
-  sudo ./xray-zh-hant-nginx-proxy-manager.sh
+  sudo ./${script_name}
 fi
 
 case $yn_choice in
@@ -84,10 +86,10 @@ services:
       docker update --restart=always nginx-proxy-manager
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./xray-zh-hant-nginx-proxy-manager.sh
+    sudo ./${script_name}
     ;;
   [Nn])
-    sudo ./xray-zh-hant-nginx-proxy-manager.sh
+    sudo ./${script_name}
     ;;
 esac
 
@@ -101,10 +103,10 @@ case $yn2_choice in
     docker update --restart=always nginx-proxy-manager
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./xray-zh-hant-nginx-proxy-manager.sh
+    sudo ./${script_name}
     ;;
   [Nn])
-    sudo ./xray-zh-hant-nginx-proxy-manager.sh
+    sudo ./${script_name}
     ;;
 esac
   
@@ -115,9 +117,9 @@ case $yn3_choice in
     rm -rf /root/data/docker/nginx-proxy-manager
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./xray-zh-hant-nginx-proxy-manager.sh
+    sudo ./${script_name}
     ;;
   [Nn])
-    sudo ./xray-zh-hant-nginx-proxy-manager.sh
+    sudo ./${script_name}
     ;;
 esac

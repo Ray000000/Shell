@@ -1,5 +1,7 @@
 #!/bin/bash
 
+script_name="${0##*/}"
+
 clear
 echo -e "\e[1m\e[93m〔Alist - Aria2〕\e[0m"
 echo "
@@ -56,7 +58,7 @@ elif [[ $choice == "0" ]]; then
 else
   echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
   read -n 1 -p "按任意按鍵，回到菜單"
-  sudo ./xray-zh-hant-alist.sh
+  sudo ./${script_name}
 fi
 
 case $yn_choice in
@@ -95,10 +97,10 @@ services:
     cd
   
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./xray-zh-hant-alist.sh
+    sudo ./${script_name}
     ;;
   [Nn])
-    sudo ./xray-zh-hant-alist.sh
+    sudo ./${script_name}
     ;;
 esac
   
@@ -111,10 +113,10 @@ case $yn2_choice in
     docker-compose up -d
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./xray-zh-hant-alist.sh
+    sudo ./${script_name}
     ;;
   [Nn])
-    sudo ./xray-zh-hant-alist.sh
+    sudo ./${script_name}
     ;;
 esac
 
@@ -129,9 +131,9 @@ case $yn3_choice in
     cd
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./xray-zh-hant-alist.sh
+    sudo ./${script_name}
     ;;
   [Nn])
-    sudo ./xray-zh-hant-alist.sh
+    sudo ./${script_name}
     ;;
 esac

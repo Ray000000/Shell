@@ -1,5 +1,7 @@
 #!/bin/bash
 
+script_name="${0##*/}"
+
 clear
 echo -e "\e[1m\e[93m〔Docker〕\e[0m"
 echo "
@@ -35,7 +37,7 @@ if [[ $choice == "1" ]]; then
 elif [[ $choice == "2" ]]; then
   sudo apt-get update -y && sudo apt-get upgrade docker-ce -y && sudo apt-get upgrade docker-compose -y
   read -n 1 -p "按任意按鍵以繼續"
-  sudo ./xray-zh-hant-docker.sh
+  sudo ./${script_name}
 elif [[ $choice == "3" ]]; then
   echo -e "\e[1m\e[34mY. 確認解除安裝\e[0m"
   echo -e "\e[1m\e[31mN. 取消解除安裝\e[0m"
@@ -48,7 +50,7 @@ elif [[ $choice == "5" ]]; then
   docker --version
   docker-compose --version
   read -n 1 -p "按任意按鍵以繼續"
-  sudo ./xray-zh-hant-docker.sh
+  sudo ./${script_name}
 elif [[ $choice == "6" ]]; then
   echo -e "\e[1m\e[93m
 請選擇您要執行的操作：
@@ -65,13 +67,13 @@ elif [[ $choice == "00" ]]; then
   echo "alias $choice1='curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/app/xray-zh-hant-docker.sh && chmod +x xray-zh-hant-docker.sh && sudo ./xray-zh-hant-docker.sh'" >> ~/.bashrc
   source ~/.bashrc
   read -n 1 -p "按任意按鍵以繼續"
-  sudo ./xray-zh-hant-docker.sh
+  sudo ./${script_name}
 elif [[ $choice == "0" ]]; then
-  sudo ./xray-zh-hant-store-d.sh
+  sudo ./xray-zh-hant-store.sh
 else
   echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
   read -n 1 -p "按任意按鍵，回到菜單"
-  sudo ./xray-zh-hant-docker.sh
+  sudo ./${script_name}
 fi
 #--------------------------------------------------choice-------------------------------------------------------#
 #--------------------------------------------------next_choice--------------------------------------------------#
@@ -82,7 +84,7 @@ fi
     docker start $choice_docker_start
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./xray-zh-hant-docker.sh
+    sudo ./${script_name}
 
   elif [[ $next_choice == "2" ]]; then
     echo -e "\e[1m\e[93m您的容器如下：\e[0m"
@@ -91,7 +93,7 @@ fi
     docker restart $choice_docker_restart
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./xray-zh-hant-docker.sh
+    sudo ./${script_name}
 
   elif [[ $next_choice == "3" ]]; then
     echo -e "\e[1m\e[93m您的容器如下：\e[0m"
@@ -100,7 +102,7 @@ fi
     docker pause $choice_docker_pause
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./xray-zh-hant-docker.sh
+    sudo ./${script_name}
 
   elif [[ $next_choice == "4" ]]; then
     echo -e "\e[1m\e[93m您的容器如下：\e[0m"
@@ -109,7 +111,7 @@ fi
     docker stop $choice_docker_stop
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./xray-zh-hant-docker.sh
+    sudo ./${script_name}
 
   elif [[ $next_choice == "5" ]]; then
     echo -e "\e[1m\e[93m您的容器如下：\e[0m"
@@ -118,7 +120,7 @@ fi
     docker rm $choice_docker_rm
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./xray-zh-hant-docker.sh
+    sudo ./${script_name}
 
   elif [[ $next_choice == "6" ]]; then
     echo -e "\e[1m\e[93m
@@ -135,7 +137,7 @@ fi
     docker pull $choice_docker_pull
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./xray-zh-hant-docker.sh
+    sudo ./${script_name}
 
   elif [[ $next_choice == "8" ]]; then
     echo -e "\e[1m\e[93m您的鏡像列表如下：\e[0m"
@@ -144,7 +146,7 @@ fi
     docker image rm -f $choice_docker_irm
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./xray-zh-hant-docker.sh
+    sudo ./${script_name}
 
   elif [[ $next_choice == "9" ]]; then
     read -p "1. 請輸入創建容器的名稱：" choice_docker_run_name
@@ -154,15 +156,15 @@ fi
     docker run -$choice_docker_run --name $choice_docker_run_name -p $choice_docker_run_port $choice_docker_run_image
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./xray-zh-hant-docker.sh
+    sudo ./${script_name}
 
   elif [[ $next_choice == "0" ]]; then
-    sudo ./xray-zh-hant-docker.sh
+    sudo ./${script_name}
 
   else
     echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./xray-zh-hant-docker.sh
+    sudo ./${script_name}
   fi
 #--------------------------------------------------next_choice--------------------------------------------------#
 #--------------------------------------------------next_choice2-------------------------------------------------#
@@ -173,7 +175,7 @@ fi
       docker update --restart=always $choice_docker_auto_restart_on
 
       read -n 1 -p "按任意按鍵以繼續"
-      sudo ./xray-zh-hant-docker.sh
+      sudo ./${script_name}
     elif [[ $next_choice2 == "2" ]]; then
       echo -e "\e[1m\e[93m您的容器如下：\e[0m"
       docker ps -a
@@ -181,13 +183,13 @@ fi
       docker update --restart=no $choice_docker_auto_restart_off
 
       read -n 1 -p "按任意按鍵以繼續"
-      sudo ./xray-zh-hant-docker.sh
+      sudo ./${script_name}
     elif [[ $next_choice2 == "0" ]]; then
-      sudo ./xray-zh-hant-docker.sh
+      sudo ./${script_name}
     else
       echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
       read -n 1 -p "按任意按鍵以繼續"
-      sudo ./xray-zh-hant-docker.sh
+      sudo ./${script_name}
     fi
 #--------------------------------------------------next_choice2--------------------------------------------------#
 #--------------------------------------------------yn_choice----------------------------------------------------#
@@ -212,10 +214,10 @@ case $yn_choice in
     systemctl enable docker
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./xray-zh-hant-docker.sh
+    sudo ./${script_name}
     ;;
   [Nn])
-    sudo ./xray-zh-hant-docker.sh
+    sudo ./${script_name}
     ;;
 esac
 #--------------------------------------------------yn2_choice---------------------------------------------------#
@@ -228,10 +230,10 @@ case $yn2_choice in
     sudo rm /usr/local/bin/docker-compose
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./xray-zh-hant-docker.sh
+    sudo ./${script_name}
     ;;
   [Nn])
-    sudo ./xray-zh-hant-docker.sh
+    sudo ./${script_name}
     ;;
 esac
 #--------------------------------------------------yn3_choice---------------------------------------------------#
@@ -245,9 +247,9 @@ case $yn3_choice in
     sudo rm /usr/local/bin/docker-compose
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./xray-zh-hant-docker.sh
+    sudo ./${script_name}
     ;;
   [Nn])
-    sudo ./xray-zh-hant-docker.sh
+    sudo ./${script_name}
     ;;
 esac
