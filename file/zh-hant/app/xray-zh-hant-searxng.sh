@@ -83,7 +83,7 @@ version: '3'
 
 services:
   searxng:
-    image: searxng/searxng
+    image: 'searxng/searxng:latest'
     container_name: searxng
     ports:
       - 8089:8080
@@ -91,7 +91,7 @@ services:
       - './searxng:/etc/searxng'
     environment:
       - BASE_URL=http://localhost:8089/
-      - INSTANCE_NAME=searxng" >> docker-compose.yml
+      - INSTANCE_NAME=SearXNG" >> docker-compose.yml
     docker-compose up -d
     docker update --restart=always searxng
   
