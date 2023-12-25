@@ -2,6 +2,8 @@
 
 clear
 
+echo -e "\e[1m\e[32m〔2023/12/24〕\e[0m: 新增
+S: SearXNG:8089"
 echo -e "\e[1m\e[32m〔2023/12/22〕\e[0m: 新增
 Q: qBittorrent:8080"
 echo -e "\e[1m\e[32m〔2023/12/22〕\e[0m: 新增

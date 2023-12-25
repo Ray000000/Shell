@@ -76,7 +76,7 @@ case $yn_choice in
     else
       echo "Docker 已安裝"
     fi
-      read -p "請輸入網址：" choice1
+      read -p "請輸入欲使用的網址：" choice1
       mkdir -p /root/data/docker/matrix
       cd /root/data/docker/matrix
       sudo docker run -it --rm \

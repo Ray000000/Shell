@@ -72,7 +72,7 @@ case $yn_choice in
     else
       echo "Docker 已安裝"
     fi
-      read -p "請輸入欲使用密碼：" choice1
+      read -p "請輸入欲使用的密碼：" choice1
       mkdir -p /root/data/docker/alist
       cd /root/data/docker/alist
       echo "
