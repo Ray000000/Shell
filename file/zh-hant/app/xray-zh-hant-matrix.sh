@@ -77,28 +77,28 @@ case $yn_choice in
       echo "Docker 已安裝"
     fi
       read -p "請輸入欲使用的網址：" choice1
-      mkdir -p /root/data/docker/matrix
-      cd /root/data/docker/matrix
+      mkdir -p /root/data/xray-shell/docker/matrix
+      cd /root/data/xray-shell/docker/matrix
       sudo docker run -it --rm \
-      -v /root/data/docker/matrix/data:/data \
+      -v /root/data/xray-shell/docker/matrix/data:/data \
       -e SYNAPSE_SERVER_NAME=$choice1 \
       -e SYNAPSE_REPORT_STATS=yes \
       matrixdotorg/synapse:latest generate
-      cd /root/data/docker/matrix/data
+      cd /root/data/xray-shell/docker/matrix/data
       echo "
 enable_registration: true
 enable_registration_without_verification: true" >> homeserver.yaml
-      cd /root/data/docker/matrix
+      cd /root/data/xray-shell/docker/matrix
       echo "
 version: '3.3'
 services:
   synapse:
       image: 'matrixdotorg/synapse:latest'
-      container_name: 'matrix'
+      container_name: matrix
       ports:
-        - 8010:8008
+        - '8010:8008'
       volumes:
-        - './data:/data'
+        - /root/data/xray-shell/docker/matrix/data:/data
       environment:
         VIRTUAL_HOST: '$choice1'
         VIRTUAL_PORT: 8008
@@ -107,12 +107,11 @@ services:
         SYNAPSE_REPORT_STATS: 'yes'
   element-web:
       image: 'vectorim/element-web'
-      container_name: 'element-web'
+      container_name: element-web
       ports:
         - '8009:80'" >> docker-compose.yml
     docker-compose up -d
-    docker update --restart=always matrix
-    docker update --restart=always element-web
+    docker update --restart=always matrix element-web
     cd
   
     read -n 1 -p "按任意按鍵以繼續"
@@ -125,10 +124,10 @@ esac
   
 case $yn2_choice in
   [Yy])
-    cd /root/data/docker/matrix
+    cd /root/data/xray-shell/docker/matrix
     docker-compose down
-    cp /root/data/docker/matrix /root/data/docker/matrix.bak
-    docker-compose pull
+    cp /root/data/xray-shell/docker/matrix /root/data/xray-shell-bak/docker/matrix
+    docker-compose pull matrixdotorg/synapse vectorim/element-web
     docker-compose up -d
 
     read -n 1 -p "按任意按鍵以繼續"
@@ -144,9 +143,9 @@ case $yn3_choice in
     cd
     docker stop matrix element-web
     docker rm matrix element-web
-    cd /root/data/docker/matrix
+    cd /root/data/xray-shell/docker/matrix
     docker-compose down
-    rm -rf /root/data/docker/matrix
+    rm -rf /root/data/xray-shell/docker/matrix
     cd
 
     read -n 1 -p "按任意按鍵以繼續"

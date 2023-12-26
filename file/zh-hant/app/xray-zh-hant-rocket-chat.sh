@@ -59,32 +59,33 @@ case $yn_choice in
     else
       echo "Docker 已安裝"
     fi
-      mkdir -p /root/data/docker/rocket-chat
-      cd /root/data/docker/rocket-chat
+      mkdir -p /root/data/xray-shell/docker/rocket-chat
+      cd /root/data/xray-shell/docker/rocket-chat
       echo "
 version: '3'
 services:
   mongodb:
-    image: mongo:latest
+    image: 'mongo:latest'
     container_name: 'mongodb'
     command: mongod --replSet rs5 --oplogSize 256
     volumes:
-      - /root/data/docker/rocket-chat/mongodb:/data/db" >> docker-compose.yml
+      - /root/data/xray-shell/docker/rocket-chat/mongodb:/data/db" >> docker-compose.yml
       docker-compose up -d
       docker exec -ti mongodb mongosh --eval "printjson(rs.initiate())"
       docker exec -ti mongodb mongo --eval "printjson(rs.initiate())"
       echo "
   rocket-chat:
-    image: registry.rocket.chat/rocketchat/rocket.chat:latest
+    image: 'registry.rocket.chat/rocketchat/rocket.chat:latest'
     container_name: 'rocket-chat'
     ports:
-      - 8020:3000
+      - '8020:3000'
     links:
-      - mongodb
+      - 'mongodb'
     environment:
       ROOT_URL: http://localhost
       MONGO_OPLOG_URL: mongodb://mongodb:27017/rs5" >> docker-compose.yml
       docker-compose up -d
+      docker update --restart=always mongodb rocket-chat
       cd
 
     read -n 1 -p "按任意按鍵以繼續"
@@ -97,10 +98,10 @@ esac
   
 case $yn2_choice in
   [Yy])
-    cd /root/data/docker/rocket-chat
+    cd /root/data/xray-shell/docker/rocket-chat
     docker-compose down
-    cp /root/data/docker/rocket-chat /root/data/docker/rocket-chat.bak
-    docker-compose pull
+    cp /root/data/xray-shell/docker/rocket-chat /root/data/xray-shell-bak/docker/rocket-chat
+    docker-compose pull registry.rocket.chat/rocketchat/rocket.chat
     docker-compose up -d
 
     read -n 1 -p "按任意按鍵以繼續"
@@ -116,9 +117,9 @@ case $yn3_choice in
     cd
     docker stop mongodb rocket-chat
     docker rm mongodb rocket-chat
-    cd /root/data/docker/rocket-chat
+    cd /root/data/xray-shell/docker/rocket-chat
     docker-compose down
-    rm -rf /root/data/docker/rocket-chat
+    rm -rf /root/data/xray-shell/docker/rocket-chat
     cd
 
     read -n 1 -p "按任意按鍵以繼續"

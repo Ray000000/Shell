@@ -19,9 +19,8 @@ qBittorrent 的優點包括：
 *輕量級：qBittorrent 的體積小，運行速度快。
 *安全：qBittorrent 不包含任何廣告或間諜軟件。
 qBittorrent 是一個非常優秀的 BitTorrent 客戶端，它功能強大、使用簡單，是下載 BitTorrent 文件的理想選擇。"
-sleep 2
 container_id=$(docker ps -qf "name=qbittorrent")
-logs=$(docker logs "$container_id")
+logs=$(docker logs -f "$container_id")
 password=$(echo "$logs" | awk '/session/ {print $NF}')
 external_ip=$(curl -s ipv4.ip.sb)
 echo -e "qBittorrent 網址（安裝完成後可用）：
@@ -29,7 +28,7 @@ http://$external_ip:8080"
 echo -e "qBittorrent 帳號：admin"
 echo -e "qBittorrent 臨時密碼：$password"
 echo -e "qBittorrent 檔案下載位置：
-/root/data/docker/qbittorrent/downloads"
+/root/data/xray-shell/docker/qbittorrent/downloads"
 echo -e "\e[1m\e[93m請登入後設定密碼！\e[0m"
 echo -e "建議使用 Nginx Proxy Manager 設定反向代理"
 echo "----------------------------------------"
@@ -76,8 +75,8 @@ case $yn_choice in
     else
       echo "Docker 已安裝"
     fi
-      mkdir -p /root/data/docker/qbittorrent
-      cd /root/data/docker/qbittorrent
+      mkdir -p /root/data/xray-shell/docker/qbittorrent
+      cd /root/data/xray-shell/docker/qbittorrent
       echo "
 version: '3'
 services:
@@ -86,17 +85,17 @@ services:
     container_name: 'qbittorrent'
     restart: unless-stopped
     volumes:
-      - /root/data/docker/qbittorrent/config:/config
-      - /root/data/docker/qbittorrent/downloads:/downloads
+      - /root/data/xray-shell/docker/qbittorrent/config:/config
+      - /root/data/xray-shell/docker/qbittorrent/downloads:/downloads
     ports:
-      - 8080:8080
-      - 6881:6881
-      - 6881:6881/udp
+      - '8080:8080'
+      - '6881:6881'
+      - '6881:6881/udp'
     environment:
       PUID: 1000
       PGID: 1000
       TZ: Etc/UTC
-      WEBUI_PORT: 8080" >> docker-compose.yml
+      WEBUI_PORT: '8080'" >> docker-compose.yml
     docker-compose up -d
     docker update --restart=always qbittorrent
     cd
@@ -111,10 +110,10 @@ esac
   
 case $yn2_choice in
   [Yy])
-    cd /root/data/docker/qbittorrent
+    cd /root/data/xray-shell/docker/qbittorrent
     docker-compose down
-    cp /root/data/docker/qbittorrent /root/data/docker/qbittorrent.bak
-    docker-compose pull
+    cp /root/data/xray-shell/docker/qbittorrent /root/data/xray-shell-bak/docker/qbittorrent
+    docker-compose pull lscr.io/linuxserver/qbittorrent
     docker-compose up -d
 
     read -n 1 -p "按任意按鍵以繼續"
@@ -130,9 +129,9 @@ case $yn3_choice in
     cd
     docker stop qbittorrent
     docker rm qbittorrent
-    cd /root/data/docker/qbittorrent
+    cd /root/data/xray-shell/docker/qbittorrent
     docker-compose down
-    rm -rf /root/data/docker/qbittorrent
+    rm -rf /root/data/xray-shell/docker/qbittorrent
     cd
 
     read -n 1 -p "按任意按鍵以繼續"

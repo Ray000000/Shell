@@ -24,12 +24,16 @@ echo -e "\e[1m\e[93m
 請選擇您要安裝應用程式：
 \e[0m"
 echo "1. Alist"
+echo "2. AriaNG（非官方）"
 echo -e "\e[1m\e[32m0. Exit\e[0m"
 
 read -p "請輸入：" choice
 
 if [[ $choice == "1" ]]; then
   curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/app/xray-zh-hant-alist.sh && chmod +x xray-zh-hant-alist.sh && sudo ./xray-zh-hant-alist.sh
+
+elif [[ $choice == "2" ]]; then
+  curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/app/xray-zh-hant-ariang.sh && chmod +x xray-zh-hant-ariang.sh && sudo ./xray-zh-hant-ariang.sh
 
 elif [[ $choice == "0" ]]; then
   exit

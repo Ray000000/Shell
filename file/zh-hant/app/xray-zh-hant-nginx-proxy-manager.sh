@@ -66,8 +66,8 @@ case $yn_choice in
       echo "Docker 已安裝"
     fi
       su
-      mkdir -p /root/data/docker/nginx-proxy-manager
-      cd /root/data/docker/nginx-proxy-manager
+      mkdir -p /root/data/xray-shell/docker/nginx-proxy-manager
+      cd /root/data/xray-shell/docker/nginx-proxy-manager
       echo "
 version: '3'
 services:
@@ -80,8 +80,8 @@ services:
       - '81:81'
       - '443:443'
     volumes:
-      - ./data:/data
-      - ./letsencrypt:/etc/letsencrypt" >> docker-compose.yml
+      - './data:/data'
+      - './letsencrypt:/etc/letsencrypt'" >> docker-compose.yml
       docker-compose up -d
       docker update --restart=always nginx-proxy-manager
 
@@ -95,10 +95,10 @@ esac
 
 case $yn2_choice in
   [Yy])
-    cd /root/data/docker/nginx-proxy-manager
+    cd /root/data/xray-shell/docker/nginx-proxy-manager
     docker-compose down 
-    cp /root/data/docker/nginx-proxy-manager /root/data/docker/nginx-proxy-manager.bak
-    docker-compose pull
+    cp /root/data/xray-shell/docker/nginx-proxy-manager /root/data/xray-shell-bak/docker/nginx-proxy-manager
+    docker-compose pull jc21/nginx-proxy-manager
     docker-compose up -d
     docker update --restart=always nginx-proxy-manager
 
@@ -112,9 +112,9 @@ esac
   
 case $yn3_choice in
   [Yy])
-    cd /root/data/docker/nginx-proxy-manager
+    cd /root/data/xray-shell/docker/nginx-proxy-manager
     docker-compose down
-    rm -rf /root/data/docker/nginx-proxy-manager
+    rm -rf /root/data/xray-shell/docker/nginx-proxy-manager
 
     read -n 1 -p "按任意按鍵以繼續"
     sudo ./${script_name}

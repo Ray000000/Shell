@@ -76,17 +76,17 @@ case $yn_choice in
     else
       echo "Docker 已安裝"
     fi
-      mkdir -p /root/data/docker/searxng
-      cd /root/data/docker/searxng
+      mkdir -p /root/data/xray-shell/docker/searxng
+      cd /root/data/xray-shell/docker/searxng
       echo "
 version: '3'
 
 services:
   searxng:
     image: 'searxng/searxng:latest'
-    container_name: searxng
+    container_name: 'searxng'
     ports:
-      - 8089:8080
+      - '8089:8080'
     volumes:
       - './searxng:/etc/searxng'
     environment:
@@ -105,10 +105,10 @@ esac
   
 case $yn2_choice in
   [Yy])
-    cd /root/data/docker/searxng
+    cd /root/data/xray-shell/docker/searxng
     docker-compose down
-    cp /root/data/docker/searxng /root/data/docker/searxng.bak
-    docker-compose pull
+    cp /root/data/xray-shell/docker/searxng /root/data/xray-shell-bak/docker/searxng
+    docker-compose pull searxng/searxng
     docker-compose up -d
 
     read -n 1 -p "按任意按鍵以繼續"
@@ -124,9 +124,9 @@ case $yn3_choice in
     cd
     docker stop searxng
     docker rm searxng
-    cd /root/data/docker/searxng
+    cd /root/data/xray-shell/docker/searxng
     docker-compose down
-    rm -rf /root/data/docker/searxng
+    rm -rf /root/data/xray-shell/docker/searxng
     cd
 
     read -n 1 -p "按任意按鍵以繼續"

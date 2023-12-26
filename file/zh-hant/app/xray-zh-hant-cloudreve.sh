@@ -3,7 +3,7 @@
 script_name="${0##*/}"
 
 clear
-echo -e "\e[1m\e[93m〔Alist〕\e[0m"
+echo -e "\e[1m\e[93m〔Cloudreve〕\e[0m"
 echo "
 Alist 是一個開源的文件列表程序，支持多種存儲，包括本地存儲、FTP、SFTP、WebDAV 等。它可以幫助你將本地或遠程的文件以網頁的形式展示出來，方便你瀏覽、下載或分享。
 
@@ -18,15 +18,16 @@ Alist 的優點包括：
 *開源：Alist 是開源的，你可以自由下載、使用和修改 Alist。
 *易用：Alist 的使用非常簡單，只需添加文件，然後即可在網頁上瀏覽、下載或分享文件。
 *功能強大：Alist 支持多種存儲、瀏覽、下載、分享、搜索、權限管理等功能。"
+container_id=$(docker ps -qf "name=cloudreve")
+logs=$(docker logs -f "$container_id")
+password=$(echo "$logs" | awk '/Admin password:/ {print $NF}')
 external_ip=$(curl -s ipv4.ip.sb)
-password_file="/root/data/xray-shell/docker/alist/password.txt"
-if [ -f "$password_file" ]; then
-    alist_password=$(cat "$password_file")
-fi
-echo -e "Alist 網址（安裝完成後可用）：
-http://$external_ip:5244"
-echo -e "Alist 登入帳號：admin"
-echo -e "Alist 登入密碼：$alist_password"
+aria2_rpc_file="/root/data/xray-shell/file/aria2_rpc.txt"
+echo -e "Cloudreve 網址（安裝完成後可用）：
+http://$external_ip:5212"
+echo -e "Cloudreve 帳號：admin@cloudreve.org"
+echo -e "Cloudreve 密碼：$password"
+echo -e "建議使用 AriaNG 設定 RPC"
 echo -e "建議使用 Nginx Proxy Manager 設定反向代理"
 echo "----------------------------------------"
 echo "官方網站：
@@ -72,28 +73,51 @@ case $yn_choice in
     else
       echo "Docker 已安裝"
     fi
-      read -p "請輸入欲使用的密碼：" choice1
-      mkdir -p /root/data/xray-shell/docker/alist
-      cd /root/data/xray-shell/docker/alist
+      read -p "請輸入 aria2 的 RPC Token：" choice1
+      mkdir -vp /root/data/xray-shell/docker/cloudreve/{uploads,avatar} \
+      && touch /root/data/xray-shell/docker/cloudreve/conf.ini \
+      && touch /root/data/xray-shell/docker/cloudreve/cloudreve.db \
+      && mkdir -p /root/data/xray-shell/docker/cloudreve/aria2/config \
+      && mkdir -p /root/data/xray-shell/docker/cloudreve/data/aria2 \
+      && chmod -R 777 /root/data/xray-shell/docker/cloudreve/data/aria2
+      cd /root/data/xray-shell/docker/cloudreve
       echo "
-version: '3.3'
+version: '3.8'
 services:
-    alist:
-        restart: always
-        volumes:
-            - '/root/data/xray-shell/docker/alist:/opt/alist/data'
-        ports:
-            - '5244:5244'
-        environment:
-            - PUID=0
-            - PGID=0
-            - UMASK=022
-        container_name: alist
-        image: 'xhofe/alist:latest'" >> docker-compose.yml
+  cloudreve:
+    container_name: 'cloudreve'
+    image: 'cloudreve/cloudreve:latest'
+    restart: unless-stopped
+    ports:
+      - '5212:5212'
+    volumes:
+      - /root/data/xray-shell/docker/cloudreve/temp_data:/data
+      - /root/data/xray-shell/docker/cloudreve/uploads:/cloudreve/uploads
+      - /root/data/xray-shell/docker/cloudreve/conf.ini:/cloudreve/conf.ini
+      - /root/data/xray-shell/docker/cloudreve/cloudreve.db:/cloudreve/cloudreve.db
+      - /root/data/xray-shell/docker/cloudreve/avatar:/cloudreve/avatar
+    depends_on:
+      - aria2-pro
+  aria2-pro:
+    container_name: aria2-pro
+    image: 'p3terx/aria2-pro'
+    restart: unless-stopped
+    environment:
+      - RPC_SECRET=$choice1
+      - RPC_PORT=6800
+    volumes:
+      - /root/data/xray-shell/docker/cloudreve/aria2/config:/config
+      - /root/data/xray-shell/docker/cloudreve/aria2/temp_data:/data
+volumes:
+  temp_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: $PWD/data
+      o: bind" >> docker-compose.yml
     docker-compose up -d
-    docker update --restart=always alist
-    docker exec -it alist ./alist admin set $choice1
-    echo "$choice1" > /root/data/xray-shell/docker/alist/password.txt
+    docker update --restart=always cloudreve aria2-pro
+    echo "$choice1" > /root/data/xray-shell/file/aria2_rpc.txt
     cd
   
     read -n 1 -p "按任意按鍵以繼續"
@@ -106,10 +130,10 @@ esac
   
 case $yn2_choice in
   [Yy])
-    cd /root/data/xray-shell/docker/alist
+    cd /root/data/xray-shell/docker/cloudreve
     docker-compose down
-    cp /root/data/xray-shell/docker/alist /root/data/xray-shell-bak/docker/alist
-    docker-compose pull xhofe/alist
+    cp /root/data/xray-shell/docker/cloudreve /root/data/xray-shell-bak/docker/cloudreve
+    docker-compose pull cloudreve/cloudreve p3terx/aria2-pro
     docker-compose up -d
 
     read -n 1 -p "按任意按鍵以繼續"
@@ -123,11 +147,11 @@ esac
 case $yn3_choice in
   [Yy])
     cd
-    docker stop alist
-    docker rm alist
-    cd /root/data/xray-shell/docker/alist
+    docker stop cloudreve aria2-pro
+    docker rm cloudreve aria2-pro
+    cd /root/data/xray-shell/docker/cloudreve
     docker-compose down
-    rm -rf /root/data/xray-shell/docker/alist
+    rm -rf /root/data/xray-shell/docker/cloudreve
     cd
 
     read -n 1 -p "按任意按鍵以繼續"
