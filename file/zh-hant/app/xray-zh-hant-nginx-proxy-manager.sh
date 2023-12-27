@@ -65,7 +65,6 @@ case $yn_choice in
     else
       echo "Docker 已安裝"
     fi
-      su
       mkdir -p /root/data/xray-shell/docker/nginx-proxy-manager
       cd /root/data/xray-shell/docker/nginx-proxy-manager
       echo "
@@ -84,6 +83,7 @@ services:
       - './letsencrypt:/etc/letsencrypt'" >> docker-compose.yml
       docker-compose up -d
       docker update --restart=always nginx-proxy-manager
+      cd
 
     read -n 1 -p "按任意按鍵以繼續"
     sudo ./${script_name}
