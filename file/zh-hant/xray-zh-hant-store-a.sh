@@ -24,7 +24,7 @@ echo -e "\e[1m\e[93m
 請選擇您要安裝應用程式：
 \e[0m"
 echo "1. Alist"
-echo "2. AriaNG（非官方）"
+echo "2. AriaNG"
 echo -e "\e[1m\e[32m0. Exit\e[0m"
 
 read -p "請輸入：" choice
