@@ -5,22 +5,17 @@ script_name="${0##*/}"
 clear
 echo -e "\e[1m\e[93m〔Cloudreve〕\e[0m"
 echo "
-Alist 是一個開源的文件列表程序，支持多種存儲，包括本地存儲、FTP、SFTP、WebDAV 等。它可以幫助你將本地或遠程的文件以網頁的形式展示出來，方便你瀏覽、下載或分享。
+Cloudreve 是一個開源的雲盤系統，支持多家雲存儲，可以讓你快速搭建起一個私有或公用的網盤系統。它支持多種文件管理和分享功能，也支持多種安全功能。
 
-Alist 的功能包括：
+Cloudreve 的優點包括：
 
-*支持多種存儲：Alist 支持多種存儲，包括本地存儲、FTP、SFTP、WebDAV 等。你可以將本地的文件或遠程的文件添加到 Alist，並以網頁的形式展示出來。
-*支持瀏覽、下載、分享：Alist 支持瀏覽、下載、分享文件。你可以在網頁上瀏覽文件，並下載或分享文件。
-*支持搜索：Alist 支持搜索文件。你可以根據文件名、文件類型等條件搜索文件。
-*支持權限管理：Alist 支持權限管理。你可以根據用戶或組設置文件的訪問權限。
-Alist 的優點包括：
+* 開源、免費
+* 功能強大，支持多種文件管理和分享功能
+* 安全，支持多種安全功能
 
-*開源：Alist 是開源的，你可以自由下載、使用和修改 Alist。
-*易用：Alist 的使用非常簡單，只需添加文件，然後即可在網頁上瀏覽、下載或分享文件。
-*功能強大：Alist 支持多種存儲、瀏覽、下載、分享、搜索、權限管理等功能。"
-container_id=$(docker ps -qf "name=cloudreve")
-logs=$(docker logs -f "$container_id")
-password=$(echo "$logs" | awk '/Admin password:/ {print $NF}')
+Cloudreve 適合需要搭建私有或公用網盤系統的人使用。"
+logs=$(docker exec -it cloudreve ./cloudreve --database-script ResetAdminPassword)
+password=$(echo "$logs" | awk '/Initial admin user password changed to:/ {gsub("to:", ""); print $NF}')
 external_ip=$(curl -s ipv4.ip.sb)
 aria2_rpc_file="/root/data/xray-shell/file/aria2_rpc.txt"
 echo -e "Cloudreve 網址（安裝完成後可用）：

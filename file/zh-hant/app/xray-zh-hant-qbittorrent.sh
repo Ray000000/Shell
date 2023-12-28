@@ -7,17 +7,20 @@ echo -e "\e[1m\e[93m〔qBittorrent〕\e[0m"
 echo "
 qBittorrent 是一個開源、自由的 BitTorrent 客戶端，支持 Windows、macOS、Linux 等多個平台。它是 µTorrent 的一個分支，具有 µTorrent 的所有功能，並且增加了一些新的功能和改進。
 qBittorrent 的主要功能包括：
-*支持 BitTorrent、Magnet URI 和 HTTP/HTTPS 下載。
-*支持多種文件格式，包括音頻、視頻、文檔等。
-*支持 RSS 訂閱，可以自動下載新發布的文件。
-*支持 BT 種子文件的搜索。
-*支持 BitTorrent 協議的所有功能，包括 DHT、PEX、UPnP 等。
+
+* 支持 BitTorrent、Magnet URI 和 HTTP/HTTPS 下載。
+* 支持多種文件格式，包括音頻、視頻、文檔等。
+* 支持 RSS 訂閱，可以自動下載新發布的文件。
+* 支持 BT 種子文件的搜索。
+* 支持 BitTorrent 協議的所有功能，包括 DHT、PEX、UPnP 等。
 
 qBittorrent 的優點包括：
-*開源：qBittorrent 是開源的，你可以自由下載、使用和修改 qBittorrent。
-*免費：qBittorrent 是免費的，你可以免費使用 qBittorrent。
-*輕量級：qBittorrent 的體積小，運行速度快。
-*安全：qBittorrent 不包含任何廣告或間諜軟件。
+
+* 開源：qBittorrent 是開源的，你可以自由下載、使用和修改 qBittorrent。
+* 免費：qBittorrent 是免費的，你可以免費使用 qBittorrent。
+* 輕量級：qBittorrent 的體積小，運行速度快。
+* 安全：qBittorrent 不包含任何廣告或間諜軟件。
+
 qBittorrent 是一個非常優秀的 BitTorrent 客戶端，它功能強大、使用簡單，是下載 BitTorrent 文件的理想選擇。"
 container_id=$(docker ps -qf "name=qbittorrent")
 logs=$(docker logs -f "$container_id")

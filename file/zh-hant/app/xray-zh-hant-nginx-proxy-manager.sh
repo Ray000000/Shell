@@ -5,17 +5,16 @@ script_name="${0##*/}"
 clear
 echo -e "\e[1m\e[93m〔Nginx Proxy Manager〕\e[0m"
 echo "
-Nginx Proxy Manager 是一個用於管理和監控 Nginx 代理的開放原始碼軟體。它提供一個簡潔的圖形化介面，使管理 Nginx 代理變得更加容易。
-Nginx Proxy Manager 具有以下功能：
-*管理 Nginx 代理的 HTTP 和 HTTPS 流量。
-*為 Nginx 代理配置 SSL/TLS 憑證，包括 Let's Encrypt 自動化。
-*監控 Nginx 代理的性能和狀態。
-*提供日誌分析功能。
-Nginx Proxy Manager 適用於各種用途，包括：
-*托管網站和應用程式。
-*提供代理服務。
-*測試和開發環境。
-Nginx Proxy Manager 的安裝和配置非常簡單。它可以安裝在各種操作系統上，包括 Linux、Windows 和 macOS。"
+Nginx Proxy Manager 是一個用於管理 Nginx 代理的軟體。它可以幫助你輕鬆管理 Nginx 代理的 HTTP 和 HTTPS 流量，配置 SSL/TLS 憑證，監控 Nginx 代理的性能和狀態，以及分析日誌。
+Nginx Proxy Manager 適用於各種用途，包括托管網站和應用程式、提供代理服務、以及測試和開發環境。
+
+以下是 Nginx Proxy Manager 的一些具體優點：
+
+* 簡潔的圖形化介面，易於使用
+* 支持多種操作系統
+* 提供多種功能，可滿足各種需求
+
+Nginx Proxy Manager 是一個非常實用的軟體，可以幫助你輕鬆管理 Nginx 代理。"
 external_ip=$(curl -s ipv4.ip.sb)
 echo -e "登入網址（安裝完成後可用）：
 http://$external_ip:81"
