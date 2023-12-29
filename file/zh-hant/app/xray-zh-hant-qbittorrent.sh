@@ -23,8 +23,8 @@ qBittorrent 的優點包括：
 
 qBittorrent 是一個非常優秀的 BitTorrent 客戶端，它功能強大、使用簡單，是下載 BitTorrent 文件的理想選擇。"
 container_id=$(docker ps -qf "name=qbittorrent")
-logs=$(docker logs -f "$container_id")
-password=$(echo "$logs" | awk '/session/ {print $NF}')
+logs=$(docker logs "$container_id")
+password=$(echo "$logs" | awk '/A temporary password is provided for this session:/ {gsub("to:", ""); print $NF}')
 external_ip=$(curl -s ipv4.ip.sb)
 echo -e "qBittorrent 網址（安裝完成後可用）：
 http://$external_ip:8080"

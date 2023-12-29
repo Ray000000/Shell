@@ -2,6 +2,10 @@
 
 clear
 
+echo -e "\e[1m\e[32m〔2023/12/28〕\e[0m: 新增
+C: Cloudreve:5212"
+echo -e "\e[1m\e[32m〔2023/12/27〕\e[0m: 新增
+A: AriaNG:6800"
 echo -e "\e[1m\e[32m〔2023/12/24〕\e[0m: 新增
 S: SearXNG:8089"
 echo -e "\e[1m\e[32m〔2023/12/22〕\e[0m: 新增

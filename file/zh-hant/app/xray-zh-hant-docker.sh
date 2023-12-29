@@ -57,11 +57,11 @@ elif [[ $choice == "6" ]]; then
   echo -e "\e[1m\e[93m
 請選擇您要執行的操作：
 \e[0m"
-  echo "1. 啟動容器　｜　6. 自啟容器"
-  echo "2. 重啟容器　｜　7. 拉取鏡像"
-  echo "3. 暫停容器　｜　8. 刪除鏡像"
-  echo -e "4. 停止容器　｜　\e[1m\e[34m9. 快速啟用\e[0m"
-  echo -e "5. 刪除容器　｜　\e[1m\e[32m0. 返回\e[0m"
+  echo "1.  啟動容器　｜　6.  自啟容器"
+  echo "2.  重啟容器　｜　7.  拉取鏡像"
+  echo "3.  暫停容器　｜　8.  刪除鏡像"
+  echo -e "4.  停止容器　｜　9.  查看日誌　｜　\e[1m\e[34m00. 快速啟用\e[0m"
+  echo -e "5.  刪除容器　｜　10. 交互模式　｜　\e[1m\e[32m0. 返回\e[0m"
 
   read -p "請輸入：" next_choice
 elif [[ $choice == "00" ]]; then
@@ -82,7 +82,7 @@ fi
   if [[ $next_choice == "1" ]]; then
     echo -e "\e[1m\e[93m您的容器如下：\e[0m"
     docker ps -a
-    read -p "請輸入啟動容器的名稱：" choice_docker_start
+    read -p "請輸入啟動的容器名稱：" choice_docker_start
     docker start $choice_docker_start
 
     read -n 1 -p "按任意按鍵以繼續"
@@ -91,7 +91,7 @@ fi
   elif [[ $next_choice == "2" ]]; then
     echo -e "\e[1m\e[93m您的容器如下：\e[0m"
     docker ps -a
-    read -p "請輸入重啟容器的名稱：" choice_docker_restart
+    read -p "請輸入重啟的容器名稱：" choice_docker_restart
     docker restart $choice_docker_restart
 
     read -n 1 -p "按任意按鍵以繼續"
@@ -100,7 +100,7 @@ fi
   elif [[ $next_choice == "3" ]]; then
     echo -e "\e[1m\e[93m您的容器如下：\e[0m"
     docker ps -s
-    read -p "請輸入暫停容器的名稱：" choice_docker_pause
+    read -p "請輸入暫停的容器名稱：" choice_docker_pause
     docker pause $choice_docker_pause
 
     read -n 1 -p "按任意按鍵以繼續"
@@ -109,7 +109,7 @@ fi
   elif [[ $next_choice == "4" ]]; then
     echo -e "\e[1m\e[93m您的容器如下：\e[0m"
     docker ps -s
-    read -p "請輸入停止容器的名稱：" choice_docker_stop
+    read -p "請輸入停止的容器名稱：" choice_docker_stop
     docker stop $choice_docker_stop
 
     read -n 1 -p "按任意按鍵以繼續"
@@ -118,7 +118,7 @@ fi
   elif [[ $next_choice == "5" ]]; then
     echo -e "\e[1m\e[93m您的容器如下：\e[0m"
     docker ps -a
-    read -p "請輸入刪除容器的名稱：" choice_docker_rm
+    read -p "請輸入刪除的容器名稱：" choice_docker_rm
     docker rm $choice_docker_rm
 
     read -n 1 -p "按任意按鍵以繼續"
@@ -135,7 +135,7 @@ fi
   elif [[ $next_choice == "7" ]]; then
     echo -e "\e[1m\e[93m您的鏡像列表如下：\e[0m"
     docker image ls
-    read -p "請輸入拉取鏡像的名稱：" choice_docker_pull
+    read -p "請輸入拉取的鏡像名稱：" choice_docker_pull
     docker pull $choice_docker_pull
 
     read -n 1 -p "按任意按鍵以繼續"
@@ -144,13 +144,33 @@ fi
   elif [[ $next_choice == "8" ]]; then
     echo -e "\e[1m\e[93m您的鏡像列表如下：\e[0m"
     docker image ls
-    read -p "請輸入刪除鏡像的名稱：" choice_docker_irm
+    read -p "請輸入刪除的鏡像名稱：" choice_docker_irm
     docker image rm -f $choice_docker_irm
 
     read -n 1 -p "按任意按鍵以繼續"
     sudo ./${script_name}
 
   elif [[ $next_choice == "9" ]]; then
+    echo -e "\e[1m\e[93m您的鏡像列表如下：\e[0m"
+    docker image ls
+    read -p "請輸入查看日誌的容器名稱：" choice_docker_logs
+    docker logs $choice_docker_logs
+
+    read -n 1 -p "按任意按鍵以繼續"
+    sudo ./${script_name}
+
+  elif [[ $next_choice == "10" ]]; then
+    echo -e "\e[1m\e[93m您的鏡像列表如下：\e[0m"
+    docker image ls
+    read -p "請輸入進入交互模式的容器名稱：" choice_docker_exce
+    read -p "請輸入容器交互模式的指令：" choice_docker_exce_input
+    docker exec -it $choice_docker_exce ./$choice_docker_exce $choice_docker_exce_input
+
+    read -n 1 -p "按任意按鍵以繼續"
+    sudo ./${script_name}
+  
+
+  elif [[ $next_choice == "00" ]]; then
     read -p "1. 請輸入創建容器的名稱：" choice_docker_run_name
     read -p "2. 請輸入創建容器的鏡像 (格式: ubuntu:15.10)：" choice_docker_run_image
     read -p "3. 請輸入創建容器的通訊端口號：" choice_docker_run_port
