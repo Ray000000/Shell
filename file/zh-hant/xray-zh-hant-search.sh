@@ -25,7 +25,7 @@ echo -e "\e[1m\e[93m
 
 read -p "搜尋：" search_term
 
-app_list_url="https://raw.githubusercontent.com/Ray000000/Shell/main/file/zh-hant/xray-zh-hant-app-a.txt"
+app_list_url="https://raw.githubusercontent.com/Ray000000/Shell/main/file/zh-hant/xray-zh-hant-app.txt"
 app_list_raw=$(curl -sS "$app_list_url")
 app_list_processed=$(echo "$app_list_raw" | sed 's/xray-zh-hant-\(.*\)\.sh/\1/' | grep -i "$search_term")
 
@@ -48,10 +48,6 @@ read -p "請輸入：" choice
 
 if [[ $choice == "0" ]]; then
   exit
-else
-  echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
-  read -n 1 -p "按任意按鍵以繼續"
-  sudo ./${script_name}
 fi
 
 selected_app=$(echo "$app_list_processed" | sed -n "${choice}p")
