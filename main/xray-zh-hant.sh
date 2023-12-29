@@ -69,7 +69,7 @@ if [[ $choice == "1" ]]; then
   sudo neofetch
 
   read -n 1 -p "按任意按鍵以繼續"
-  sudo ./xray-zh-hant.sh
+  sudo ./${script_name}
 elif [[ $choice == "2" ]]; then
   echo -e "\e[1m\e[93m您的系統資訊如下：\e[0m"
   echo "作業系統：$os_info"
@@ -81,7 +81,7 @@ elif [[ $choice == "2" ]]; then
   df -h
 
   read -n 1 -p "按任意按鍵以繼續"
-  sudo ./xray-zh-hant.sh
+  sudo ./${script_name}
 elif [[ $choice == "3" ]]; then
   curl -sS -O https://raw.githubusercontent.com/Ray000000/Shell/main/file/zh-hant/xray-zh-hant-store.sh && chmod +x xray-zh-hant-store.sh && sudo ./xray-zh-hant-store.sh
 
@@ -110,22 +110,22 @@ elif [[ $choice == "00" ]]; then
     echo -e "\e[1m\e[93m您的系統日誌如下：\e[0m"
     cat /var/log/syslog
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./xray-zh-hant.sh
+    sudo ./${script_name}
   elif [[ $next_choice == "2" ]]; then
     echo -e "\e[1m\e[93m您的所有用戶資訊如下：\e[0m"
     cat /etc/passwd
     echo -e "\e[1m\e[93m您的所有群組資訊如下：\e[0m"
     cat /etc/group
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./xray-zh-hant.sh
+    sudo ./${script_name}
   elif [[ $next_choice == "log" ]]; then
     curl -sS -O https://raw.githubusercontent.com/Ray000000/Shell/main/xray-update-log.sh && chmod +x xray-update-log.sh && sudo ./xray-update-log.sh
   elif [[ $next_choice == "0" ]]; then
-    sudo ./xray-zh-hant.sh
+    sudo ./${script_name}
   else
     echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./xray-zh-hant.sh
+    sudo ./${script_name}
   fi
 
 elif [[ $choice == "0" ]]; then
@@ -133,5 +133,5 @@ elif [[ $choice == "0" ]]; then
 else
   echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
   read -n 1 -p "按任意按鍵以繼續"
-  sudo ./xray-zh-hant.sh
+  sudo ./${script_name}
 fi

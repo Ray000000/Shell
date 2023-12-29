@@ -95,6 +95,8 @@ elif [[ $choice == "26" ]]; then
 
 elif [[ $choice == "log" ]]; then
   curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/xray-zh-hant-store-log.sh && chmod +x xray-zh-hant-store-log.sh && sudo ./xray-zh-hant-store-log.sh
+elif [[ $choice == "00" ]]; then
+  curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/xray-zh-hant-search.sh && chmod +x xray-zh-hant-search.sh && sudo ./xray-zh-hant-search.sh
 
 elif [[ $choice == "0" ]]; then
   exit
