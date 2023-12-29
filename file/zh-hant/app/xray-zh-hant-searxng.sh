@@ -105,6 +105,7 @@ case $yn2_choice in
   [Yy])
     cd /root/data/xray-shell/docker/searxng
     docker-compose down
+    mkdir -p /root/data/xray-shell-bak/docker/searxng
     cp /root/data/xray-shell/docker/searxng /root/data/xray-shell-bak/docker/searxng
     docker-compose pull searxng/searxng
     docker-compose up -d

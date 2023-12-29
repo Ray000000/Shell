@@ -115,6 +115,7 @@ case $yn2_choice in
   [Yy])
     cd /root/data/xray-shell/docker/matrix
     docker-compose down
+    mkdir -p /root/data/xray-shell-bak/docker/matrix
     cp /root/data/xray-shell/docker/matrix /root/data/xray-shell-bak/docker/matrix
     docker-compose pull matrixdotorg/synapse vectorim/element-web
     docker-compose up -d

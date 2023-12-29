@@ -95,7 +95,8 @@ esac
 case $yn2_choice in
   [Yy])
     cd /root/data/xray-shell/docker/nginx-proxy-manager
-    docker-compose down 
+    docker-compose down
+    mkdir -p /root/data/xray-shell-bak/docker/nginx-proxy-manager
     cp /root/data/xray-shell/docker/nginx-proxy-manager /root/data/xray-shell-bak/docker/nginx-proxy-manager
     docker-compose pull jc21/nginx-proxy-manager
     docker-compose up -d

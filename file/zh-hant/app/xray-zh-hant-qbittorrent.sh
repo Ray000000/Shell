@@ -115,6 +115,7 @@ case $yn2_choice in
   [Yy])
     cd /root/data/xray-shell/docker/qbittorrent
     docker-compose down
+    mkdir -p /root/data/xray-shell-bak/docker/qbittorrent
     cp /root/data/xray-shell/docker/qbittorrent /root/data/xray-shell-bak/docker/qbittorrent
     docker-compose pull lscr.io/linuxserver/qbittorrent
     docker-compose up -d

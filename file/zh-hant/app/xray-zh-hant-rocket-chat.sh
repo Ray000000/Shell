@@ -102,6 +102,7 @@ case $yn2_choice in
   [Yy])
     cd /root/data/xray-shell/docker/rocket-chat
     docker-compose down
+    mkdir -p /root/data/xray-shell-bak/docker/rocket-chat
     cp /root/data/xray-shell/docker/rocket-chat /root/data/xray-shell-bak/docker/rocket-chat
     docker-compose pull registry.rocket.chat/rocketchat/rocket.chat
     docker-compose up -d

@@ -104,6 +104,7 @@ case $yn2_choice in
   [Yy])
     cd /root/data/xray-shell/docker/alist
     docker-compose down
+    mkdir -p /root/data/xray-shell-bak/docker/alist
     cp /root/data/xray-shell/docker/alist /root/data/xray-shell-bak/docker/alist
     docker-compose pull xhofe/alist
     docker-compose up -d
