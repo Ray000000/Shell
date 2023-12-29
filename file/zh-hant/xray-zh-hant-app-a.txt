@@ -1,0 +1,2 @@
+xray-zh-hant-alist.sh
+xray-zh-hant-ariang.sh

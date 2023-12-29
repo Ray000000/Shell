@@ -1,7 +1,6 @@
 #!/bin/bash
 
 script_name="${0##*/}"
-echo "${script_name} started: $(date)" >> ./xray-log.txt
 
 clear
 
@@ -23,19 +22,25 @@ _/      _/  _/    _/    _/_/_/    _/_/_/           ____|_/ |_|  |_| |_|____ |_|_
 echo -e "\e[1m\e[93m
 請選擇您要安裝應用程式：
 \e[0m"
-echo "1. None"
+
+app_list_url="https://raw.githubusercontent.com/Ray000000/Shell/main/file/zh-hant/xray-zh-hant-app-f.txt"
+app_list_raw=$(curl -sS "$app_list_url")
+app_list_processed=$(echo "$app_list_raw" | sed 's/xray-zh-hant-\(.*\)\.sh/\1/' | sort)
+
+index=1
+while IFS= read -r app; do
+  echo "$index. $app"
+  ((index++))
+done <<< "$app_list_processed"
+
 echo -e "\e[1m\e[32m0. Exit\e[0m"
 
 read -p "請輸入：" choice
 
-if [[ $choice == "1" ]]; then
-  curl -sS -O https://example.com && chmod +x .sh && sudo ./.sh
-
-elif [[ $choice == "0" ]]; then
+if [[ $choice == "0" ]]; then
   exit
-else
-  echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
-  read -n 1 -p "按任意按鍵以繼續"
-  sudo ./xray-zh-hant-store.sh
 fi
-echo "${script_name} ended: $(date)" >> ./xray-log.txt
+
+selected_app=$(echo "$app_list_processed" | sed -n "${choice}p")
+
+curl -sS -O "https://raw.githubusercontent.com/Ray000000/Shell/main/file/zh-hant/app/xray-zh-hant-${selected_app}.sh" && chmod +x "xray-zh-hant-${selected_app}.sh" && sudo "./xray-zh-hant-${selected_app}.sh"

@@ -1,7 +1,6 @@
 #!/bin/bash
 
 script_name="${0##*/}"
-echo "${script_name} started: $(date)" >> ./xray-log.txt
 
 clear
 
@@ -136,4 +135,3 @@ else
   read -n 1 -p "按任意按鍵以繼續"
   sudo ./xray-zh-hant.sh
 fi
-echo "${script_name} ended: $(date)" >> ./xray-log.txt

@@ -26,7 +26,7 @@ echo -e "\e[1m\e[93m
 
 app_list_url="https://raw.githubusercontent.com/Ray000000/Shell/main/file/zh-hant/xray-zh-hant-app.txt"
 app_list_raw=$(curl -sS "$app_list_url")
-app_list_processed=$(echo "$app_list_raw" | sed 's/xray-zh-hant-\(.*\)\.sh/\1/')
+app_list_processed=$(echo "$app_list_raw" | sed 's/xray-zh-hant-\(.*\)\.sh/\1/' | sort)
 
 index=1
 while IFS= read -r app; do

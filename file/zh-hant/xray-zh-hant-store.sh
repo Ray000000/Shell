@@ -1,7 +1,6 @@
 #!/bin/bash
 
 script_name="${0##*/}"
-echo "${script_name} started: $(date)" >> ./xray-log.txt
 
 clear
 
@@ -102,6 +101,5 @@ elif [[ $choice == "0" ]]; then
 else
   echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
   read -n 1 -p "按任意按鍵以繼續"
-  sudo ./xray-zh-hant-store.sh
+  sudo ./${script_name}
 fi
-echo "${script_name} ended: $(date)" >> ./xray-log.txt
