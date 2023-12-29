@@ -21,12 +21,12 @@ https://www.docker.com/"
 echo -e "\e[1m\e[93m
 請選擇您要執行的任務：
 \e[0m"
-echo "1. 安裝"
-echo "2. 更新"
-echo "3. 解除安裝"
-echo -e "\e[1m\e[31m4. 解除安裝（不保存資料）\e[0m"
-echo "5. 查看版本"
-echo "6. 簡易操作"
+echo "1.  安裝"
+echo "2.  更新"
+echo "3.  解除安裝"
+echo -e "\e[1m\e[31m4.  解除安裝（不保存資料）\e[0m"
+echo "5.  查看版本"
+echo "6.  簡易操作"
 echo "00. 設定快捷方式"
 echo -e "\e[1m\e[32m0. 回到菜單\e[0m"
 
