@@ -100,4 +100,8 @@ elif [[ $choice == "00" ]]; then
 
 elif [[ $choice == "0" ]]; then
   exit
+else
+  echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
+  read -n 1 -p "按任意按鍵以繼續"
+  sudo ./${script_name}
 fi

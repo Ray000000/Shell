@@ -39,6 +39,10 @@ read -p "請輸入：" choice
 
 if [[ $choice == "0" ]]; then
   exit
+else
+  echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
+  read -n 1 -p "按任意按鍵以繼續"
+  sudo ./${script_name}
 fi
 
 selected_app=$(echo "$app_list_processed" | sed -n "${choice}p")

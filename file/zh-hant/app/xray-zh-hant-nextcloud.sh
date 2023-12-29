@@ -72,26 +72,22 @@ case $yn_choice in
       mkdir -p /root/data/xray-shell/docker/nextcloud
       cd /root/data/xray-shell/docker/nextcloud
       echo "
-version: '3.8'
+version: '3'
+
+services:
+  nextcloud:
+    image: nextcloud
+    ports:
+      - 8083:80
+    environment:
+      - NEXTCLOUD_ADMIN_USER=admin
+      - NEXTCLOUD_ADMIN_PASSWORD=admin_password
+      - SQLITE_DATABASE=/var/www/html/data/nextcloud.db
+    volumes:
+      - nextcloud:/var/www/html
 
 volumes:
- nextcloud_aio_mastercontainer:
-   name: nextcloud_aio_mastercontainer
-services:
- nextcloud:
-   image: nextcloud/all-in-one:latest
-   restart: unless-stopped
-   container_name: nextcloud-aio-mastercontainer
-   volumes:
-     - nextcloud_aio_mastercontainer:/mnt/docker-aio-config
-     - /var/run/docker.sock:/var/run/docker.sock:ro
-   ports:
-     - 8090:8080
-   environment:
-     - APACHE_PORT=11000
-     - APACHE_DISABLE_REWRITE_IP=1
-     - NEXTCLOUD_TRUSTED_DOMAINS=$choice1 $external_ip
-     - TRUSTED_PROXIES=$external_ip" >> docker-compose.yml
+  nextcloud:" >> docker-compose.yml
     docker-compose up -d
     docker update --restart=always nextcloud_aio_mastercontainer
     cd

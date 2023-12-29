@@ -31,7 +31,7 @@ app_list_processed=$(echo "$app_list_raw" | sed 's/xray-zh-hant-\(.*\)\.sh/\1/' 
 
 if [[ -z "$app_list_processed" ]]; then
   echo -e "\e[1m\e[31m找不到相關應用程式\e[0m"
-  
+
 fi
 
 echo -e "\e[1m\e[34m搜尋結果：\e[0m"
@@ -48,6 +48,10 @@ read -p "請輸入：" choice
 
 if [[ $choice == "0" ]]; then
   exit
+else
+  echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
+  read -n 1 -p "按任意按鍵以繼續"
+  sudo ./${script_name}
 fi
 
 selected_app=$(echo "$app_list_processed" | sed -n "${choice}p")

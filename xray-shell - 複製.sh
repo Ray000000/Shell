@@ -10,18 +10,6 @@ if [[ -n "$update_message" ]]; then
   eval "$update_message"
 fi
 
-script_urls=(
-  "https://raw.githubusercontent.com/Ray000000/Shell/main/main/xray-en.sh"
-  "https://raw.githubusercontent.com/Ray000000/Shell/main/main/xray-zh-hant.sh"
-  "https://raw.githubusercontent.com/Ray000000/Shell/main/main/xray-zh-hans.sh"
-)
-
-local_dir="/root/xray-shell"
-
-mkdir -p "${local_dir}"
-
-chmod +x "${local_dir}"
-
 echo -e "\e[1m\e[34m
     _/      _/  _/_/_/                        
      _/  _/    _/    _/    _/_/_/  _/    _/        ______   _    _   ______  ______  _       
@@ -34,32 +22,23 @@ _/      _/  _/    _/    _/_/_/    _/_/_/           ____|_/ |_|  |_| |_|____ |_|_
 echo -e "\e[1m\e[93m
 Choose your language:
 \e[0m"
-
-for ((i=0; i<${#script_urls[@]}; i++)); do
-  case $i in
-    0) lang="English";;
-    1) lang="繁體中文";;
-    2) lang="简体中文";;
-  esac
-  echo "$((i+1)). $lang"
-done
-
+echo "1. English(Coming)"
+echo "2. 繁體中文"
+echo "3. 简体中文(Coming)"
 echo -e "\e[1m\e[32m0. Exit\e[0m"
 
 read -p "Please input:" choice
 
-if [[ $choice -ge 1 && $choice -le ${#script_urls[@]} ]]; then
-  selected_script="${script_urls[$((choice-1))]}"
-  script_name=$(basename "${selected_script}")
-  curl -sS "${selected_script}" -o "${local_dir}/${script_name}"
-
-  chmod +x "${local_dir}/${script_name}"
-
-  "${local_dir}/${script_name}"
+if [[ $choice == "1" ]]; then
+  curl -sS -O https://raw.githubusercontent.com/Ray000000/Shell/main/main/xray-en.sh && chmod +x xray-en.sh && sudo ./xray-en.sh
+elif [[ $choice == "2" ]]; then
+  curl -sS -O https://raw.githubusercontent.com/Ray000000/Shell/main/main/xray-zh-hant.sh && chmod +x xray-zh-hant.sh && sudo ./xray-zh-hant.sh
+elif [[ $choice == "3" ]]; then
+  curl -sS -O https://raw.githubusercontent.com/Ray000000/Shell/main/main/xray-zh-hans.sh && chmod +x xray-zh-hans.sh && sudo ./xray-zh-hans.sh
 elif [[ $choice == "0" ]]; then
   exit
 else
   echo -e "\e[1m\e[31mError: Ineffective choices\e[0m"
   read -n 1 -p "Press any key to return to the menu."
-  sudo "${local_dir}"
+  sudo ./${script_name}
 fi
