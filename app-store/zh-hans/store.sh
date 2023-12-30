@@ -9,7 +9,7 @@ if [[ -n "${update_message}" ]]; then
   eval "${update_message}"
 fi
 
-dir0="app-store/${language}"
+dir0="app-store/zh-hant"
 dir1="./xray-shell/${dir0}"
 if [ ! -d "${dir1}" ]; then
   mkdir -p "${dir1}"

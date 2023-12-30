@@ -112,7 +112,6 @@ PasswordAuthentication yes" >> /etc/ssh/sshd_config
     \e[0m"
     echo "1. 查看系統日誌"
     echo "2. 查看用戶和群組"
-    echo "log. 更新紀錄"
     echo -e "\e[1m\e[32m0. Back\e[0m"
     read -p "請輸入：" next_choice
 

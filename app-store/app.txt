@@ -1,0 +1,10 @@
+Nextcloud
+Docker
+Cloudreve
+Matrix
+Alist
+Nginx-Proxy-Manager
+Rocker.Chat
+qBittorrent
+SearXNG
+AriaNG
