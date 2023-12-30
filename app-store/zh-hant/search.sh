@@ -20,12 +20,22 @@ _/      _/  _/    _/    _/_/_/    _/_/_/           ____|_/ |_|  |_| |_|____ |_|_
                                 _/_/ \e[0m"
 
 echo -e "\e[1m\e[93m
-請選擇您要安裝應用程式：
+請輸入您想搜尋的應用程式關鍵字：
 \e[0m"
 
-app_list_url="https://raw.githubusercontent.com/Ray000000/Shell/main/file/zh-hant/xray-zh-hant-app-a.txt"
+read -p "搜尋：" search_term
+
+app_list_url="https://raw.githubusercontent.com/Ray000000/Shell/main/file/zh-hant/xray-zh-hant-app.txt"
 app_list_raw=$(curl -sS "$app_list_url")
-app_list_processed=$(echo "$app_list_raw" | sed 's/xray-zh-hant-\(.*\)\.sh/\1/' | sort)
+app_list_processed=$(echo "$app_list_raw" | sed 's/xray-zh-hant-\(.*\)\.sh/\1/' | grep -i "$search_term")
+
+if [[ -z "$app_list_processed" ]]; then
+  echo -e "\e[1m\e[31m找不到相關應用程式\e[0m"
+  read -n 1 -p "按任意按鍵以繼續"
+  sudo ./xray-shell/${script_name}
+fi
+
+echo -e "\e[1m\e[34m搜尋結果：\e[0m"
 
 index=1
 while IFS= read -r app; do
@@ -37,14 +47,18 @@ echo -e "\e[1m\e[32m0. Exit\e[0m"
 
 read -p "請輸入：" choice
 
-if [[ $choice == "0" ]]; then
-  exit
-else
-  echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
-  read -n 1 -p "按任意按鍵以繼續"
-  sudo ./${script_name}
-fi
-
-selected_app=$(echo "$app_list_processed" | sed -n "${choice}p")
+case $choice in
+  0)
+    exit
+    ;;
+  [1-9]|10|log)
+    selected_app=$(echo "$app_list_processed" | sed -n "${choice}p")
+    ;;
+  *)
+    echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
+    read -n 1 -p "按任意按鍵以繼續"
+    sudo ./xray-shell/zh-hant/${script_name}
+    ;;
+esac
 
 curl -sS -O "https://raw.githubusercontent.com/Ray000000/Shell/main/file/zh-hant/app/xray-zh-hant-${selected_app}.sh" && chmod +x "xray-zh-hant-${selected_app}.sh" && sudo "./xray-zh-hant-${selected_app}.sh"

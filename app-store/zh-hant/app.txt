@@ -1,0 +1,10 @@
+xray-zh-hant-Nextcloud.sh
+xray-zh-hant-Docker.sh
+xray-zh-hant-Cloudreve.sh
+xray-zh-hant-Matrix.sh
+xray-zh-hant-Alist.sh
+xray-zh-hant-Nginx Proxy Manager.sh
+xray-zh-hant-Rocker.Chat.sh
+xray-zh-hant-qBittorrent.sh
+xray-zh-hant-SearXNG.sh
+xray-zh-hant-AriaNG.sh

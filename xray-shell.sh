@@ -1,11 +1,9 @@
 #!/bin/bash
+clear
 
 script_name="${0##*/}"
 
-clear
-
 update_message=$(curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/xray-update-message.sh | awk '/echo -e ".*"/ {print}')
-
 if [[ -n "$update_message" ]]; then
   eval "$update_message"
 fi
@@ -15,11 +13,8 @@ script_urls=(
   "https://raw.githubusercontent.com/Ray000000/Shell/main/main/xray-zh-hant.sh"
   "https://raw.githubusercontent.com/Ray000000/Shell/main/main/xray-zh-hans.sh"
 )
-
-local_dir="/root/xray-shell"
-
+local_dir="./xray-shell"
 mkdir -p "${local_dir}"
-
 chmod +x "${local_dir}"
 
 echo -e "\e[1m\e[34m
@@ -37,16 +32,15 @@ Choose your language:
 
 for ((i=0; i<${#script_urls[@]}; i++)); do
   case $i in
-    0) lang="English";;
-    1) lang="繁體中文";;
-    2) lang="简体中文";;
+    0) option="English";;
+    1) option="繁體中文";;
+    2) option="简体中文";;
   esac
-  echo "$((i+1)). $lang"
+  echo "$((i+1)). $option"
 done
-
 echo -e "\e[1m\e[32m0. Exit\e[0m"
 
-read -p "Please input:" choice
+read -p "Please input: " choice
 
 if [[ $choice -ge 1 && $choice -le ${#script_urls[@]} ]]; then
   selected_script="${script_urls[$((choice-1))]}"
@@ -56,10 +50,11 @@ if [[ $choice -ge 1 && $choice -le ${#script_urls[@]} ]]; then
   chmod +x "${local_dir}/${script_name}"
 
   "${local_dir}/${script_name}"
+
 elif [[ $choice == "0" ]]; then
   exit
 else
   echo -e "\e[1m\e[31mError: Ineffective choices\e[0m"
   read -n 1 -p "Press any key to return to the menu."
-  sudo "${local_dir}"
+  sudo ./${script_name}
 fi
