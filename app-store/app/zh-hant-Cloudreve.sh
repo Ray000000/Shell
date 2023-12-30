@@ -2,9 +2,34 @@
 clear
 
 script_name="${0##*/}"
+language="zh-hant"
+
+local_dir_lang="./xray-shell/app-store/${language}"
 local_dir0="./xray-shell/app-store/app"
-mkdir -p ${local_dir0}
-chmod +x ${local_dir0}
+local_dir1="./xray-shell/app-store/app-bak"
+local_dir2="./xray-shell/file"
+
+if [ ! -d "${local_dir0}" ]; then
+  mkdir -p ${local_dir0}
+  chmod +x ${local_dir0}
+else
+  chmod +x ${local_dir0}
+fi
+if [ ! -d "${local_dir1}" ]; then
+  mkdir -p ${local_dir1}
+  chmod +x ${local_dir1}
+else
+  chmod +x ${local_dir1}
+fi
+if [ ! -d "${local_dir2}" ]; then
+  mkdir -p ${local_dir2}
+  chmod +x ${local_dir2}
+else
+  chmod +x ${local_dir2}
+fi
+
+curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/app/${script_name} -o ${local_dir0}/${script_name} && chmod +x ${local_dir0}/${script_name}
+curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/${language}/store.sh -o ${local_dir0}/store.sh && chmod +x ${local_dir0}/store.sh
 
 echo -e "\e[1m\e[93m〔Cloudreve〕\e[0m"
 echo "
@@ -20,7 +45,7 @@ Cloudreve 適合需要搭建私有或公用網盤系統的人使用。"
 logs=$(docker exec -it cloudreve ./cloudreve --database-script ResetAdminPassword)
 password=$(echo "$logs" | awk '/Initial admin user password changed to:/ {gsub("to:", ""); print $NF}')
 external_ip=$(curl -s ipv4.ip.sb)
-aria2_rpc_file="/root/data/xray-shell/file/aria2_rpc.txt"
+aria2_rpc_file="${local_dir2}/aria2_rpc.txt"
 echo -e "Cloudreve 網址（安裝完成後可用）：
 http://$external_ip:5212"
 echo -e "Cloudreve 帳號：admin@cloudreve.org"
@@ -37,7 +62,7 @@ echo -e "\e[1m\e[93m
 echo "1. 安裝"
 echo "2. 更新"
 echo -e "\e[1m\e[31m3. 解除安裝（不保存資料）\e[0m"
-echo -e "\e[1m\e[32m0. 回到菜單\e[0m"
+echo -e "\e[1m\e[32m0. Back\e[0m"
 
 read -p "請輸入：" choice
 
@@ -54,11 +79,11 @@ elif [[ $choice == "3" ]]; then
   echo -e "\e[1m\e[31mN. 取消解除安裝\e[0m"
   read -p "請輸入：" yn3_choice
 elif [[ $choice == "0" ]]; then
-  sudo ./xray-zh-hant-store.sh
+  sudo ${local_dir_lang}/store.sh
 else
   echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
   read -n 1 -p "按任意按鍵，回到菜單"
-  sudo ./${script_name}
+  sudo ${local_dir0}/${script_name}
 fi
 
 case $yn_choice in
@@ -73,13 +98,13 @@ case $yn_choice in
       echo "Docker 已安裝"
     fi
       read -p "請輸入 aria2 的 RPC Token：" choice1
-      mkdir -vp /root/data/xray-shell/docker/cloudreve/{uploads,avatar} \
-      && touch /root/data/xray-shell/docker/cloudreve/conf.ini \
-      && touch /root/data/xray-shell/docker/cloudreve/cloudreve.db \
-      && mkdir -p /root/data/xray-shell/docker/cloudreve/aria2/config \
-      && mkdir -p /root/data/xray-shell/docker/cloudreve/data/aria2 \
-      && chmod -R 777 /root/data/xray-shell/docker/cloudreve/data/aria2
-      cd /root/data/xray-shell/docker/cloudreve
+      mkdir -vp ${local_dir0}/cloudreve/{uploads,avatar} \
+      && touch ${local_dir0}/cloudreve/conf.ini \
+      && touch ${local_dir0}/cloudreve/cloudreve.db \
+      && mkdir -p ${local_dir0}/cloudreve/aria2/config \
+      && mkdir -p ${local_dir0}/cloudreve/data/aria2 \
+      && chmod -R 777 ${local_dir0}/cloudreve/data/aria2
+      cd ${local_dir0}/cloudreve
       echo "
 version: '3.8'
 services:
@@ -90,11 +115,11 @@ services:
     ports:
       - '5212:5212'
     volumes:
-      - /root/data/xray-shell/docker/cloudreve/temp_data:/data
-      - /root/data/xray-shell/docker/cloudreve/uploads:/cloudreve/uploads
-      - /root/data/xray-shell/docker/cloudreve/conf.ini:/cloudreve/conf.ini
-      - /root/data/xray-shell/docker/cloudreve/cloudreve.db:/cloudreve/cloudreve.db
-      - /root/data/xray-shell/docker/cloudreve/avatar:/cloudreve/avatar
+      - ${local_dir0}/cloudreve/temp_data:/data
+      - ${local_dir0}/cloudreve/uploads:/cloudreve/uploads
+      - ${local_dir0}/cloudreve/conf.ini:/cloudreve/conf.ini
+      - ${local_dir0}/cloudreve/cloudreve.db:/cloudreve/cloudreve.db
+      - ${local_dir0}/cloudreve/avatar:/cloudreve/avatar
     depends_on:
       - aria2-pro
   aria2-pro:
@@ -105,8 +130,8 @@ services:
       - RPC_SECRET=$choice1
       - RPC_PORT=6800
     volumes:
-      - /root/data/xray-shell/docker/cloudreve/aria2/config:/config
-      - /root/data/xray-shell/docker/cloudreve/aria2/temp_data:/data
+      - ${local_dir0}/cloudreve/aria2/config:/config
+      - ${local_dir0}/cloudreve/aria2/temp_data:/data
 volumes:
   temp_data:
     driver: local
@@ -116,31 +141,31 @@ volumes:
       o: bind" >> docker-compose.yml
     docker-compose up -d
     docker update --restart=always cloudreve aria2-pro
-    echo "$choice1" > /root/data/xray-shell/file/aria2_rpc.txt
+    echo "$choice1" > ${local_dir2}/aria2_rpc.txt
     cd
   
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
   [Nn])
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
 esac
   
 case $yn2_choice in
   [Yy])
-    cd /root/data/xray-shell/docker/cloudreve
+    cd ${local_dir0}/cloudreve
     docker-compose down
-    mkdir -p /root/data/xray-shell-bak/docker/cloudreve
-    cp /root/data/xray-shell/docker/cloudreve /root/data/xray-shell-bak/docker/cloudreve
+    mkdir -p ${local_dir1}/cloudreve
+    cp ${local_dir0}/cloudreve ${local_dir1}/cloudreve
     docker-compose pull cloudreve/cloudreve p3terx/aria2-pro
     docker-compose up -d
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
   [Nn])
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
 esac
 
@@ -149,15 +174,15 @@ case $yn3_choice in
     cd
     docker stop cloudreve aria2-pro
     docker rm cloudreve aria2-pro
-    cd /root/data/xray-shell/docker/cloudreve
+    cd ${local_dir0}/cloudreve
     docker-compose down
-    rm -rf /root/data/xray-shell/docker/cloudreve
+    rm -rf ${local_dir0}/cloudreve
     cd
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
   [Nn])
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
 esac

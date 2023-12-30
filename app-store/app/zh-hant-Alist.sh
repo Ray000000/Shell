@@ -1,8 +1,36 @@
 #!/bin/bash
+clear
 
 script_name="${0##*/}"
+language="zh-hant"
 
-clear
+local_dir_lang="./xray-shell/app-store/${language}"
+local_dir0="./xray-shell/app-store/app"
+local_dir1="./xray-shell/app-store/app-bak"
+local_dir2="./xray-shell/file"
+
+if [ ! -d "${local_dir0}" ]; then
+  mkdir -p ${local_dir0}
+  chmod +x ${local_dir0}
+else
+  chmod +x ${local_dir0}
+fi
+if [ ! -d "${local_dir1}" ]; then
+  mkdir -p ${local_dir1}
+  chmod +x ${local_dir1}
+else
+  chmod +x ${local_dir1}
+fi
+if [ ! -d "${local_dir2}" ]; then
+  mkdir -p ${local_dir2}
+  chmod +x ${local_dir2}
+else
+  chmod +x ${local_dir2}
+fi
+
+curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/app/${script_name} -o ${local_dir0}/${script_name} && chmod +x ${local_dir0}/${script_name}
+curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/${language}/store.sh -o ${local_dir0}/store.sh && chmod +x ${local_dir0}/store.sh
+
 echo -e "\e[1m\e[93m〔Alist〕\e[0m"
 echo "
 Alist 是一個開源的文件列表程序，可以將本地或遠程的文件以網頁的形式展示出來。它支持多種存儲方式，包括本地存儲、FTP、SFTP、WebDAV 等。你可以在網頁上瀏覽、下載或分享文件。
@@ -15,7 +43,7 @@ Alist 的優點包括：
 
 Alist 是一個非常實用的文件列表程序。它可以幫助您輕鬆管理您的文件。"
 external_ip=$(curl -s ipv4.ip.sb)
-password_file="/root/data/xray-shell/docker/alist/password.txt"
+password_file="${local_dir1}/alist/password.txt"
 if [ -f "$password_file" ]; then
     alist_password=$(cat "$password_file")
 fi
@@ -33,7 +61,7 @@ echo -e "\e[1m\e[93m
 echo "1. 安裝"
 echo "2. 更新"
 echo -e "\e[1m\e[31m3. 解除安裝（不保存資料）\e[0m"
-echo -e "\e[1m\e[32m0. 回到菜單\e[0m"
+echo -e "\e[1m\e[32m0. Back\e[0m"
 
 read -p "請輸入：" choice
 
@@ -50,11 +78,11 @@ elif [[ $choice == "3" ]]; then
   echo -e "\e[1m\e[31mN. 取消解除安裝\e[0m"
   read -p "請輸入：" yn3_choice
 elif [[ $choice == "0" ]]; then
-  sudo ./xray-zh-hant-store.sh
+  sudo ${local_dir_lang}/store.sh
 else
   echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
   read -n 1 -p "按任意按鍵，回到菜單"
-  sudo ./${script_name}
+  sudo ${local_dir0}/${script_name}
 fi
 
 case $yn_choice in
@@ -69,15 +97,15 @@ case $yn_choice in
       echo "Docker 已安裝"
     fi
       read -p "請輸入欲使用的密碼：" choice1
-      mkdir -p /root/data/xray-shell/docker/alist
-      cd /root/data/xray-shell/docker/alist
+      mkdir -p ${local_dir1}/alist
+      cd ${local_dir1}/alist
       echo "
 version: '3.3'
 services:
     alist:
         restart: always
         volumes:
-            - '/root/data/xray-shell/docker/alist:/opt/alist/data'
+            - '${local_dir1}/alist:/opt/alist/data'
         ports:
             - '5244:5244'
         environment:
@@ -89,28 +117,28 @@ services:
     docker-compose up -d
     docker update --restart=always alist
     docker exec -it alist ./alist admin set $choice1
-    echo "$choice1" > /root/data/xray-shell/docker/alist/password.txt
+    echo "$choice1" > ${local_dir1}/alist/password.txt
     cd
   
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
   [Nn])
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
 esac
   
 case $yn2_choice in
   [Yy])
-    cd /root/data/xray-shell/docker/alist
+    cd ${local_dir0}/alist
     docker-compose down
-    mkdir -p /root/data/xray-shell-bak/docker/alist
-    cp /root/data/xray-shell/docker/alist /root/data/xray-shell-bak/docker/alist
+    mkdir -p ${local_dir1}/alist
+    cp ${local_dir0}/alist ${local_dir1}/alist
     docker-compose pull xhofe/alist
     docker-compose up -d
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
   [Nn])
     sudo ./${script_name}
@@ -122,15 +150,15 @@ case $yn3_choice in
     cd
     docker stop alist
     docker rm alist
-    cd /root/data/xray-shell/docker/alist
+    cd ${local_dir0}/alist
     docker-compose down
-    rm -rf /root/data/xray-shell/docker/alist
+    rm -rf ${local_dir0}/alist
     cd
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
   [Nn])
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
 esac

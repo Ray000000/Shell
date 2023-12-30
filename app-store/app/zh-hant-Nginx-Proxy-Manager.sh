@@ -1,8 +1,36 @@
 #!/bin/bash
+clear
 
 script_name="${0##*/}"
+language="zh-hant"
 
-clear
+local_dir_lang="./xray-shell/app-store/${language}"
+local_dir0="./xray-shell/app-store/app"
+local_dir1="./xray-shell/app-store/app-bak"
+local_dir2="./xray-shell/file"
+
+if [ ! -d "${local_dir0}" ]; then
+  mkdir -p ${local_dir0}
+  chmod +x ${local_dir0}
+else
+  chmod +x ${local_dir0}
+fi
+if [ ! -d "${local_dir1}" ]; then
+  mkdir -p ${local_dir1}
+  chmod +x ${local_dir1}
+else
+  chmod +x ${local_dir1}
+fi
+if [ ! -d "${local_dir2}" ]; then
+  mkdir -p ${local_dir2}
+  chmod +x ${local_dir2}
+else
+  chmod +x ${local_dir2}
+fi
+
+curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/app/${script_name} -o ${local_dir0}/${script_name} && chmod +x ${local_dir0}/${script_name}
+curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/${language}/store.sh -o ${local_dir0}/store.sh && chmod +x ${local_dir0}/store.sh
+
 echo -e "\e[1m\e[93m〔Nginx Proxy Manager〕\e[0m"
 echo "
 Nginx Proxy Manager 是一個用於管理 Nginx 代理的軟體。它可以幫助你輕鬆管理 Nginx 代理的 HTTP 和 HTTPS 流量，配置 SSL/TLS 憑證，監控 Nginx 代理的性能和狀態，以及分析日誌。
@@ -29,7 +57,7 @@ echo -e "\e[1m\e[93m
 echo "1. 安裝"
 echo "2. 更新"
 echo -e "\e[1m\e[31m2. 解除安裝（不保存資料）\e[0m"
-echo -e "\e[1m\e[32m0. 回到菜單\e[0m"
+echo -e "\e[1m\e[32m0. Back\e[0m"
 
 read -p "請輸入：" choice
 
@@ -46,11 +74,11 @@ elif [[ $choice == "3" ]]; then
   echo -e "\e[1m\e[31mN. 取消解除安裝\e[0m"
   read -p "請輸入：" yn3_choice
 elif [[ $choice == "0" ]]; then
-  sudo ./xray-zh-hant-store.sh
+  sudo ${local_dir_lang}/store.sh
 else
   echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
   read -n 1 -p "按任意按鍵，回到菜單"
-  sudo ./${script_name}
+  sudo ${local_dir0}/${script_name}
 fi
 
 case $yn_choice in
@@ -64,8 +92,8 @@ case $yn_choice in
     else
       echo "Docker 已安裝"
     fi
-      mkdir -p /root/data/xray-shell/docker/nginx-proxy-manager
-      cd /root/data/xray-shell/docker/nginx-proxy-manager
+      mkdir -p ${local_dir0}/nginx-proxy-manager
+      cd ${local_dir0}/nginx-proxy-manager
       echo "
 version: '3'
 services:
@@ -85,41 +113,41 @@ services:
       cd
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
   [Nn])
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
 esac
 
 case $yn2_choice in
   [Yy])
-    cd /root/data/xray-shell/docker/nginx-proxy-manager
+    cd ${local_dir0}/nginx-proxy-manager
     docker-compose down
-    mkdir -p /root/data/xray-shell-bak/docker/nginx-proxy-manager
-    cp /root/data/xray-shell/docker/nginx-proxy-manager /root/data/xray-shell-bak/docker/nginx-proxy-manager
+    mkdir -p ${local_dir1}/docker/nginx-proxy-manager
+    cp ${local_dir0}/nginx-proxy-manager ${local_dir1}/nginx-proxy-manager
     docker-compose pull jc21/nginx-proxy-manager
     docker-compose up -d
     docker update --restart=always nginx-proxy-manager
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
   [Nn])
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
 esac
   
 case $yn3_choice in
   [Yy])
-    cd /root/data/xray-shell/docker/nginx-proxy-manager
+    cd ${local_dir0}/nginx-proxy-manager
     docker-compose down
-    rm -rf /root/data/xray-shell/docker/nginx-proxy-manager
+    rm -rf ${local_dir0}/nginx-proxy-manager
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
   [Nn])
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
 esac

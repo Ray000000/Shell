@@ -1,8 +1,36 @@
 #!/bin/bash
+clear
 
 script_name="${0##*/}"
+language="zh-hant"
 
-clear
+local_dir_lang="./xray-shell/app-store/${language}"
+local_dir0="./xray-shell/app-store/app"
+local_dir1="./xray-shell/app-store/app-bak"
+local_dir2="./xray-shell/file"
+
+if [ ! -d "${local_dir0}" ]; then
+  mkdir -p ${local_dir0}
+  chmod +x ${local_dir0}
+else
+  chmod +x ${local_dir0}
+fi
+if [ ! -d "${local_dir1}" ]; then
+  mkdir -p ${local_dir1}
+  chmod +x ${local_dir1}
+else
+  chmod +x ${local_dir1}
+fi
+if [ ! -d "${local_dir2}" ]; then
+  mkdir -p ${local_dir2}
+  chmod +x ${local_dir2}
+else
+  chmod +x ${local_dir2}
+fi
+
+curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/app/${script_name} -o ${local_dir0}/${script_name} && chmod +x ${local_dir0}/${script_name}
+curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/${language}/store.sh -o ${local_dir0}/store.sh && chmod +x ${local_dir0}/store.sh
+
 echo -e "\e[1m\e[93m〔Docker〕\e[0m"
 echo "
 Docker 是一種開源軟體平台，可讓您快速地建立、測試和部署應用程式。Docker 將軟體封裝到名為容器的標準化單位，其中包含程式庫、系統工具、程式碼和執行時間等執行軟體所需的所有項目。使用Docker，您可以將應用程式快速地部署到各種環境並加以擴展，而且知道程式碼可以執行。
@@ -28,7 +56,7 @@ echo -e "\e[1m\e[31m4.  解除安裝（不保存資料）\e[0m"
 echo "5.  查看版本"
 echo "6.  簡易操作"
 echo "00. 設定快捷方式"
-echo -e "\e[1m\e[32m0. 回到菜單\e[0m"
+echo -e "\e[1m\e[32m0. Back\e[0m"
 
 read -p "請輸入：" choice
 #--------------------------------------------------choice-------------------------------------------------------#
@@ -39,7 +67,7 @@ if [[ $choice == "1" ]]; then
 elif [[ $choice == "2" ]]; then
   sudo apt-get update -y && sudo apt-get upgrade docker-ce -y && sudo apt-get upgrade docker-compose -y
   read -n 1 -p "按任意按鍵以繼續"
-  sudo ./${script_name}
+  sudo ${local_dir0}/${script_name}
 elif [[ $choice == "3" ]]; then
   echo -e "\e[1m\e[34mY. 確認解除安裝\e[0m"
   echo -e "\e[1m\e[31mN. 取消解除安裝\e[0m"
@@ -52,7 +80,7 @@ elif [[ $choice == "5" ]]; then
   docker --version
   docker-compose --version
   read -n 1 -p "按任意按鍵以繼續"
-  sudo ./${script_name}
+  sudo ${local_dir0}/${script_name}
 elif [[ $choice == "6" ]]; then
   echo -e "\e[1m\e[93m
 請選擇您要執行的操作：
@@ -66,16 +94,17 @@ elif [[ $choice == "6" ]]; then
   read -p "請輸入：" next_choice
 elif [[ $choice == "00" ]]; then
   read -p "請輸入快捷鍵：" choice1
-  echo "alias $choice1='curl -sS -O https://ray000000.github.io/Shell/file/zh-hant/app/xray-zh-hant-docker.sh && chmod +x xray-zh-hant-docker.sh && sudo ./xray-zh-hant-docker.sh'" >> ~/.bashrc
+  echo "alias $choice1='curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/app/${script_name} -o ${local_dir0}/${script_name} && chmod +x ${local_dir0}/${script_name} && sudo ${local_dir0}/${script_name}'" >> ~/.bashrc
+  sleep 1
   source ~/.bashrc
   read -n 1 -p "按任意按鍵以繼續"
-  sudo ./${script_name}
+  sudo ${local_dir0}/${script_name}
 elif [[ $choice == "0" ]]; then
-  sudo ./xray-zh-hant-store.sh
+  sudo ${local_dir_lang}/store.sh
 else
   echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
   read -n 1 -p "按任意按鍵，回到菜單"
-  sudo ./${script_name}
+  sudo ${local_dir0}/${script_name}
 fi
 #--------------------------------------------------choice-------------------------------------------------------#
 #--------------------------------------------------next_choice--------------------------------------------------#
@@ -86,7 +115,7 @@ fi
     docker start $choice_docker_start
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
 
   elif [[ $next_choice == "2" ]]; then
     echo -e "\e[1m\e[93m您的容器如下：\e[0m"
@@ -95,7 +124,7 @@ fi
     docker restart $choice_docker_restart
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
 
   elif [[ $next_choice == "3" ]]; then
     echo -e "\e[1m\e[93m您的容器如下：\e[0m"
@@ -104,7 +133,7 @@ fi
     docker pause $choice_docker_pause
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
 
   elif [[ $next_choice == "4" ]]; then
     echo -e "\e[1m\e[93m您的容器如下：\e[0m"
@@ -113,7 +142,7 @@ fi
     docker stop $choice_docker_stop
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
 
   elif [[ $next_choice == "5" ]]; then
     echo -e "\e[1m\e[93m您的容器如下：\e[0m"
@@ -122,7 +151,7 @@ fi
     docker rm $choice_docker_rm
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
 
   elif [[ $next_choice == "6" ]]; then
     echo -e "\e[1m\e[93m
@@ -139,7 +168,7 @@ fi
     docker pull $choice_docker_pull
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
 
   elif [[ $next_choice == "8" ]]; then
     echo -e "\e[1m\e[93m您的鏡像列表如下：\e[0m"
@@ -148,7 +177,7 @@ fi
     docker image rm -f $choice_docker_irm
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
 
   elif [[ $next_choice == "9" ]]; then
     echo -e "\e[1m\e[93m您的鏡像列表如下：\e[0m"
@@ -157,7 +186,7 @@ fi
     docker logs $choice_docker_logs
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
 
   elif [[ $next_choice == "10" ]]; then
     echo -e "\e[1m\e[93m您的鏡像列表如下：\e[0m"
@@ -167,7 +196,7 @@ fi
     docker exec -it $choice_docker_exce ./$choice_docker_exce $choice_docker_exce_input
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
   
 
   elif [[ $next_choice == "00" ]]; then
@@ -178,15 +207,15 @@ fi
     docker run -$choice_docker_run --name $choice_docker_run_name -p $choice_docker_run_port $choice_docker_run_image
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
 
   elif [[ $next_choice == "0" ]]; then
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
 
   else
     echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
   fi
 #--------------------------------------------------next_choice--------------------------------------------------#
 #--------------------------------------------------next_choice2-------------------------------------------------#
@@ -197,7 +226,7 @@ fi
       docker update --restart=always $choice_docker_auto_restart_on
 
       read -n 1 -p "按任意按鍵以繼續"
-      sudo ./${script_name}
+      sudo ${local_dir0}/${script_name}
     elif [[ $next_choice2 == "2" ]]; then
       echo -e "\e[1m\e[93m您的容器如下：\e[0m"
       docker ps -a
@@ -205,13 +234,13 @@ fi
       docker update --restart=no $choice_docker_auto_restart_off
 
       read -n 1 -p "按任意按鍵以繼續"
-      sudo ./${script_name}
+      sudo ${local_dir0}/${script_name}
     elif [[ $next_choice2 == "0" ]]; then
-      sudo ./${script_name}
+      sudo ${local_dir0}/${script_name}
     else
       echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
       read -n 1 -p "按任意按鍵以繼續"
-      sudo ./${script_name}
+      sudo ${local_dir0}/${script_name}
     fi
 #--------------------------------------------------next_choice2--------------------------------------------------#
 #--------------------------------------------------yn_choice----------------------------------------------------#
@@ -236,10 +265,10 @@ case $yn_choice in
     systemctl enable docker
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
   [Nn])
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
 esac
 #--------------------------------------------------yn2_choice---------------------------------------------------#
@@ -252,10 +281,10 @@ case $yn2_choice in
     sudo rm /usr/local/bin/docker-compose
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
   [Nn])
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
 esac
 #--------------------------------------------------yn3_choice---------------------------------------------------#
@@ -269,9 +298,9 @@ case $yn3_choice in
     sudo rm /usr/local/bin/docker-compose
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
   [Nn])
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
 esac

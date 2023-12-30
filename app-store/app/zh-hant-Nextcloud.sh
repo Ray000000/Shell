@@ -1,8 +1,36 @@
 #!/bin/bash
+clear
 
 script_name="${0##*/}"
+language="zh-hant"
 
-clear
+local_dir_lang="./xray-shell/app-store/${language}"
+local_dir0="./xray-shell/app-store/app"
+local_dir1="./xray-shell/app-store/app-bak"
+local_dir2="./xray-shell/file"
+
+if [ ! -d "${local_dir0}" ]; then
+  mkdir -p ${local_dir0}
+  chmod +x ${local_dir0}
+else
+  chmod +x ${local_dir0}
+fi
+if [ ! -d "${local_dir1}" ]; then
+  mkdir -p ${local_dir1}
+  chmod +x ${local_dir1}
+else
+  chmod +x ${local_dir1}
+fi
+if [ ! -d "${local_dir2}" ]; then
+  mkdir -p ${local_dir2}
+  chmod +x ${local_dir2}
+else
+  chmod +x ${local_dir2}
+fi
+
+curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/app/${script_name} -o ${local_dir0}/${script_name} && chmod +x ${local_dir0}/${script_name}
+curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/${language}/store.sh -o ${local_dir0}/store.sh && chmod +x ${local_dir0}/store.sh
+
 echo -e "\e[1m\e[93m〔Nextcloud〕\e[0m"
 echo "
 Cloudreve 是一個開源的雲盤系統，支持多家雲存儲，可以讓你快速搭建起一個私有或公用的網盤系統。它支持多種文件管理和分享功能，也支持多種安全功能。
@@ -33,7 +61,7 @@ echo -e "\e[1m\e[93m
 echo "1. 安裝"
 echo "2. 更新"
 echo -e "\e[1m\e[31m3. 解除安裝（不保存資料）\e[0m"
-echo -e "\e[1m\e[32m0. 回到菜單\e[0m"
+echo -e "\e[1m\e[32m0. Back\e[0m"
 
 read -p "請輸入：" choice
 
@@ -50,11 +78,11 @@ elif [[ $choice == "3" ]]; then
   echo -e "\e[1m\e[31mN. 取消解除安裝\e[0m"
   read -p "請輸入：" yn3_choice
 elif [[ $choice == "0" ]]; then
-  sudo ./xray-zh-hant-store.sh
+  sudo ${local_dir_lang}/store.sh
 else
   echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
   read -n 1 -p "按任意按鍵，回到菜單"
-  sudo ./${script_name}
+  sudo ${local_dir0}/${script_name}
 fi
 
 case $yn_choice in
@@ -69,8 +97,8 @@ case $yn_choice in
       echo "Docker 已安裝"
     fi
       read -p "請輸入您的網址：" choice1
-      mkdir -p /root/data/xray-shell/docker/nextcloud
-      cd /root/data/xray-shell/docker/nextcloud
+      mkdir -p ${local_dir0}/nextcloud
+      cd ${local_dir0}/nextcloud
       echo "
 version: '3'
 
@@ -93,27 +121,27 @@ volumes:
     cd
   
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
   [Nn])
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
 esac
   
 case $yn2_choice in
   [Yy])
-    cd /root/data/xray-shell/docker/nextcloud
+    cd ${local_dir0}/nextcloud
     docker-compose down
-    mkdir -p /root/data/xray-shell-bak/docker/nextcloud
-    cp /root/data/xray-shell/docker/nextcloud /root/data/xray-shell-bak/docker/nextcloud
+    mkdir -p ${local_dir1}/nextcloud
+    cp ${local_dir0}/nextcloud ${local_dir1}/nextcloud
     docker-compose pull nextcloud/all-in-one
     docker-compose up -d
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
   [Nn])
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
 esac
 
@@ -122,15 +150,15 @@ case $yn3_choice in
     cd
     docker stop nextcloud
     docker rm nextcloud
-    cd /root/data/xray-shell/docker/nextcloud
+    cd ${local_dir0}/nextcloud
     docker-compose down
-    rm -rf /root/data/xray-shell/docker/nextcloud
+    rm -rf ${local_dir0}/nextcloud
     cd
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
   [Nn])
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
 esac

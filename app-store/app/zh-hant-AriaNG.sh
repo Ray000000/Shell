@@ -1,8 +1,36 @@
 #!/bin/bash
+clear
 
 script_name="${0##*/}"
+language="zh-hant"
 
-clear
+local_dir_lang="./xray-shell/app-store/${language}"
+local_dir0="./xray-shell/app-store/app"
+local_dir1="./xray-shell/app-store/app-bak"
+local_dir2="./xray-shell/file"
+
+if [ ! -d "${local_dir0}" ]; then
+  mkdir -p ${local_dir0}
+  chmod +x ${local_dir0}
+else
+  chmod +x ${local_dir0}
+fi
+if [ ! -d "${local_dir1}" ]; then
+  mkdir -p ${local_dir1}
+  chmod +x ${local_dir1}
+else
+  chmod +x ${local_dir1}
+fi
+if [ ! -d "${local_dir2}" ]; then
+  mkdir -p ${local_dir2}
+  chmod +x ${local_dir2}
+else
+  chmod +x ${local_dir2}
+fi
+
+curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/app/${script_name} -o ${local_dir0}/${script_name} && chmod +x ${local_dir0}/${script_name}
+curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/${language}/store.sh -o ${local_dir0}/store.sh && chmod +x ${local_dir0}/store.sh
+
 echo -e "\e[1m\e[93m〔AriaNG〕\e[0m"
 echo "
 AriaNG 是讓你在網頁上管理下載的工具。
@@ -26,13 +54,13 @@ AriaNG 適合：
 
 如果你符合其中任何一個條件，那麼 AriaNG 是一個不錯的選擇。"
 echo "----------------------------------------"
-echo "第三方網站：
+echo "官方網站：
 https://github.com/P3TERX/aria2.sh"
 echo -e "\e[1m\e[93m
 請選擇您要執行的任務：
 \e[0m"
 echo "1. 使用"
-echo -e "\e[1m\e[32m0. 回到菜單\e[0m"
+echo -e "\e[1m\e[32m0. Back\e[0m"
 
 read -p "請輸入：" choice
 
@@ -41,11 +69,11 @@ if [[ $choice == "1" ]]; then
   echo -e "\e[1m\e[31mN. 取消使用\e[0m"
   read -p "請輸入：" yn_choice
 elif [[ $choice == "0" ]]; then
-  sudo ./xray-zh-hant-store.sh
+  sudo ${local_dir_lang}/store.sh
 else
   echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
   read -n 1 -p "按任意按鍵，回到菜單"
-  sudo ./${script_name}
+  sudo ${local_dir0}/${script_name}
 fi
 
 case $yn_choice in
@@ -55,9 +83,9 @@ case $yn_choice in
     ./aria2.sh
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
   [Nn])
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
 esac

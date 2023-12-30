@@ -1,8 +1,33 @@
 #!/bin/bash
+clear
 
 script_name="${0##*/}"
+language="zh-hant"
 
-clear
+local_dir_lang="./xray-shell/app-store/${language}"
+local_dir0="./xray-shell/app-store/app"
+local_dir1="./xray-shell/app-store/app-bak"
+local_dir2="./xray-shell/file"
+
+if [ ! -d "${local_dir0}" ]; then
+  mkdir -p ${local_dir0}
+  chmod +x ${local_dir0}
+else
+  chmod +x ${local_dir0}
+fi
+if [ ! -d "${local_dir1}" ]; then
+  mkdir -p ${local_dir1}
+  chmod +x ${local_dir1}
+else
+  chmod +x ${local_dir1}
+fi
+if [ ! -d "${local_dir2}" ]; then
+  mkdir -p ${local_dir2}
+  chmod +x ${local_dir2}
+else
+  chmod +x ${local_dir2}
+fi
+
 echo -e "\e[1m\e[93m〔SearXNG〕\e[0m"
 echo "
 SearXNG 是一個免費的網路元搜尋引擎，它匯集了來自多個搜尋服務的結果。
@@ -39,7 +64,7 @@ echo -e "\e[1m\e[93m
 echo "1. 安裝"
 echo "2. 更新"
 echo -e "\e[1m\e[31m3. 解除安裝（不保存資料）\e[0m"
-echo -e "\e[1m\e[32m0. 回到菜單\e[0m"
+echo -e "\e[1m\e[32m0. Back\e[0m"
 
 read -p "請輸入：" choice
 
@@ -56,11 +81,11 @@ elif [[ $choice == "3" ]]; then
   echo -e "\e[1m\e[31mN. 取消解除安裝\e[0m"
   read -p "請輸入：" yn3_choice
 elif [[ $choice == "0" ]]; then
-  sudo ./xray-zh-hant-store.sh
+  sudo ${local_dir_lang}/store.sh
 else
   echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
   read -n 1 -p "按任意按鍵，回到菜單"
-  sudo ./${script_name}
+  sudo ${local_dir0}/${script_name}
 fi
 
 case $yn_choice in
@@ -74,8 +99,8 @@ case $yn_choice in
     else
       echo "Docker 已安裝"
     fi
-      mkdir -p /root/data/xray-shell/docker/searxng
-      cd /root/data/xray-shell/docker/searxng
+      mkdir -p ${local_dir0}/searxng
+      cd ${local_dir0}/searxng
       echo "
 version: '3'
 
@@ -94,27 +119,27 @@ services:
     docker update --restart=always searxng
   
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
   [Nn])
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
 esac
   
 case $yn2_choice in
   [Yy])
-    cd /root/data/xray-shell/docker/searxng
+    cd ${local_dir0}/searxng
     docker-compose down
-    mkdir -p /root/data/xray-shell-bak/docker/searxng
-    cp /root/data/xray-shell/docker/searxng /root/data/xray-shell-bak/docker/searxng
+    mkdir -p ${local_dir1}/docker/searxng
+    cp ${local_dir0}/searxng ${local_dir1}/docker/searxng
     docker-compose pull searxng/searxng
     docker-compose up -d
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
   [Nn])
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
 esac
 
@@ -123,15 +148,15 @@ case $yn3_choice in
     cd
     docker stop searxng
     docker rm searxng
-    cd /root/data/xray-shell/docker/searxng
+    cd ${local_dir0}/searxng
     docker-compose down
-    rm -rf /root/data/xray-shell/docker/searxng
+    rm -rf ${local_dir0}/searxng
     cd
 
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
   [Nn])
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
 esac

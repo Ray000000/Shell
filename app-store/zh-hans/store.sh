@@ -2,15 +2,16 @@
 clear
 
 script_name="${0##*/}"
-language="zh-hant"
+language="zh-cn"
 
 update_message=$(curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/xray-update-message.sh | awk '/echo -e ".*"/ {print}')
 if [[ -n "${update_message}" ]]; then
   eval "${update_message}"
 fi
 
-dir0="app-store/zh-hant"
+dir0="app-store/${language}"
 dir1="./xray-shell/${dir0}"
+
 if [ ! -d "${dir1}" ]; then
   mkdir -p "${dir1}"
   chmod +x "${dir1}"
@@ -23,12 +24,12 @@ echo -e "\e[1m\e[34m
      _/  _/    _/    _/    _/_/_/  _/    _/        ______   _    _   ______  ______  _       
       _/      _/_/_/    _/    _/  _/    _/        / |      | |  | | | |     | |     | |      
    _/  _/    _/    _/  _/    _/  _/    _/         '------. | |--| | | |---- | |---- | |   _  
-_/      _/  _/    _/    _/_/_/    _/_/_/           ____|_/ |_|  |_| |_|____ |_|____ |_|__|_|   〔繁體中文版〕
+_/      _/  _/    _/    _/_/_/    _/_/_/           ____|_/ |_|  |_| |_|____ |_|____ |_|__|_|   〔简体中文版〕
                                      _/       
                                 _/_/ \e[0m"
 
 echo -e "\e[1m\e[93m
-請選擇您要安裝的應用程式首字母：
+请选择您要安装的应用程序首字母：
 \e[0m"
 echo "1.  A　　　　　14. N"
 echo "2.  B　　　　　15. O"
@@ -43,10 +44,10 @@ echo "10. J　　　　　23. W"
 echo "11. K　　　　　24. X"
 echo "12. L　　　　　25. Y"
 echo "13. M　　　　　26. Z"
-echo "00. 搜尋"
-echo -e "\e[1m\e[32m0. Exit\e[0m"
+echo "00. 搜索"
+echo -e "\e[1m\e[32m0. 退出\e[0m"
 
-read -p "請輸入：" choice
+read -p "请输入：" choice
 
 if [[ "${choice}" == "1" ]]; then
   curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/${dir0}/a.sh -o ${dir1}/a.sh && chmod +x ${dir1}/a.sh && sudo ${dir1}/a.sh
@@ -102,11 +103,11 @@ elif [[ "${choice}" == "26" ]]; then
   curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/${dir0}/z.sh -o ${dir1}/z.sh && chmod +x ${dir1}/z.sh && sudo ${dir1}/z.sh
 
 elif [[ "${choice}" == "00" ]]; then
-  curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/${dir0}/${script_name} -o ${dir1}/${script_name} && chmod +x ${dir1}/${script_name} && sudo ${dir1}/${script_name}
+  curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/${dir0}/search.sh -o ${dir1}/search.sh && chmod +x ${dir1}/search.sh && sudo ${dir1}/search.sh
 elif [[ "${choice}" == "0" ]]; then
   exit
 else
-  echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
-  read -n 1 -p "按任意按鍵以繼續"
+  echo -e "\e[1m\e[31m错误：无效选项\e[0m"
+  read -n 1 -p "按任意按键以继续"
   sudo ${dir1}/${script_name}
 fi
