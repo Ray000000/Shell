@@ -43,7 +43,7 @@ Alist 的優點包括：
 
 Alist 是一個非常實用的文件列表程序。它可以幫助您輕鬆管理您的文件。"
 external_ip=$(curl -s ipv4.ip.sb)
-password_file="${local_dir1}/alist/password.txt"
+password_file="${local_dir0}/alist/password.txt"
 if [ -f "$password_file" ]; then
     alist_password=$(cat "$password_file")
 fi
@@ -117,7 +117,7 @@ services:
     docker-compose up -d
     docker update --restart=always alist
     docker exec -it alist ./alist admin set $choice1
-    echo "$choice1" > ${local_dir1}/alist/password.txt
+    echo "$choice1" > ${local_dir0}/alist/password.txt
     cd
   
     read -n 1 -p "按任意按鍵以繼續"
