@@ -11,15 +11,15 @@ if [[ -n "${update_message}" ]]; then
   eval "${update_message}"
 fi
 
-local_dir0="./xray-shell/app-store/app/${language}"
-local_dir1="app-store/app/${language}"
-local_dir2="./xray-shell/${language}"
+local_dir0="app-store/app/${language}"
+local_dir1="./xray-shell/${local_dir0}"
+local_dir2="./xray-shell/app-store/${language}"
 
-if [ ! -d "${local_dir0}" ]; then
-  mkdir -p ${local_dir0}
-  chmod +x ${local_dir0}
+if [ ! -d "${local_dir1}" ]; then
+  mkdir -p ${local_dir1}
+  chmod +x ${local_dir1}
 else
-  chmod +x ${local_dir0}
+  chmod +x ${local_dir1}
 fi
 
 echo -e "\e[1m\e[34m
@@ -54,7 +54,7 @@ if [[ "${choice}" == "0" ]]; then
   exit
 elif (( choice > 0 && choice <= ${#app_list[@]} )); then
   selected_app="${app_list[choice-1]}"
-  curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/${local_dir1}-${selected_app}.sh -o ${local_dir0}-${selected_app}.sh && chmod +x ${local_dir0}-${selected_app}.sh && sudo ${local_dir0}-${selected_app}.sh
+  curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/${local_dir0}-${selected_app}.sh -o ${local_dir1}-${selected_app}.sh && chmod +x ${local_dir1}-${selected_app}.sh && sudo ${local_dir1}-${selected_app}.sh
 else
   echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
   read -n 1 -p "按任意按鍵以繼續"
