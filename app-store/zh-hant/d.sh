@@ -60,7 +60,7 @@ else
   if [[ "${choice}" == "0" ]]; then
     exit
   elif (( choice > 0 && choice <= index - 1 )); then
-    selected_app=$(echo "${app_list_raw}" | sed -n "${choice}p" | sed -E 's/xray-${language}-(.*)\.sh/\1/')
+    selected_app=$(echo "${app_list_raw}" | sed -n "${choice}p" | sed -E "s/xray-${language}-(.*)\.sh/\1/")
     curl -sS "https://raw.githubusercontent.com/Ray000000/Shell/main/${local_dir0}-${selected_app}.sh" -o "./xray-shell/${local_dir0}-${selected_app}.sh" && chmod +x "./xray-shell/${local_dir0}-${selected_app}.sh" && sudo "./xray-shell/${local_dir0}-${selected_app}.sh"
   else
     echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
