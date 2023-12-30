@@ -103,6 +103,7 @@ PasswordAuthentication yes" >> /etc/ssh/sshd_config
   5)
     read -p "請輸入快捷鍵：" choice1
     echo "alias $choice1='curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/language/${script_name} -o ${local_dir1}/${script_name} && chmod +x ${local_dir1}/${script_name} && sudo ${local_dir1}/${script_name}'" >> ~/.bashrc
+    sleep 1
     source ~/.bashrc
     ;;
   00)

@@ -3,6 +3,7 @@ clear
 
 script_name="${0##*/}"
 deplay_name="${script_name%.sh}"
+deplay_name_upper=$(echo "${deplay_name}" | tr 'a-z' 'A-Z')
 language="zh-hant"
 
 update_message=$(curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/xray-update-message.sh | awk '/echo -e ".*"/ {print}')
@@ -31,11 +32,11 @@ _/      _/  _/    _/    _/_/_/    _/_/_/           ____|_/ |_|  |_| |_|____ |_|_
                                 _/_/ \e[0m"
 
 echo -e "\e[1m\e[93m
-以下是以 [${deplay_name}] 開頭的應用程式：
+以下是以 [${deplay_name_upper}] 開頭的應用程式：
 \e[0m"
 
 app_list_url="https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/${language}/app.txt"
-app_list_raw=$(curl -sS "${app_list_url}" | grep -E "^xray-${language}-[${deplay_name}].*\.sh$")
+app_list_raw=$(curl -sS "${app_list_url}" | grep -E "^xray-${language}-[${deplay_name_upper}].*\.sh$")
 
 if [[ -z "${app_list_raw}" ]]; then
   echo -e "\e[1m\e[31m找不到相關應用程式\e[0m"
