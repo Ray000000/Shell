@@ -2,7 +2,7 @@
 clear
 
 script_name="${0##*/}"
-language="zh-cn"
+language="zh-hans"
 
 update_message=$(curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/xray-update-message.sh | awk '/echo -e ".*"/ {print}')
 if [[ -n "${update_message}" ]]; then
