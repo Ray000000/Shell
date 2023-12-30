@@ -4,7 +4,7 @@ Cloudreve
 Matrix
 Alist
 Nginx-Proxy-Manager
-Rocker.Chat
+Rocket.Chat
 qBittorrent
 SearXNG
 AriaNG

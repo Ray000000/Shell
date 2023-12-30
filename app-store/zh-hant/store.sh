@@ -11,6 +11,7 @@ fi
 
 dir0="app-store/${language}"
 dir1="./xray-shell/${dir0}"
+
 if [ ! -d "${dir1}" ]; then
   mkdir -p "${dir1}"
   chmod +x "${dir1}"
@@ -102,7 +103,7 @@ elif [[ "${choice}" == "26" ]]; then
   curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/${dir0}/z.sh -o ${dir1}/z.sh && chmod +x ${dir1}/z.sh && sudo ${dir1}/z.sh
 
 elif [[ "${choice}" == "00" ]]; then
-  curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/${dir0}/${script_name} -o ${dir1}/${script_name} && chmod +x ${dir1}/${script_name} && sudo ${dir1}/${script_name}
+  curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/${dir0}/search.sh -o ${dir1}/search.sh && chmod +x ${dir1}/search.sh && sudo ${dir1}/search.sh
 elif [[ "${choice}" == "0" ]]; then
   exit
 else
