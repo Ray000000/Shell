@@ -33,7 +33,7 @@ English(Coming) | 繁體中文 | 简体中文(Coming)
 ## 使用
 ```bash
 sudo apt install curl
-curl -sS -O https://raw.githubusercontent.com/Ray000000/Shell/main/xray-shell.sh && chmod +x xray-shell.sh && sudo ./xray-shell.sh
+curl -sS 'https://raw.githubusercontent.com/Ray000000/Shell/main/xray-shell.sh' -o './xray-shell/xray-shell.sh' && chmod +x './xray-shell/xray-shell.sh' && './xray-shell/xray-shell.sh'
 ```
 
 ## 協助
