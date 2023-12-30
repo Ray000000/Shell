@@ -13,6 +13,7 @@ fi
 
 local_dir0="./xray-shell/app-store/app/${language}"
 local_dir1="app-store/app/${language}"
+local_dir2="./xray-shell/${language}"
 
 if [ ! -d "${local_dir0}" ]; then
   mkdir -p ${local_dir0}
@@ -39,7 +40,7 @@ app_list=($(curl -sS "${app_list_url}" | grep -E "^(${deplay_name_upper}|${depla
 if [ "${#app_list[@]}" -eq 0 ]; then
   echo -e "\e[1m\e[31m查無相關應用程式\e[0m"
   read -n 1 -p "按任意按鍵以繼續"
-  sudo "${local_dir0}/${script_name}"
+  sudo "${local_dir2}/${script_name}"
 fi
 
 for i in "${!app_list[@]}"; do
@@ -57,5 +58,5 @@ elif (( choice > 0 && choice <= ${#app_list[@]} )); then
 else
   echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
   read -n 1 -p "按任意按鍵以繼續"
-  sudo "${local_dir0}/${script_name}"
+  sudo "${local_dir2}/${script_name}"
 fi
