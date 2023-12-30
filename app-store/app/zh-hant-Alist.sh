@@ -117,7 +117,7 @@ services:
     docker-compose up -d
     docker update --restart=always alist
     docker exec -it alist ./alist admin set $choice1
-    echo "$choice1" > ${local_dir0}/alist/password.txt
+    echo "$choice1" > password.txt
     cd
   
     read -n 1 -p "按任意按鍵以繼續"
