@@ -35,6 +35,11 @@ English(Coming) | 繁體中文 | 简体中文(Coming)
 sudo apt install curl
 curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/xray-shell.sh -o ./xray-shell/xray-shell.sh && chmod +x ./xray-shell/xray-shell.sh && ./xray-shell/xray-shell.sh
 ```
+#### 應用商店
+```bash
+sudo apt install curl
+curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/zh-hant/store.sh -o ./xray-shell/app-store/zh-hant/store.sh && chmod +x ./xray-shell/app-store/zh-hant/store.sh && ./xray-shell/app-store/zh-hant/store.sh
+```
 
 ## 協助
 ### 想為我們的社區出一份力嗎?
