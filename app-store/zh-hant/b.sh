@@ -30,11 +30,11 @@ _/      _/  _/    _/    _/_/_/    _/_/_/           ____|_/ |_|  |_| |_|____ |_|_
                                      _/       
                                 _/_/ \e[0m"
 
-echo -e "\e[1m\e[93m以下是以 [A] 開頭的應用程式：
+echo -e "\e[1m\e[93m以下是以 [${deplay_name_upper}${deplay_name}] 開頭的應用程式：
 \e[0m"
 
 app_list_url="https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/app.txt"
-app_list=($(curl -sS "${app_list_url}" | grep -E "^(A|a)"))
+app_list=($(curl -sS "${app_list_url}" | grep -E "^(${deplay_name_upper}|${deplay_name})"))
 
 if [ "${#app_list[@]}" -eq 0 ]; then
   echo -e "\e[1m\e[31m查無相關應用程式\e[0m"

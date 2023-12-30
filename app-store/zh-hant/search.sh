@@ -62,7 +62,7 @@ echo -e "\e[1m\e[32m0. Exit\e[0m"
   
 read -p "請輸入：" choice
 
-if [[ "${choice}" == "0" ]]; then
+if [[ "$choice" == "0" ]]; then
   exit
 elif (( choice > 0 && choice <= ${#app_list_processed_sorted[@]} )); then
   selected_app="${app_list_processed_sorted[choice-1]}"
