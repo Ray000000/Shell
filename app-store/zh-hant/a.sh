@@ -44,4 +44,4 @@ fi
 
 selected_app=$(echo "$app_list_processed" | sed -n "${choice}p")
 
-curl -sS 'https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/app/xray-zh-hant-${selected_app}.sh' -o './xray-shell/app/xray-zh-hant-${selected_app}.sh' && chmod +x './xray-shell/app/xray-zh-hant-${selected_app}.sh' && './xray-shell/app/xray-zh-hant-${selected_app}.sh'
+curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/app/xray-zh-hant-${selected_app}.sh -o ./xray-shell/app/xray-zh-hant-${selected_app}.sh && chmod +x ./xray-shell/app/xray-zh-hant-${selected_app}.sh && ./xray-shell/app/xray-zh-hant-${selected_app}.sh

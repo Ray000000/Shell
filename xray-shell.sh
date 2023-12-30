@@ -9,9 +9,9 @@ if [[ -n "$update_message" ]]; then
 fi
 
 script_urls=(
-  "https://raw.githubusercontent.com/Ray000000/Shell/main/main/xray-en.sh"
-  "https://raw.githubusercontent.com/Ray000000/Shell/main/main/xray-zh-hant.sh"
-  "https://raw.githubusercontent.com/Ray000000/Shell/main/main/xray-zh-hans.sh"
+  "https://raw.githubusercontent.com/Ray000000/Shell/main/language/en.sh"
+  "https://raw.githubusercontent.com/Ray000000/Shell/main/language/zh-hant.sh"
+  "https://raw.githubusercontent.com/Ray000000/Shell/main/language/zh-hans.sh"
 )
 local_dir="./xray-shell"
 mkdir -p "${local_dir}"
