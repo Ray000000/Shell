@@ -1,13 +1,24 @@
 #!/bin/bash
-
-script_name="${0##*/}"
-
 clear
 
-update_message=$(curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/xray-update-message.sh | awk '/echo -e ".*"/ {print}')
+script_name="${0##*/}"
+deplay_name="${script_name%.sh}"
+language="zh-hant"
 
-if [[ -n "$update_message" ]]; then
-  eval "$update_message"
+update_message=$(curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/xray-update-message.sh | awk '/echo -e ".*"/ {print}')
+if [[ -n "${update_message}" ]]; then
+  eval "${update_message}"
+fi
+
+local_dir0="app-store/app/xray-${language}"
+local_dir1="./xray-shell/app-store/app"
+local_dir2="./xray-shell/app-store/${language}"
+
+if [ ! -d "${local_dir1}" ]; then
+  mkdir -p "${local_dir1}"
+  chmod +x "${local_dir1}"
+else
+  chmod +x "${local_dir1}"
 fi
 
 echo -e "\e[1m\e[34m
@@ -20,31 +31,39 @@ _/      _/  _/    _/    _/_/_/    _/_/_/           ____|_/ |_|  |_| |_|____ |_|_
                                 _/_/ \e[0m"
 
 echo -e "\e[1m\e[93m
-請選擇您要安裝應用程式：
+以下是以 [${deplay_name}] 開頭的應用程式：
 \e[0m"
 
-app_list_url="https://raw.githubusercontent.com/Ray000000/Shell/main/file/zh-hant/xray-zh-hant-app-y.txt"
-app_list_raw=$(curl -sS "$app_list_url")
-app_list_processed=$(echo "$app_list_raw" | sed 's/xray-zh-hant-\(.*\)\.sh/\1/' | sort)
+app_list_url="https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/${language}/app.txt"
+app_list_raw=$(curl -sS "${app_list_url}" | grep -E "^xray-${language}-[${deplay_name}].*\.sh$")
 
-index=1
-while IFS= read -r app; do
-  echo "$index. $app"
-  ((index++))
-done <<< "$app_list_processed"
-
-echo -e "\e[1m\e[32m0. Exit\e[0m"
-
-read -p "請輸入：" choice
-
-if [[ $choice == "0" ]]; then
-  exit
+if [[ -z "${app_list_raw}" ]]; then
+  echo -e "\e[1m\e[31m找不到相關應用程式\e[0m"
 else
-  echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
-  read -n 1 -p "按任意按鍵以繼續"
-  sudo ./${script_name}
+  index=1
+  while IFS= read -r app; do
+    display_name=$(echo "${app}" | sed -E 's/xray-${language}-(.*)\.sh/\1/')
+    echo "$index. ${display_name}"
+    ((index++))
+  done <<< "${app_list_raw}"
+  echo -e "\e[1m\e[32m0. Exit\e[0m"
+  
+  read -p "請輸入：" choice
+  
+  if ! [[ "${choice}" =~ ^[0-9]+$ ]]; then
+    echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
+    read -n 1 -p "按任意按鍵以繼續"
+    sudo "${local_dir2}/${script_name}"
+  fi
+
+  if [[ "${choice}" == "0" ]]; then
+    exit
+  elif (( choice > 0 && choice <= index - 1 )); then
+    selected_app=$(echo "${app_list_raw}" | sed -n "${choice}p" | sed -E 's/xray-${language}-(.*)\.sh/\1/')
+    curl -sS "https://raw.githubusercontent.com/Ray000000/Shell/main/${local_dir0}-${selected_app}.sh" -o "./xray-shell/${local_dir0}-${selected_app}.sh" && chmod +x "./xray-shell/${local_dir0}-${selected_app}.sh" && sudo "./xray-shell/${local_dir0}-${selected_app}.sh"
+  else
+    echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
+    read -n 1 -p "按任意按鍵以繼續"
+    sudo "${local_dir2}/${script_name}"
+  fi
 fi
-
-selected_app=$(echo "$app_list_processed" | sed -n "${choice}p")
-
-curl -sS -O "https://raw.githubusercontent.com/Ray000000/Shell/main/file/zh-hant/app/xray-zh-hant-${selected_app}.sh" && chmod +x "xray-zh-hant-${selected_app}.sh" && sudo "./xray-zh-hant-${selected_app}.sh"

@@ -2,16 +2,21 @@
 clear
 
 script_name="${0##*/}"
-language="$(basename '${0}' .sh)"
+language="zh-hant"
 
 update_message=$(curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/xray-update-message.sh | awk '/echo -e ".*"/ {print}')
-if [[ -n "$update_message" ]]; then
-  eval "$update_message"
+if [[ -n "${update_message}" ]]; then
+  eval "${update_message}"
 fi
 
-local_dir="./xray-shell/language ./xray-shell/app-store/${language}/store.sh"
-mkdir -p "${local_dir}"
-chmod +x "${local_dir}"
+local_dir0="./xray-shell/app-store/${language}"
+local_dir1="./xray-shell/language"
+if [ ! -d "${local_dir0}" ]; then
+  mkdir -p ${local_dir0}
+  chmod +x ${local_dir0}
+else
+  chmod +x ${local_dir0}
+fi
 
 echo -e "\e[1m\e[34m
     _/      _/  _/_/_/                        
@@ -72,7 +77,7 @@ case $choice in
     clear
     sudo neofetch
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./xray-shell/language/${script_name}
+    sudo ${local_dir1}/${script_name}
     ;;
   2)
     echo -e "\e[1m\e[93m您的系統資訊如下：\e[0m"
@@ -84,10 +89,10 @@ case $choice in
     echo "IPv6 位置：$(curl -s ipv6.ip.sb)"
     df -h
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./xray-shell/language/${script_name}
+    sudo ${local_dir1}/${script_name}
     ;;
   3)
-    curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/${language}/store.sh -o ./xray-shell/app-store/${language}/store.sh && chmod +x ./xray-shell/app-store/${language}/store.sh && ./xray-shell/app-store/${language}/store.sh
+    curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/${language}/store.sh -o ${local_dir0}/store.sh && chmod +x ${local_dir0}/store.sh && sudo ${local_dir0}/store.sh
     ;;
   4)
     echo "
@@ -97,7 +102,7 @@ PasswordAuthentication yes" >> /etc/ssh/sshd_config
     ;;
   5)
     read -p "請輸入快捷鍵：" choice1
-    echo "alias $choice1='curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/language/${script_name} -o ./xray-shell/language/${script_name} && chmod +x ./xray-shell/language/${script_name} && ./xray-shell/language/${script_name}'" >> ~/.bashrc
+    echo "alias $choice1='curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/language/${script_name} -o ${local_dir1}/${script_name} && chmod +x ${local_dir1}/${script_name} && sudo ${local_dir1}/${script_name}'" >> ~/.bashrc
     source ~/.bashrc
     ;;
   00)
@@ -115,7 +120,7 @@ PasswordAuthentication yes" >> /etc/ssh/sshd_config
         echo -e "\e[1m\e[93m您的系統日誌如下：\e[0m"
         cat /var/log/syslog
         read -n 1 -p "按任意按鍵以繼續"
-        sudo ./xray-shell/language/${script_name}
+        sudo ${local_dir1}/${script_name}
         ;;
       2)
         echo -e "\e[1m\e[93m您的所有用戶資訊如下：\e[0m"
@@ -123,15 +128,15 @@ PasswordAuthentication yes" >> /etc/ssh/sshd_config
         echo -e "\e[1m\e[93m您的所有群組資訊如下：\e[0m"
         cat /etc/group
         read -n 1 -p "按任意按鍵以繼續"
-        sudo ./xray-shell/language/${script_name}
+        sudo ${local_dir1}/${script_name}
         ;;
       0)
-        sudo ./xray-shell/language/${script_name}
+        sudo ${local_dir1}/${script_name}
         ;;
       *)
         echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
         read -n 1 -p "按任意按鍵以繼續"
-        sudo ./xray-shell/language/${script_name}
+        sudo ${local_dir1}/${script_name}
         ;;
     esac
     ;;
@@ -141,6 +146,6 @@ PasswordAuthentication yes" >> /etc/ssh/sshd_config
   *)
     echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
     read -n 1 -p "按任意按鍵以繼續"
-    sudo ./xray-shell/language/${script_name}
+    sudo ${local_dir1}/${script_name}
     ;;
 esac

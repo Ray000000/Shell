@@ -1,8 +1,11 @@
 #!/bin/bash
+clear
 
 script_name="${0##*/}"
+local_dir0="./xray-shell/app-store/app"
+mkdir -p ${local_dir0}
+chmod +x ${local_dir0}
 
-clear
 echo -e "\e[1m\e[93m〔Cloudreve〕\e[0m"
 echo "
 Cloudreve 是一個開源的雲盤系統，支持多家雲存儲，可以讓你快速搭建起一個私有或公用的網盤系統。它支持多種文件管理和分享功能，也支持多種安全功能。

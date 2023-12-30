@@ -1,2 +1,0 @@
-xray-zh-hant-nginx-proxy-manager.sh
-xray-zh-hant-nextcloud.sh
