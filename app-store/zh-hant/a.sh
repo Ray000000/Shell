@@ -43,7 +43,7 @@ if [[ -z "${app_list_raw}" ]]; then
 else
   index=1
   while IFS= read -r app; do
-    display_name=$(echo "${app}" | sed -E 's/xray-${language}-(.*)\.sh/\1/')
+    display_name=$(echo "${app}" | sed -E "s/xray-${language}-(.*)\.sh/\1/")
     echo "$index. ${display_name}"
     ((index++))
   done <<< "${app_list_raw}"
