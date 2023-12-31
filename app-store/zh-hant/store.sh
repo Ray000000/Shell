@@ -104,7 +104,7 @@ elif [[ "${choice}" == "26" ]]; then
 
 elif [[ "${choice}" == "00" ]]; then
   curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/${dir0}/search.sh -o ${dir1}/search.sh && chmod +x ${dir1}/search.sh && sudo ${dir1}/search.sh
-elif [[ "${choice}" == "0" ]]; then
+elif [[ "$choice" == "0" ]]; then
   exit
 else
   echo -e "\e[1m\e[31m錯誤：無效選項\e[0m"
