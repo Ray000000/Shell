@@ -45,6 +45,7 @@ elif [[ $choice == "3" ]]; then
 elif [[ $choice == "00" ]]; then
   cd
   rm -rf ./xray-shell
+  clear
   cd
 elif [[ $choice == "0" ]]; then
   exit
