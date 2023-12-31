@@ -53,7 +53,7 @@ Alist 是一個非常實用的文件列表程序。它可以幫助您輕鬆管�
 echo -e "\e[1m\e[34m----------------------------------------\e[0m"
 
 external_ip=$(curl -s ipv4.ip.sb)
-password_file="${local_dir2}/${script_name}/password.txt"
+password_file="${local_dir2}/alist_password.txt"
 if [ -f "$password_file" ]; then
     alist_password=$(cat "$password_file")
 fi
