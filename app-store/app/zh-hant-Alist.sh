@@ -5,7 +5,7 @@ script_name="${0##*/}"
 language="zh-hant"
 
 dir0="/root/xray-shell/app-store/app"
-dir1="/root//xray-shell/app-store/app-bak"
+dir1="/root/xray-shell/app-store/app-bak"
 local_dir_lang="./xray-shell/app-store/${language}"
 local_dir0="./xray-shell/app-store/app"
 local_dir1="./xray-shell/app-store/app-bak"
@@ -150,7 +150,7 @@ case $yn2_choice in
     cd ${dir0}/alist
     docker-compose down
     mkdir -p ${dir1}/alist
-    cp ${dir0}/alist ${dir1}/alist
+    cp ${dir1}/alist ${dir0}/alist
     docker-compose pull xhofe/alist
     docker-compose up -d
 

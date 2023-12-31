@@ -5,7 +5,7 @@ script_name="${0##*/}"
 language="zh-hant"
 
 dir0="/root/xray-shell/app-store/app"
-dir1="/root//xray-shell/app-store/app-bak"
+dir1="/root/xray-shell/app-store/app-bak"
 local_dir_lang="./xray-shell/app-store/${language}"
 local_dir0="./xray-shell/app-store/app"
 local_dir1="./xray-shell/app-store/app-bak"
@@ -142,7 +142,7 @@ case $yn2_choice in
     cd ${dir0}/nginx-proxy-manager
     docker-compose down
     mkdir -p ${dir1}/docker/nginx-proxy-manager
-    cp ${dir0}/nginx-proxy-manager ${dir1}/nginx-proxy-manager
+    cp ${dir1}/nginx-proxy-manager ${dir0}/nginx-proxy-manager
     docker-compose pull jc21/nginx-proxy-manager
     docker-compose up -d
     docker update --restart=always nginx-proxy-manager

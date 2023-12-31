@@ -5,7 +5,7 @@ script_name="${0##*/}"
 language="zh-hant"
 
 dir0="/root/xray-shell/app-store/app"
-dir1="/root//xray-shell/app-store/app-bak"
+dir1="/root/xray-shell/app-store/app-bak"
 local_dir_lang="./xray-shell/app-store/${language}"
 local_dir0="./xray-shell/app-store/app"
 local_dir1="./xray-shell/app-store/app-bak"
@@ -141,8 +141,8 @@ case $yn2_choice in
   [Yy])
     cd ${dir0}/searxng
     docker-compose down
-    mkdir -p ${dir1}/docker/searxng
-    cp ${dir0}/searxng ${dir1}/docker/searxng
+    mkdir -p ${dir1}/searxng
+    cp ${dir1}/searxng ${dir0}/searxng
     docker-compose pull searxng/searxng
     docker-compose up -d
 

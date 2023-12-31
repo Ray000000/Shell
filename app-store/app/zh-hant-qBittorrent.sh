@@ -5,7 +5,7 @@ script_name="${0##*/}"
 language="zh-hant"
 
 dir0="/root/xray-shell/app-store/app"
-dir1="/root//xray-shell/app-store/app-bak"
+dir1="/root/xray-shell/app-store/app-bak"
 local_dir_lang="./xray-shell/app-store/${language}"
 local_dir0="./xray-shell/app-store/app"
 local_dir1="./xray-shell/app-store/app-bak"
@@ -161,7 +161,7 @@ case $yn2_choice in
     cd ${dir0}/qbittorrent
     docker-compose down
     mkdir -p ${dir1}/qbittorrent
-    cp ${dir0}/qbittorrent ${dir1}/qbittorrent
+    cp ${dir1}/qbittorrent ${dir0}/qbittorrent
     docker-compose pull lscr.io/linuxserver/qbittorrent
     docker-compose up -d
 

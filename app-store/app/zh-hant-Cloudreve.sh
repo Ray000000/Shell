@@ -5,7 +5,7 @@ script_name="${0##*/}"
 language="zh-hant"
 
 dir0="/root/xray-shell/app-store/app"
-dir1="/root//xray-shell/app-store/app-bak"
+dir1="/root/xray-shell/app-store/app-bak"
 local_dir_lang="./xray-shell/app-store/${language}"
 local_dir0="./xray-shell/app-store/app"
 local_dir1="./xray-shell/app-store/app-bak"
@@ -174,7 +174,7 @@ case $yn2_choice in
     cd ${dir0}/cloudreve
     docker-compose down
     mkdir -p ${dir1}/cloudreve
-    cp ${dir0}/cloudreve ${dir1}/cloudreve
+    cp ${dir1}/cloudreve ${dir0}/cloudreve
     docker-compose pull cloudreve/cloudreve p3terx/aria2-pro
     docker-compose up -d
 
