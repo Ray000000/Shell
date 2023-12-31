@@ -133,7 +133,6 @@ services:
         image: 'xhofe/alist:latest'" >> docker-compose.yml
     docker-compose up -d
     docker update --restart=always alist
-    sleep 1
     docker exec -it alist ./alist admin set $choice1
     cd
     echo "$choice1" > ${local_dir2}/alist_password.txt
