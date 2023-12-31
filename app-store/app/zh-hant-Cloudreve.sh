@@ -160,6 +160,8 @@ volumes:
     docker update --restart=always cloudreve aria2-pro
     cd
     echo "$choice1" > ${local_dir2}/aria2_rpc.txt
+    sudo apt install -y ffmpeg
+    sudo apt install -y libvips-tools
   
     read -n 1 -p "按任意按鍵以繼續"
     sudo ${local_dir0}/${script_name}
