@@ -156,8 +156,8 @@ volumes:
       o: bind" >> docker-compose.yml
     docker-compose up -d
     docker update --restart=always cloudreve aria2-pro
-    echo "$choice1" > aria2_rpc.txt
     cd
+    echo "$choice1" > ${local_dir2}/aria2_rpc.txt
   
     read -n 1 -p "按任意按鍵以繼續"
     sudo ${local_dir0}/${script_name}
