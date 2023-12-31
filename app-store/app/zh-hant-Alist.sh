@@ -162,7 +162,7 @@ case $yn2_choice in
     sudo ${local_dir0}/${script_name}
     ;;
   [Nn])
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
 esac
 
