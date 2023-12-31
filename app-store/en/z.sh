@@ -56,7 +56,7 @@ elif (( choice > 0 && choice <= ${#app_list[@]} )); then
   selected_app="${app_list[choice-1]}"
   curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/${local_dir0}-${selected_app}.sh -o ${local_dir1}-${selected_app}.sh && chmod +x ${local_dir1}-${selected_app}.sh && sudo ${local_dir1}-${selected_app}.sh
 else
-  echo -e "\e[1m\e[31mError: Ineffective choices\e[0m"
-  read -n 1 -p "Press any key to return to the menu."
+  echo -e "\e[1m\e[31mError: Invalid option\e[0m"
+  read -n 1 -p "Press any key to continue"
   sudo "${local_dir2}/${script_name}"
 fi

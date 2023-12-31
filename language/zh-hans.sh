@@ -11,6 +11,7 @@ fi
 
 local_dir0="./xray-shell/app-store/${language}"
 local_dir1="./xray-shell/language"
+
 if [ ! -d "${local_dir0}" ]; then
   mkdir -p ${local_dir0}
   chmod +x ${local_dir0}
@@ -36,9 +37,9 @@ echo "3. 进入应用商店"
 echo "4. 允许管理员账户登录"
 echo "5. 设置 Shell 快捷方式"
 echo "00. 高级选项"
-echo -e "\e[1m\e[32m0. 退出\e[0m"
+echo -e "\e[1m\e[32m0. Exit\e[0m"
 
-read -p "请输入选项：" choice
+read -p "请输入：" choice
 
 if [ "$(uname -m)" == "x86_64" ]; then
   cpu_info=$(cat /proc/cpuinfo | grep 'model name' | uniq | sed -e 's/model name[[:space:]]*: //')

@@ -11,6 +11,7 @@ fi
 
 local_dir0="./xray-shell/app-store/${language}"
 local_dir1="./xray-shell/language"
+
 if [ ! -d "${local_dir0}" ]; then
   mkdir -p ${local_dir0}
   chmod +x ${local_dir0}

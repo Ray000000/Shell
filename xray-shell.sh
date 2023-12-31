@@ -9,6 +9,7 @@ if [[ -n "${update_message}" ]]; then
 fi
 
 local_dir0="./xray-shell/language"
+
 if [ ! -d "${local_dir0}" ]; then
   mkdir -p ${local_dir0}
   chmod +x ${local_dir0}
@@ -44,7 +45,7 @@ elif [[ $choice == "3" ]]; then
 elif [[ $choice == "0" ]]; then
   exit
 else
-  echo -e "\e[1m\e[31mError: Ineffective choices\e[0m"
-  read -n 1 -p "Press any key to return to the menu."
+  echo -e "\e[1m\e[31mError: Invalid option\e[0m"
+  read -n 1 -p "Press any key to return to the menu"
   sudo ./xray-shell/${script_name}
 fi

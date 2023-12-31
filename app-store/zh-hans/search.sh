@@ -58,7 +58,7 @@ echo -e "\e[1m\e[34m搜索结果如下：
 for i in "${!app_list_processed_sorted[@]}"; do
   echo "$((i+1)). ${app_list_processed_sorted[i]}"
 done
-echo -e "\e[1m\e[32m0. 退出\e[0m"
+echo -e "\e[1m\e[32m0. Exit\e[0m"
   
 read -p "请输入：" choice
 

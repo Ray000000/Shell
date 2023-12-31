@@ -107,7 +107,7 @@ elif [[ "${choice}" == "00" ]]; then
 elif [[ "${choice}" == "0" ]]; then
   exit
 else
-  echo -e "\e[1m\e[31mError: Ineffective choices\e[0m"
-  read -n 1 -p "Press any key to return to the menu."
+  echo -e "\e[1m\e[31mError: Invalid option\e[0m"
+  read -n 1 -p "Press any key to continue"
   sudo ${dir1}/${script_name}
 fi
