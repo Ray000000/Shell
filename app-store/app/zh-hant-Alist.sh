@@ -135,7 +135,7 @@ services:
     docker update --restart=always alist
     docker exec -it alist ./alist admin set $choice1
     cd
-    echo "$choice1" > ${local_dir2}/${script_name}/password.txt
+    echo "$choice1" > ${local_dir2}/alist/password.txt
   
     read -n 1 -p "按任意按鍵以繼續"
     sudo ${local_dir0}/${script_name}
