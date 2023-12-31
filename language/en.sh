@@ -9,7 +9,7 @@ if [[ -n "${update_message}" ]]; then
   eval "${update_message}"
 fi
 
-local_dir0="./xray-shell/app-store"
+local_dir0="./xray-shell/app-store/${language}"
 local_dir1="./xray-shell/language"
 
 if [ ! -d "${local_dir0}" ]; then
@@ -24,7 +24,7 @@ echo -e "\e[1m\e[34m
      _/  _/    _/    _/    _/_/_/  _/    _/        ______   _    _   ______  ______  _       
       _/      _/_/_/    _/    _/  _/    _/        / |      | |  | | | |     | |     | |      
    _/  _/    _/    _/  _/    _/  _/    _/         '------. | |--| | | |---- | |---- | |   _  
-_/      _/  _/    _/    _/_/_/    _/_/_/           ____|_/ |_|  |_| |_|____ |_|____ |_|__|_|   [English Version]
+_/      _/  _/    _/    _/_/_/    _/_/_/           ____|_/ |_|  |_| |_|____ |_|____ |_|__|_|   { English Version }
                                      _/       
                                 _/_/ \e[0m"
 
@@ -33,13 +33,13 @@ Please choose the task you want to perform:
 \e[0m"
 echo "1. Check and update the system"
 echo "2. System information"
-echo "3. App store"
+echo "3. App Store"
 echo "4. Allow root login"
-echo "5. Set up Shell shortcut"
+echo "5. Set up Shell shortcuts"
 echo "00. Advanced options"
 echo -e "\e[1m\e[32m0. Exit\e[0m"
 
-read -p "Enter your choice: " choice
+read -p "Please enter: " choice
 
 if [ "$(uname -m)" == "x86_64" ]; then
   cpu_info=$(cat /proc/cpuinfo | grep 'model name' | uniq | sed -e 's/model name[[:space:]]*: //')
@@ -99,10 +99,11 @@ case $choice in
     echo "
 PermitRootLogin yes
 PasswordAuthentication yes" >> /etc/ssh/sshd_config
+    sleep 1
     /etc/init.d/ssh restart
     ;;
   5)
-    read -p "Enter the shortcut key: " choice1
+    read -p "Please enter the shortcut: " choice1
     echo "alias $choice1='curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/language/${script_name} -o ${local_dir1}/${script_name} && chmod +x ${local_dir1}/${script_name} && sudo ${local_dir1}/${script_name}'" >> ~/.bashrc
     sleep 1
     source ~/.bashrc
@@ -114,7 +115,7 @@ Please choose the task you want to perform:
     echo "1. View system logs"
     echo "2. View users and groups"
     echo -e "\e[1m\e[32m0. Back\e[0m"
-    read -p "Enter your choice: " next_choice
+    read -p "Please enter: " next_choice
 
     case $next_choice in
       1)

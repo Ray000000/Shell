@@ -9,7 +9,7 @@ if [[ -n "${update_message}" ]]; then
   eval "${update_message}"
 fi
 
-local_dir0="./xray-shell/app-store"
+local_dir0="./xray-shell/app-store/${language}"
 local_dir1="./xray-shell/language"
 
 if [ ! -d "${local_dir0}" ]; then
@@ -31,12 +31,12 @@ _/      _/  _/    _/    _/_/_/    _/_/_/           ____|_/ |_|  |_| |_|____ |_|_
 echo -e "\e[1m\e[93m
 请选择您要执行的任务：
 \e[0m"
-echo "1. 检查并更新系统"
-echo "2. 查看系统信息"
-echo "3. 进入应用商店"
-echo "4. 允许管理员账户登录"
+echo "1. 检测并更新系统"
+echo "2. 系统信息"
+echo "3. 应用商店"
+echo "4. 允许管理员帐号登录"
 echo "5. 设置 Shell 快捷方式"
-echo "00. 高级选项"
+echo "00. 进阶选项"
 echo -e "\e[1m\e[32m0. Exit\e[0m"
 
 read -p "请输入：" choice
@@ -83,11 +83,11 @@ case $choice in
   2)
     echo -e "\e[1m\e[93m您的系统信息如下：\e[0m"
     echo "操作系统：$os_info"
-    echo "内核版本：$(uname -r)"
+    echo "核心版本：$(uname -r)"
     echo "CPU 型号：$cpu_info
     "
-    echo "IPv4 地址：$(curl -s ipv4.ip.sb)"
-    echo "IPv6 地址：$(curl -s ipv6.ip.sb)"
+    echo "IPv4 位置：$(curl -s ipv4.ip.sb)"
+    echo "IPv6 位置：$(curl -s ipv6.ip.sb)"
     df -h
     read -n 1 -p "按任意键以继续"
     sudo ${local_dir1}/${script_name}
@@ -99,6 +99,7 @@ case $choice in
     echo "
 PermitRootLogin yes
 PasswordAuthentication yes" >> /etc/ssh/sshd_config
+    sleep 1
     /etc/init.d/ssh restart
     ;;
   5)
@@ -112,8 +113,8 @@ PasswordAuthentication yes" >> /etc/ssh/sshd_config
 请选择您要执行的任务：
     \e[0m"
     echo "1. 查看系统日志"
-    echo "2. 查看用户和群组"
-    echo -e "\e[1m\e[32m0. 返回\e[0m"
+    echo "2. 查看用户和组"
+    echo -e "\e[1m\e[32m0. Back\e[0m"
     read -p "请输入：" next_choice
 
     case $next_choice in
@@ -126,7 +127,7 @@ PasswordAuthentication yes" >> /etc/ssh/sshd_config
       2)
         echo -e "\e[1m\e[93m您的所有用户信息如下：\e[0m"
         cat /etc/passwd
-        echo -e "\e[1m\e[93m您的所有群组信息如下：\e[0m"
+        echo -e "\e[1m\e[93m您的所有组信息如下：\e[0m"
         cat /etc/group
         read -n 1 -p "按任意键以继续"
         sudo ${local_dir1}/${script_name}

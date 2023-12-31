@@ -25,7 +25,7 @@ echo -e "\e[1m\e[34m
      _/  _/    _/    _/    _/_/_/  _/    _/        ______   _    _   ______  ______  _       
       _/      _/_/_/    _/    _/  _/    _/        / |      | |  | | | |     | |     | |      
    _/  _/    _/    _/  _/    _/  _/    _/         '------. | |--| | | |---- | |---- | |   _  
-_/      _/  _/    _/    _/_/_/    _/_/_/           ____|_/ |_|  |_| |_|____ |_|____ |_|__|_|   {English Version}
+_/      _/  _/    _/    _/_/_/    _/_/_/           ____|_/ |_|  |_| |_|____ |_|____ |_|__|_|   { English Version }
                                      _/       
                                 _/_/ \e[0m"
 
@@ -33,7 +33,8 @@ echo -e "\e[1m\e[93m
 Please enter the keyword for the application you want to search:
 \e[0m"
 
-read -p "Search: " search_term
+read -p "Search:
+" search_term
 
 app_list_url="https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/app.txt"
 app_list=($(curl -sS "${app_list_url}"))
@@ -46,7 +47,7 @@ for app in "${app_list[@]}"; do
 done
 
 if [ "${#app_list_processed[@]}" -eq 0 ]; then
-  echo -e "\e[1m\e[31mNo related applications found\e[0m"
+  echo -e "\e[1m\e[31mNo relevant applications found\e[0m"
   read -n 1 -p "Press any key to continue"
   sudo "${local_dir0}/${script_name}"
 fi

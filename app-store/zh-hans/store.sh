@@ -45,7 +45,7 @@ echo "11. K　　　　　24. X"
 echo "12. L　　　　　25. Y"
 echo "13. M　　　　　26. Z"
 echo "00. 搜索"
-echo -e "\e[1m\e[32m0. 退出\e[0m"
+echo -e "\e[1m\e[32m0. Exit\e[0m"
 
 read -p "请输入：" choice
 
