@@ -33,7 +33,8 @@ echo -e "\e[1m\e[93m
 請輸入您想搜尋的應用程式關鍵字：
 \e[0m"
 
-read -p "搜尋：" search_term
+read -p "搜尋：
+" search_term
 
 app_list_url="https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/app.txt"
 app_list=($(curl -sS "${app_list_url}"))

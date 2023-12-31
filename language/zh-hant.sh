@@ -9,7 +9,7 @@ if [[ -n "${update_message}" ]]; then
   eval "${update_message}"
 fi
 
-local_dir0="./xray-shell/app-store"
+local_dir0="./xray-shell/app-store/${language}"
 local_dir1="./xray-shell/language"
 
 if [ ! -d "${local_dir0}" ]; then

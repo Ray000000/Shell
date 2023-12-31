@@ -42,6 +42,8 @@ Alist 的優點包括：
 * 功能強大：Alist 支持多種存儲方式、瀏覽、下載、分享、搜索、權限管理等功能。
 
 Alist 是一個非常實用的文件列表程序。它可以幫助您輕鬆管理您的文件。"
+echo -e "\e[1m\e[34m----------------------------------------\e[0m"
+
 external_ip=$(curl -s ipv4.ip.sb)
 password_file="${local_dir0}/alist/password.txt"
 if [ -f "$password_file" ]; then
@@ -52,7 +54,14 @@ http://$external_ip:5244"
 echo -e "Alist 登入帳號：admin"
 echo -e "Alist 登入密碼：$alist_password"
 echo -e "建議使用 Nginx Proxy Manager 設定反向代理"
-echo "----------------------------------------"
+echo -e "\e[1m\e[34m----------------------------------------\e[0m"
+
+echo "快速腳本：
+sudo apt install curl
+mkdir -p ${local_dir0} && chmod +x ${local_dir0}
+curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/app/${script_name} -o ${local_dir0}/${script_name} && chmod +x ${local_dir0}/${script_name} && ${local_dir0}/${script_name}"
+echo -e "\e[1m\e[34m----------------------------------------\e[0m"
+
 echo "官方網站：
 https://alist.nn.ci/"
 echo -e "\e[1m\e[93m
