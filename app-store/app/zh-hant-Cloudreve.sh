@@ -4,6 +4,7 @@ clear
 script_name="${0##*/}"
 language="zh-hant"
 
+dir="/root/xray-shell/app-store/app"
 local_dir_lang="./xray-shell/app-store/${language}"
 local_dir0="./xray-shell/app-store/app"
 local_dir1="./xray-shell/app-store/app-bak"
@@ -113,13 +114,13 @@ case $yn_choice in
       echo "Docker 已安裝"
     fi
       read -p "請輸入 aria2 的 RPC Token：" choice1
-      mkdir -vp ${local_dir0}/cloudreve/{uploads,avatar} \
-      && touch ${local_dir0}/cloudreve/conf.ini \
-      && touch ${local_dir0}/cloudreve/cloudreve.db \
-      && mkdir -p ${local_dir0}/cloudreve/aria2/config \
-      && mkdir -p ${local_dir0}/cloudreve/data/aria2 \
-      && chmod -R 777 ${local_dir0}/cloudreve/data/aria2
-      cd ${local_dir0}/cloudreve
+      mkdir -vp ${dir}/cloudreve/{uploads,avatar} \
+      && touch ${dir}/cloudreve/conf.ini \
+      && touch ${dir}/cloudreve/cloudreve.db \
+      && mkdir -p ${dir}/cloudreve/aria2/config \
+      && mkdir -p ${dir}/cloudreve/data/aria2 \
+      && chmod -R 777 ${dir}/cloudreve/data/aria2
+      cd ${dir}/cloudreve
       echo "
 version: '3.8'
 services:
@@ -130,11 +131,11 @@ services:
     ports:
       - '5212:5212'
     volumes:
-      - ${local_dir0}/cloudreve/temp_data:/data
-      - ${local_dir0}/cloudreve/uploads:/cloudreve/uploads
-      - ${local_dir0}/cloudreve/conf.ini:/cloudreve/conf.ini
-      - ${local_dir0}/cloudreve/cloudreve.db:/cloudreve/cloudreve.db
-      - ${local_dir0}/cloudreve/avatar:/cloudreve/avatar
+      - ${dir}/cloudreve/temp_data:/data
+      - ${dir}/cloudreve/uploads:/cloudreve/uploads
+      - ${dir}/cloudreve/conf.ini:/cloudreve/conf.ini
+      - ${dir}/cloudreve/cloudreve.db:/cloudreve/cloudreve.db
+      - ${dir}/cloudreve/avatar:/cloudreve/avatar
     depends_on:
       - aria2-pro
   aria2-pro:
@@ -145,8 +146,8 @@ services:
       - RPC_SECRET=$choice1
       - RPC_PORT=6800
     volumes:
-      - ${local_dir0}/cloudreve/aria2/config:/config
-      - ${local_dir0}/cloudreve/aria2/temp_data:/data
+      - ${dir}/cloudreve/aria2/config:/config
+      - ${dir}/cloudreve/aria2/temp_data:/data
 volumes:
   temp_data:
     driver: local
