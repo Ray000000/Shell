@@ -99,6 +99,7 @@ case $choice in
     echo "
 PermitRootLogin yes
 PasswordAuthentication yes" >> /etc/ssh/sshd_config
+    sleep 1
     /etc/init.d/ssh restart
     ;;
   5)
