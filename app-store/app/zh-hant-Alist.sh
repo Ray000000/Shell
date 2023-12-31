@@ -33,6 +33,12 @@ if [ ! -d "${local_dir2}" ]; then
 else
   chmod +x ${local_dir2}
 fi
+if [ ! -d "${local_dir2}/${script_name}" ]; then
+  mkdir -p ${local_dir2}/${script_name}
+  chmod +x ${local_dir2}/${script_name}
+else
+  chmod +x ${local_dir2}/${script_name}
+fi
 
 curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/app/${script_name} -o ${local_dir0}/${script_name} && chmod +x ${local_dir0}/${script_name}
 curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/${language}/store.sh -o ${local_dir_lang}/store.sh && chmod +x ${local_dir_lang}/store.sh
