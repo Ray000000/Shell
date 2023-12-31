@@ -4,6 +4,8 @@ clear
 script_name="${0##*/}"
 language="zh-hant"
 
+dir0="/root/xray-shell/app-store/app"
+dir1="/root//xray-shell/app-store/app-bak"
 local_dir_lang="./xray-shell/app-store/${language}"
 local_dir0="./xray-shell/app-store/app"
 local_dir1="./xray-shell/app-store/app-bak"

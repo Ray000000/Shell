@@ -4,6 +4,8 @@ clear
 script_name="${0##*/}"
 language="zh-hant"
 
+dir0="/root/xray-shell/app-store/app"
+dir1="/root//xray-shell/app-store/app-bak"
 local_dir_lang="./xray-shell/app-store/${language}"
 local_dir0="./xray-shell/app-store/app"
 local_dir1="./xray-shell/app-store/app-bak"
@@ -112,8 +114,8 @@ case $yn_choice in
       echo "Docker 已安裝"
     fi
       read -p "請輸入您的網址：" choice1
-      mkdir -p ${local_dir0}/nextcloud
-      cd ${local_dir0}/nextcloud
+      mkdir -p ${dir0}/nextcloud
+      cd ${dir0}/nextcloud
       echo "
 version: '3'
 
@@ -145,10 +147,10 @@ esac
   
 case $yn2_choice in
   [Yy])
-    cd ${local_dir0}/nextcloud
+    cd ${dir0}/nextcloud
     docker-compose down
-    mkdir -p ${local_dir1}/nextcloud
-    cp ${local_dir0}/nextcloud ${local_dir1}/nextcloud
+    mkdir -p ${dir1}/nextcloud
+    cp ${dir0}/nextcloud ${dir1}/nextcloud
     docker-compose pull nextcloud/all-in-one
     docker-compose up -d
 
@@ -165,9 +167,9 @@ case $yn3_choice in
     cd
     docker stop nextcloud
     docker rm nextcloud
-    cd ${local_dir0}/nextcloud
+    cd ${dir0}/nextcloud
     docker-compose down
-    rm -rf ${local_dir0}/nextcloud
+    rm -rf ${dir0}/nextcloud
     cd
 
     read -n 1 -p "按任意按鍵以繼續"

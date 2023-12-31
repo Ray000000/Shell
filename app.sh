@@ -5,6 +5,8 @@ script_name="${0##*/}"
 #--------------------------------------------------<lang>-------------------------------------------------------#
 language="<lang_code>"
 
+dir0="/root/xray-shell/app-store/app"
+dir1="/root//xray-shell/app-store/app-bak"
 local_dir_lang="./xray-shell/app-store/${language}"
 local_dir0="./xray-shell/app-store/app"
 local_dir1="./xray-shell/app-store/app-bak"
@@ -73,7 +75,7 @@ elif [[ $choice == "2" ]]; then
   cp
   cd
   read -n 1 -p "Press any key to continue."
-  sudo ./${script_name}
+  sudo ${local_dir0}/${script_name}
 elif [[ $choice == "3" ]]; then
   echo -e "\e[1m\e[34mY. Confirm uninstall\e[0m"
   echo -e "\e[1m\e[31mN. Cancel uninstall\e[0m"
@@ -85,13 +87,13 @@ elif [[ $choice == "4" ]]; then
 elif [[ $choice == "5" ]]; then
   version
   read -n 1 -p "Press any key to continue."
-  sudo ./${script_name}
+  sudo ${local_dir0}/${script_name}
 elif [[ $choice == "0" ]]; then
-  exit
+  sudo ${local_dir_lang}/store.sh
 else
   echo -e "\e[1m\e[31mError: Ineffective choices\e[0m"
   read -n 1 -p "Press any key to return to the menu."
-  sudo ./${script_name}
+  sudo ${local_dir0}/${script_name}
 fi
 #--------------------------------------------------choice-------------------------------------------------------#
 #--------------------------------------------------yn_choice----------------------------------------------------#
@@ -100,10 +102,10 @@ case $yn_choice in
     sudo apt install -y
 
     read -n 1 -p "Press any key to continue."
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
   [Nn])
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
 esac
 #--------------------------------------------------yn_choice----------------------------------------------------#
@@ -113,10 +115,10 @@ case $yn2_choice in
     sudo apt uninstall -y
 
     read -n 1 -p "Press any key to continue."
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
   [Nn])
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
 esac
 #--------------------------------------------------yn2_choice----------------------------------------------------#
@@ -127,10 +129,10 @@ case $yn3_choice in
     rm
 
     read -n 1 -p "Press any key to continue."
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
   [Nn])
-    sudo ./${script_name}
+    sudo ${local_dir0}/${script_name}
     ;;
 esac
 #--------------------------------------------------yn3_choice----------------------------------------------------#

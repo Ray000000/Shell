@@ -4,7 +4,8 @@ clear
 script_name="${0##*/}"
 language="zh-hant"
 
-dir="/root/xray-shell/app-store/app"
+dir0="/root/xray-shell/app-store/app"
+dir1="/root//xray-shell/app-store/app-bak"
 local_dir_lang="./xray-shell/app-store/${language}"
 local_dir0="./xray-shell/app-store/app"
 local_dir1="./xray-shell/app-store/app-bak"
@@ -114,13 +115,13 @@ case $yn_choice in
       echo "Docker 已安裝"
     fi
       read -p "請輸入 aria2 的 RPC Token：" choice1
-      mkdir -vp ${dir}/cloudreve/{uploads,avatar} \
-      && touch ${dir}/cloudreve/conf.ini \
-      && touch ${dir}/cloudreve/cloudreve.db \
-      && mkdir -p ${dir}/cloudreve/aria2/config \
-      && mkdir -p ${dir}/cloudreve/data/aria2 \
-      && chmod -R 777 ${dir}/cloudreve/data/aria2
-      cd ${dir}/cloudreve
+      mkdir -vp ${dir0}/cloudreve/{uploads,avatar} \
+      && touch ${dir0}/cloudreve/conf.ini \
+      && touch ${dir0}/cloudreve/cloudreve.db \
+      && mkdir -p ${dir0}/cloudreve/aria2/config \
+      && mkdir -p ${dir0}/cloudreve/data/aria2 \
+      && chmod -R 777 ${dir0}/cloudreve/data/aria2
+      cd ${dir0}/cloudreve
       echo "
 version: '3.8'
 services:
@@ -131,11 +132,11 @@ services:
     ports:
       - '5212:5212'
     volumes:
-      - ${dir}/cloudreve/temp_data:/data
-      - ${dir}/cloudreve/uploads:/cloudreve/uploads
-      - ${dir}/cloudreve/conf.ini:/cloudreve/conf.ini
-      - ${dir}/cloudreve/cloudreve.db:/cloudreve/cloudreve.db
-      - ${dir}/cloudreve/avatar:/cloudreve/avatar
+      - ${dir0}/cloudreve/temp_data:/data
+      - ${dir0}/cloudreve/uploads:/cloudreve/uploads
+      - ${dir0}/cloudreve/conf.ini:/cloudreve/conf.ini
+      - ${dir0}/cloudreve/cloudreve.db:/cloudreve/cloudreve.db
+      - ${dir0}/cloudreve/avatar:/cloudreve/avatar
     depends_on:
       - aria2-pro
   aria2-pro:
@@ -146,8 +147,8 @@ services:
       - RPC_SECRET=$choice1
       - RPC_PORT=6800
     volumes:
-      - ${dir}/cloudreve/aria2/config:/config
-      - ${dir}/cloudreve/aria2/temp_data:/data
+      - ${dir0}/cloudreve/aria2/config:/config
+      - ${dir0}/cloudreve/aria2/temp_data:/data
 volumes:
   temp_data:
     driver: local
@@ -170,10 +171,10 @@ esac
   
 case $yn2_choice in
   [Yy])
-    cd ${local_dir0}/cloudreve
+    cd ${dir0}/cloudreve
     docker-compose down
-    mkdir -p ${local_dir1}/cloudreve
-    cp ${local_dir0}/cloudreve ${local_dir1}/cloudreve
+    mkdir -p ${dir1}/cloudreve
+    cp ${dir0}/cloudreve ${dir1}/cloudreve
     docker-compose pull cloudreve/cloudreve p3terx/aria2-pro
     docker-compose up -d
 
@@ -190,9 +191,9 @@ case $yn3_choice in
     cd
     docker stop cloudreve aria2-pro
     docker rm cloudreve aria2-pro
-    cd ${local_dir0}/cloudreve
+    cd ${dir0}/cloudreve
     docker-compose down
-    rm -rf ${local_dir0}/cloudreve
+    rm -rf ${dir0}/cloudreve
     cd
 
     read -n 1 -p "按任意按鍵以繼續"

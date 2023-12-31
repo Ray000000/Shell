@@ -4,6 +4,8 @@ clear
 script_name="${0##*/}"
 language="zh-hant"
 
+dir0="/root/xray-shell/app-store/app"
+dir1="/root//xray-shell/app-store/app-bak"
 local_dir_lang="./xray-shell/app-store/${language}"
 local_dir0="./xray-shell/app-store/app"
 local_dir1="./xray-shell/app-store/app-bak"
@@ -95,8 +97,8 @@ case $yn_choice in
     else
       echo "Docker 已安裝"
     fi
-      mkdir -p ${local_dir0}/rocket-chat
-      cd ${local_dir0}/rocket-chat
+      mkdir -p ${dir0}/rocket-chat
+      cd ${dir0}/rocket-chat
       echo "
 version: '3'
 services:
@@ -105,7 +107,7 @@ services:
     container_name: 'mongodb'
     command: mongod --replSet rs5 --oplogSize 256
     volumes:
-      - ${local_dir0}/rocket-chat/mongodb:/data/db" >> docker-compose.yml
+      - ${dir0}/rocket-chat/mongodb:/data/db" >> docker-compose.yml
       docker-compose up -d
       docker exec -ti mongodb mongosh --eval "printjson(rs.initiate())"
       docker exec -ti mongodb mongo --eval "printjson(rs.initiate())"
@@ -134,10 +136,10 @@ esac
   
 case $yn2_choice in
   [Yy])
-    cd ${local_dir0}/rocket-chat
+    cd ${dir0}/rocket-chat
     docker-compose down
-    mkdir -p ${local_dir1}/rocket-chat
-    cp ${local_dir0}/rocket-chat ${local_dir1}/rocket-chat
+    mkdir -p ${dir1}/rocket-chat
+    cp ${dir0}/rocket-chat ${dir1}/rocket-chat
     docker-compose pull registry.rocket.chat/rocketchat/rocket.chat
     docker-compose up -d
 
@@ -154,9 +156,9 @@ case $yn3_choice in
     cd
     docker stop mongodb rocket-chat
     docker rm mongodb rocket-chat
-    cd ${local_dir0}/rocket-chat
+    cd ${dir0}/rocket-chat
     docker-compose down
-    rm -rf ${local_dir0}/rocket-chat
+    rm -rf ${dir0}/rocket-chat
     cd
 
     read -n 1 -p "按任意按鍵以繼續"

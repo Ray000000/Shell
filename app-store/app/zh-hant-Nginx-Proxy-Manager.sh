@@ -4,6 +4,8 @@ clear
 script_name="${0##*/}"
 language="zh-hant"
 
+dir0="/root/xray-shell/app-store/app"
+dir1="/root//xray-shell/app-store/app-bak"
 local_dir_lang="./xray-shell/app-store/${language}"
 local_dir0="./xray-shell/app-store/app"
 local_dir1="./xray-shell/app-store/app-bak"
@@ -107,8 +109,8 @@ case $yn_choice in
     else
       echo "Docker 已安裝"
     fi
-      mkdir -p ${local_dir0}/nginx-proxy-manager
-      cd ${local_dir0}/nginx-proxy-manager
+      mkdir -p ${dir0}/nginx-proxy-manager
+      cd ${dir0}/nginx-proxy-manager
       echo "
 version: '3'
 services:
@@ -137,10 +139,10 @@ esac
 
 case $yn2_choice in
   [Yy])
-    cd ${local_dir0}/nginx-proxy-manager
+    cd ${dir0}/nginx-proxy-manager
     docker-compose down
-    mkdir -p ${local_dir1}/docker/nginx-proxy-manager
-    cp ${local_dir0}/nginx-proxy-manager ${local_dir1}/nginx-proxy-manager
+    mkdir -p ${dir1}/docker/nginx-proxy-manager
+    cp ${dir0}/nginx-proxy-manager ${dir1}/nginx-proxy-manager
     docker-compose pull jc21/nginx-proxy-manager
     docker-compose up -d
     docker update --restart=always nginx-proxy-manager
@@ -155,9 +157,9 @@ esac
   
 case $yn3_choice in
   [Yy])
-    cd ${local_dir0}/nginx-proxy-manager
+    cd ${dir0}/nginx-proxy-manager
     docker-compose down
-    rm -rf ${local_dir0}/nginx-proxy-manager
+    rm -rf ${dir0}/nginx-proxy-manager
 
     read -n 1 -p "按任意按鍵以繼續"
     sudo ${local_dir0}/${script_name}

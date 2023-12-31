@@ -4,6 +4,8 @@ clear
 script_name="${0##*/}"
 language="zh-hant"
 
+dir0="/root/xray-shell/app-store/app"
+dir1="/root//xray-shell/app-store/app-bak"
 local_dir_lang="./xray-shell/app-store/${language}"
 local_dir0="./xray-shell/app-store/app"
 local_dir1="./xray-shell/app-store/app-bak"
@@ -121,8 +123,8 @@ case $yn_choice in
     else
       echo "Docker 已安裝"
     fi
-      mkdir -p ${local_dir0}/qbittorrent
-      cd ${local_dir0}/qbittorrent
+      mkdir -p ${dir0}/qbittorrent
+      cd ${dir0}/qbittorrent
       echo "
 version: '3'
 services:
@@ -131,8 +133,8 @@ services:
     container_name: 'qbittorrent'
     restart: unless-stopped
     volumes:
-      - ${local_dir0}/qbittorrent/config:/config
-      - ${local_dir0}/qbittorrent/downloads:/downloads
+      - ${dir0}/qbittorrent/config:/config
+      - ${dir0}/qbittorrent/downloads:/downloads
     ports:
       - '8080:8080'
       - '6881:6881'
@@ -156,10 +158,10 @@ esac
   
 case $yn2_choice in
   [Yy])
-    cd ${local_dir0}/qbittorrent
+    cd ${dir0}/qbittorrent
     docker-compose down
-    mkdir -p ${local_dir1}/qbittorrent
-    cp ${local_dir0}/qbittorrent ${local_dir1}/qbittorrent
+    mkdir -p ${dir1}/qbittorrent
+    cp ${dir0}/qbittorrent ${dir1}/qbittorrent
     docker-compose pull lscr.io/linuxserver/qbittorrent
     docker-compose up -d
 
@@ -176,9 +178,9 @@ case $yn3_choice in
     cd
     docker stop qbittorrent
     docker rm qbittorrent
-    cd ${local_dir0}/qbittorrent
+    cd ${dir0}/qbittorrent
     docker-compose down
-    rm -rf ${local_dir0}/qbittorrent
+    rm -rf ${dir0}/qbittorrent
     cd
 
     read -n 1 -p "按任意按鍵以繼續"

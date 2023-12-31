@@ -4,6 +4,8 @@ clear
 script_name="${0##*/}"
 language="zh-hant"
 
+dir0="/root/xray-shell/app-store/app"
+dir1="/root//xray-shell/app-store/app-bak"
 local_dir_lang="./xray-shell/app-store/${language}"
 local_dir0="./xray-shell/app-store/app"
 local_dir1="./xray-shell/app-store/app-bak"
@@ -109,18 +111,18 @@ case $yn_choice in
       echo "Docker 已安裝"
     fi
       read -p "請輸入欲使用的網址：" choice1
-      mkdir -p ${local_dir0}/matrix
-      cd ${local_dir0}/matrix
+      mkdir -p ${dir0}/matrix
+      cd ${dir0}/matrix
       sudo docker run -it --rm \
-      -v ${local_dir0}/matrix/data:/data \
+      -v ${dir0}/matrix/data:/data \
       -e SYNAPSE_SERVER_NAME=$choice1 \
       -e SYNAPSE_REPORT_STATS=yes \
       matrixdotorg/synapse:latest generate
-      cd ${local_dir0}/matrix/data
+      cd ${dir0}/matrix/data
       echo "
 enable_registration: true
 enable_registration_without_verification: true" >> homeserver.yaml
-      cd ${local_dir0}/matrix
+      cd ${dir0}/matrix
       echo "
 version: '3.3'
 services:
@@ -130,7 +132,7 @@ services:
       ports:
         - '8010:8008'
       volumes:
-        - ${local_dir0}/matrix/data:/data
+        - ${dir0}/matrix/data:/data
       environment:
         VIRTUAL_HOST: '$choice1'
         VIRTUAL_PORT: 8008
@@ -156,10 +158,10 @@ esac
   
 case $yn2_choice in
   [Yy])
-    cd ${local_dir0}/matrix
+    cd ${dir0}/matrix
     docker-compose down
-    mkdir -p ${local_dir1}/matrix
-    cp ${local_dir0}/matrix ${local_dir1}/matrix
+    mkdir -p ${dir1}/matrix
+    cp ${dir0}/matrix ${dir1}/matrix
     docker-compose pull matrixdotorg/synapse vectorim/element-web
     docker-compose up -d
 
@@ -176,9 +178,9 @@ case $yn3_choice in
     cd
     docker stop matrix element-web
     docker rm matrix element-web
-    cd ${local_dir0}/matrix
+    cd ${dir0}/matrix
     docker-compose down
-    rm -rf ${local_dir0}/matrix
+    rm -rf ${dir0}/matrix
     cd
 
     read -n 1 -p "按任意按鍵以繼續"

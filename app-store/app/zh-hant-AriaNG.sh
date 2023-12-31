@@ -4,6 +4,8 @@ clear
 script_name="${0##*/}"
 language="zh-hant"
 
+dir0="/root/xray-shell/app-store/app"
+dir1="/root//xray-shell/app-store/app-bak"
 local_dir_lang="./xray-shell/app-store/${language}"
 local_dir0="./xray-shell/app-store/app"
 local_dir1="./xray-shell/app-store/app-bak"
@@ -93,7 +95,7 @@ case $yn_choice in
   [Yy])
     apt install sudo wget curl ca-certificates
     wget -N git.io/aria2.sh && chmod +x aria2.sh
-    ./aria2.sh
+    sudo ./aria2.sh
 
     read -n 1 -p "按任意按鍵以繼續"
     sudo ${local_dir0}/${script_name}

@@ -42,6 +42,10 @@ elif [[ $choice == "2" ]]; then
   curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/language/zh-hant.sh -o ${local_dir0}/zh-hant.sh && chmod +x ${local_dir0}/zh-hant.sh && sudo ${local_dir0}/zh-hant.sh
 elif [[ $choice == "3" ]]; then
   curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/language/zh-hans.sh -o ${local_dir0}/zh-hans.sh && chmod +x ${local_dir0}/zh-hans.sh && sudo ${local_dir0}/zh-hans.sh
+elif [[ $choice == "00" ]]; then
+  cd
+  rm -rf ./xray-shell
+  cd
 elif [[ $choice == "0" ]]; then
   exit
 else

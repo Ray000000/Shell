@@ -4,6 +4,8 @@ clear
 script_name="${0##*/}"
 language="zh-hant"
 
+dir0="/root/xray-shell/app-store/app"
+dir1="/root//xray-shell/app-store/app-bak"
 local_dir_lang="./xray-shell/app-store/${language}"
 local_dir0="./xray-shell/app-store/app"
 local_dir1="./xray-shell/app-store/app-bak"
@@ -32,12 +34,6 @@ if [ ! -d "${local_dir2}" ]; then
   chmod +x ${local_dir2}
 else
   chmod +x ${local_dir2}
-fi
-if [ ! -d "${local_dir2}/${script_name}" ]; then
-  mkdir -p ${local_dir2}/${script_name}
-  chmod +x ${local_dir2}/${script_name}
-else
-  chmod +x ${local_dir2}/${script_name}
 fi
 
 curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/app/${script_name} -o ${local_dir0}/${script_name} && chmod +x ${local_dir0}/${script_name}
@@ -118,15 +114,15 @@ case $yn_choice in
       echo "Docker 已安裝"
     fi
       read -p "請輸入欲使用的密碼：" choice1
-      mkdir -p ${local_dir1}/alist
-      cd ${local_dir1}/alist
+      mkdir -p ${dir0}/alist
+      cd ${dir0}/alist
       echo "
 version: '3.3'
 services:
     alist:
         restart: always
         volumes:
-            - '${local_dir1}/alist:/opt/alist/data'
+            - '${dir0}/alist:/opt/alist/data'
         ports:
             - '5244:5244'
         environment:
@@ -151,10 +147,10 @@ esac
   
 case $yn2_choice in
   [Yy])
-    cd ${local_dir0}/alist
+    cd ${dir0}/alist
     docker-compose down
-    mkdir -p ${local_dir1}/alist
-    cp ${local_dir0}/alist ${local_dir1}/alist
+    mkdir -p ${dir1}/alist
+    cp ${dir0}/alist ${dir1}/alist
     docker-compose pull xhofe/alist
     docker-compose up -d
 
@@ -171,9 +167,9 @@ case $yn3_choice in
     cd
     docker stop alist
     docker rm alist
-    cd ${local_dir0}/alist
+    cd ${dir0}/alist
     docker-compose down
-    rm -rf ${local_dir0}/alist
+    rm -rf ${dir0}/alist
     cd
 
     read -n 1 -p "按任意按鍵以繼續"
