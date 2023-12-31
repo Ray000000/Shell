@@ -39,7 +39,7 @@ fi
 curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/app/${script_name} -o ${local_dir0}/${script_name} && chmod +x ${local_dir0}/${script_name}
 curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/${language}/store.sh -o ${local_dir_lang}/store.sh && chmod +x ${local_dir_lang}/store.sh
 
-echo -e "\e[1m\e[93m〔Rocker.Chat〕\e[0m"
+echo -e "\e[1m\e[93m〔Rocket.Chat〕\e[0m"
 echo "
 Rocket.Chat 是一個開源的即時通訊平台，可用於個人、企業和社群。它提供多種功能，包括：
 
