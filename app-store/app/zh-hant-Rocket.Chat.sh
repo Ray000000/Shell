@@ -49,11 +49,20 @@ Rocket.Chat 是一個開源的即時通訊平台，可用於個人、企業和�
 * 安全性和隱私性
 
 Rocket.Chat 可在各種平台上使用，包括網頁、桌面和行動裝置。它是免費和開源的，因此任何人都可以使用和自訂。"
+echo -e "\e[1m\e[34m----------------------------------------\e[0m"
+
 external_ip=$(curl -s ipv4.ip.sb)
 echo -e "登入網址（安裝完成後可用）：
 http://$external_ip:8020"
 echo -e "建議使用 Nginx Proxy Manager 設定反向代理"
-echo "----------------------------------------"
+echo -e "\e[1m\e[34m----------------------------------------\e[0m"
+
+echo -e "快速腳本：
+sudo apt install curl
+mkdir -p ${local_dir0} && chmod +x ${local_dir0}
+curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/app/${script_name} -o ${local_dir0}/${script_name} && chmod +x ${local_dir0}/${script_name} && ${local_dir0}/${script_name}"
+echo -e "\e[1m\e[34m----------------------------------------\e[0m"
+
 echo "官方網站：
 https://www.rocket.chat/"
 echo -e "\e[1m\e[93m
