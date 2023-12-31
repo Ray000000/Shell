@@ -1,12 +1,54 @@
 #!/bin/bash
+clear
 
 script_name="${0##*/}"
+#--------------------------------------------------<lang>-------------------------------------------------------#
+language="<lang_code>"
 
-clear
+local_dir_lang="./xray-shell/app-store/${language}"
+local_dir0="./xray-shell/app-store/app"
+local_dir1="./xray-shell/app-store/app-bak"
+local_dir2="./xray-shell/file"
+
+if [ ! -d "${local_dir_lang}" ]; then
+  mkdir -p ${local_dir_lang}
+  chmod +x ${local_dir_lang}
+else
+  chmod +x ${local_dir_lang}
+fi
+if [ ! -d "${local_dir0}" ]; then
+  mkdir -p ${local_dir0}
+  chmod +x ${local_dir0}
+else
+  chmod +x ${local_dir0}
+fi
+if [ ! -d "${local_dir1}" ]; then
+  mkdir -p ${local_dir1}
+  chmod +x ${local_dir1}
+else
+  chmod +x ${local_dir1}
+fi
+if [ ! -d "${local_dir2}" ]; then
+  mkdir -p ${local_dir2}
+  chmod +x ${local_dir2}
+else
+  chmod +x ${local_dir2}
+fi
+
+curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/app/${script_name} -o ${local_dir0}/${script_name} && chmod +x ${local_dir0}/${script_name}
+curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/${language}/store.sh -o ${local_dir_lang}/store.sh && chmod +x ${local_dir_lang}/store.sh
+
 echo -e "\e[1m\e[93m〔Application Name〕\e[0m"
 echo "
 Application Introduction and Help"
-echo "----------------------------------------"
+echo -e "\e[1m\e[34m----------------------------------------\e[0m"
+
+echo -e "Use:
+sudo apt install curl
+mkdir -p ${local_dir0} && chmod +x ${local_dir0}
+curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/app/${script_name} -o ${local_dir0}/${script_name} && chmod +x ${local_dir0}/${script_name} && ${local_dir0}/${script_name}"
+echo -e "\e[1m\e[34m----------------------------------------\e[0m"
+
 echo "Official Website:
 https://example.com/"
 echo -e "\e[1m\e[93m
