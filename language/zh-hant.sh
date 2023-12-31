@@ -81,11 +81,12 @@ case $choice in
     sudo ${local_dir1}/${script_name}
     ;;
   2)
-    echo -e "\e[1m\e[93m您的系統資訊如下：\e[0m"
+    echo -e "\e[1m\e[93m
+您的系統資訊如下：
+\e[0m"
     echo "作業系統：$os_info"
     echo "核心版本：$(uname -r)"
-    echo "CPU 型號：$cpu_info
-    "
+    echo "CPU 型號：$cpu_info"
     echo "IPv4 位置：$(curl -s ipv4.ip.sb)"
     echo "IPv6 位置：$(curl -s ipv6.ip.sb)"
     df -h
