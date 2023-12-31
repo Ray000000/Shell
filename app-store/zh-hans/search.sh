@@ -9,10 +9,17 @@ if [[ -n "${update_message}" ]]; then
   eval "${update_message}"
 fi
 
+dir="./xray-shell/app-store/app"
 local_dir0="./xray-shell/app-store/${language}"
 local_dir1="app-store/app/${language}"
 local_dir2="./xray-shell/app-store/app/${language}"
 
+if [ ! -d "${dir}" ]; then
+  mkdir -p ${dir}
+  chmod +x ${dir}
+else
+  chmod +x ${dir}
+fi
 if [ ! -d "${local_dir0}" ]; then
   mkdir -p ${local_dir0}
   chmod +x ${local_dir0}
