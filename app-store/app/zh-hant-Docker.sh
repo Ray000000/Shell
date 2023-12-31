@@ -9,6 +9,12 @@ local_dir0="./xray-shell/app-store/app"
 local_dir1="./xray-shell/app-store/app-bak"
 local_dir2="./xray-shell/file"
 
+if [ ! -d "${local_dir_lang}" ]; then
+  mkdir -p ${local_dir_lang}
+  chmod +x ${local_dir_lang}
+else
+  chmod +x ${local_dir_lang}
+fi
 if [ ! -d "${local_dir0}" ]; then
   mkdir -p ${local_dir0}
   chmod +x ${local_dir0}
@@ -29,7 +35,7 @@ else
 fi
 
 curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/app/${script_name} -o ${local_dir0}/${script_name} && chmod +x ${local_dir0}/${script_name}
-curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/${language}/store.sh -o ${local_dir0}/store.sh && chmod +x ${local_dir0}/store.sh
+curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/${language}/store.sh -o ${local_dir_lang}/store.sh && chmod +x ${local_dir_lang}/store.sh
 
 echo -e "\e[1m\e[93m〔Docker〕\e[0m"
 echo "
@@ -43,7 +49,14 @@ Docker 有許多優點，包括：
 * 安全性：容器可以隔離彼此，這有助於防止安全漏洞的傳播。
 
 Docker 被廣泛使用於各種行業，包括開發、運營和安全。它已成為現代軟體開發和部署的關鍵工具。"
-echo "----------------------------------------"
+echo -e "\e[1m\e[34m----------------------------------------\e[0m"
+
+echo -e "快速腳本：
+sudo apt install curl
+mkdir -p ${local_dir0} && chmod +x ${local_dir0}
+curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/app/${script_name} -o ${local_dir0}/${script_name} && chmod +x ${local_dir0}/${script_name} && ${local_dir0}/${script_name}"
+echo -e "\e[1m\e[34m----------------------------------------\e[0m"
+
 echo "官方網站：
 https://www.docker.com/"
 echo -e "\e[1m\e[93m

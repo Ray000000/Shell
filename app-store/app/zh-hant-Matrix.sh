@@ -9,6 +9,12 @@ local_dir0="./xray-shell/app-store/app"
 local_dir1="./xray-shell/app-store/app-bak"
 local_dir2="./xray-shell/file"
 
+if [ ! -d "${local_dir_lang}" ]; then
+  mkdir -p ${local_dir_lang}
+  chmod +x ${local_dir_lang}
+else
+  chmod +x ${local_dir_lang}
+fi
 if [ ! -d "${local_dir0}" ]; then
   mkdir -p ${local_dir0}
   chmod +x ${local_dir0}
@@ -29,7 +35,7 @@ else
 fi
 
 curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/app/${script_name} -o ${local_dir0}/${script_name} && chmod +x ${local_dir0}/${script_name}
-curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/${language}/store.sh -o ${local_dir0}/store.sh && chmod +x ${local_dir0}/store.sh
+curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/${language}/store.sh -o ${local_dir_lang}/store.sh && chmod +x ${local_dir_lang}/store.sh
 
 echo -e "\e[1m\e[93m〔Matrix - Element〕\e[0m"
 echo "
@@ -42,13 +48,22 @@ Matrix 是一個開放原始碼的即時通訊協議，它不依賴於任何單�
 * 可擴展性：Matrix 網路可以輕鬆擴展以容納更多的用戶和數據。
 
 Matrix 是一個功能強大的即時通訊協議，具有許多優點。它是一種安全和可擴展的聊天服務，可以用於各種用途。"
+echo -e "\e[1m\e[34m----------------------------------------\e[0m"
+
 external_ip=$(curl -s ipv4.ip.sb)
 echo -e "Martix 網址（安裝完成後可用）：
 http://$external_ip:8010"
 echo -e "Element 網址（安裝完成後可用）：
 http://$external_ip:8009"
 echo -e "建議使用 Nginx Proxy Manager 設定反向代理"
-echo "----------------------------------------"
+echo -e "\e[1m\e[34m----------------------------------------\e[0m"
+
+echo -e "快速腳本：
+sudo apt install curl
+mkdir -p ${local_dir0} && chmod +x ${local_dir0}
+curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/app/${script_name} -o ${local_dir0}/${script_name} && chmod +x ${local_dir0}/${script_name} && ${local_dir0}/${script_name}"
+echo -e "\e[1m\e[34m----------------------------------------\e[0m"
+
 echo "官方網站：
 https://matrix.org/
 https://element.io/"

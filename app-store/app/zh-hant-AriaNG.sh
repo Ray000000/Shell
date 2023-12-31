@@ -9,6 +9,12 @@ local_dir0="./xray-shell/app-store/app"
 local_dir1="./xray-shell/app-store/app-bak"
 local_dir2="./xray-shell/file"
 
+if [ ! -d "${local_dir_lang}" ]; then
+  mkdir -p ${local_dir_lang}
+  chmod +x ${local_dir_lang}
+else
+  chmod +x ${local_dir_lang}
+fi
 if [ ! -d "${local_dir0}" ]; then
   mkdir -p ${local_dir0}
   chmod +x ${local_dir0}
@@ -29,7 +35,7 @@ else
 fi
 
 curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/app/${script_name} -o ${local_dir0}/${script_name} && chmod +x ${local_dir0}/${script_name}
-curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/${language}/store.sh -o ${local_dir0}/store.sh && chmod +x ${local_dir0}/store.sh
+curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/${language}/store.sh -o ${local_dir_lang}/store.sh && chmod +x ${local_dir_lang}/store.sh
 
 echo -e "\e[1m\e[93m〔AriaNG〕\e[0m"
 echo "
@@ -53,7 +59,14 @@ AriaNG 適合：
 * 在企業內部加速下載
 
 如果你符合其中任何一個條件，那麼 AriaNG 是一個不錯的選擇。"
-echo "----------------------------------------"
+echo -e "\e[1m\e[34m----------------------------------------\e[0m"
+
+echo -e "快速腳本：
+sudo apt install curl
+mkdir -p ${local_dir0} && chmod +x ${local_dir0}
+curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/app/${script_name} -o ${local_dir0}/${script_name} && chmod +x ${local_dir0}/${script_name} && ${local_dir0}/${script_name}"
+echo -e "\e[1m\e[34m----------------------------------------\e[0m"
+
 echo "官方網站：
 https://github.com/P3TERX/aria2.sh"
 echo -e "\e[1m\e[93m

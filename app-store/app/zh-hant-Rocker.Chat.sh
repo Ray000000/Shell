@@ -9,6 +9,12 @@ local_dir0="./xray-shell/app-store/app"
 local_dir1="./xray-shell/app-store/app-bak"
 local_dir2="./xray-shell/file"
 
+if [ ! -d "${local_dir_lang}" ]; then
+  mkdir -p ${local_dir_lang}
+  chmod +x ${local_dir_lang}
+else
+  chmod +x ${local_dir_lang}
+fi
 if [ ! -d "${local_dir0}" ]; then
   mkdir -p ${local_dir0}
   chmod +x ${local_dir0}
@@ -27,6 +33,9 @@ if [ ! -d "${local_dir2}" ]; then
 else
   chmod +x ${local_dir2}
 fi
+
+curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/app/${script_name} -o ${local_dir0}/${script_name} && chmod +x ${local_dir0}/${script_name}
+curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/${language}/store.sh -o ${local_dir_lang}/store.sh && chmod +x ${local_dir_lang}/store.sh
 
 echo -e "\e[1m\e[93m〔Rocker.Chat〕\e[0m"
 echo "
