@@ -28,7 +28,7 @@ echo -e "\e[1m\e[93m
 \e[0m"
 echo "1. 安裝"
 echo "2. 更新"
-echo -e "\e[1m\e[31m2. 解除安裝（不保存資料）\e[0m"
+echo -e "\e[1m\e[31m3. 解除安裝（不保存資料）\e[0m"
 echo -e "\e[1m\e[32m0. 回到菜單\e[0m"
 
 read -p "請輸入：" choice
