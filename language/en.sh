@@ -33,9 +33,9 @@ Please choose the task you want to perform:
 \e[0m"
 echo "1. Check and update the system"
 echo "2. System information"
-echo "3. App Store"
+echo "3. App store"
 echo "4. Allow root login"
-echo "5. Set up Shell shortcuts"
+echo "5. Set Shell shortcuts"
 echo "00. Advanced options"
 echo -e "\e[1m\e[32m0. Exit\e[0m"
 
@@ -81,11 +81,12 @@ case $choice in
     sudo ${local_dir1}/${script_name}
     ;;
   2)
-    echo -e "\e[1m\e[93mYour system information is as follows:\e[0m"
+    echo -e "\e[1m\e[93m
+Your system information is as follows:
+\e[0m"
     echo "Operating System: $os_info"
     echo "Kernel Version: $(uname -r)"
-    echo "CPU Model: $cpu_info
-    "
+    echo "CPU Model: $cpu_info"
     echo "IPv4 Address: $(curl -s ipv4.ip.sb)"
     echo "IPv6 Address: $(curl -s ipv6.ip.sb)"
     df -h
@@ -103,7 +104,7 @@ PasswordAuthentication yes" >> /etc/ssh/sshd_config
     /etc/init.d/ssh restart
     ;;
   5)
-    read -p "Please enter the shortcut: " choice1
+    read -p "Please enter a shortcut: " choice1
     echo "alias $choice1='curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/language/${script_name} -o ${local_dir1}/${script_name} && chmod +x ${local_dir1}/${script_name} && sudo ${local_dir1}/${script_name}'" >> ~/.bashrc
     sleep 1
     source ~/.bashrc
