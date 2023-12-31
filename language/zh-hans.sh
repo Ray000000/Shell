@@ -36,7 +36,7 @@ echo "2. 系统信息"
 echo "3. 应用商店"
 echo "4. 允许管理员帐号登录"
 echo "5. 设置 Shell 快捷方式"
-echo "00. 进阶选项"
+echo "00. 高级选项"
 echo -e "\e[1m\e[32m0. Exit\e[0m"
 
 read -p "请输入：" choice
@@ -77,19 +77,20 @@ case $choice in
     fi
     clear
     sudo neofetch
-    read -n 1 -p "按任意键以继续"
+    read -n 1 -p "按任意按键以继续"
     sudo ${local_dir1}/${script_name}
     ;;
   2)
-    echo -e "\e[1m\e[93m您的系统信息如下：\e[0m"
+    echo -e "\e[1m\e[93m
+您的系统信息如下：
+\e[0m"
     echo "操作系统：$os_info"
     echo "核心版本：$(uname -r)"
-    echo "CPU 型号：$cpu_info
-    "
-    echo "IPv4 位置：$(curl -s ipv4.ip.sb)"
-    echo "IPv6 位置：$(curl -s ipv6.ip.sb)"
+    echo "CPU 型号：$cpu_info"
+    echo "IPv4 地址：$(curl -s ipv4.ip.sb)"
+    echo "IPv6 地址：$(curl -s ipv6.ip.sb)"
     df -h
-    read -n 1 -p "按任意键以继续"
+    read -n 1 -p "按任意按键以继续"
     sudo ${local_dir1}/${script_name}
     ;;
   3)
@@ -121,7 +122,7 @@ PasswordAuthentication yes" >> /etc/ssh/sshd_config
       1)
         echo -e "\e[1m\e[93m您的系统日志如下：\e[0m"
         cat /var/log/syslog
-        read -n 1 -p "按任意键以继续"
+        read -n 1 -p "按任意按键以继续"
         sudo ${local_dir1}/${script_name}
         ;;
       2)
@@ -129,7 +130,7 @@ PasswordAuthentication yes" >> /etc/ssh/sshd_config
         cat /etc/passwd
         echo -e "\e[1m\e[93m您的所有组信息如下：\e[0m"
         cat /etc/group
-        read -n 1 -p "按任意键以继续"
+        read -n 1 -p "按任意按键以继续"
         sudo ${local_dir1}/${script_name}
         ;;
       0)
@@ -137,7 +138,7 @@ PasswordAuthentication yes" >> /etc/ssh/sshd_config
         ;;
       *)
         echo -e "\e[1m\e[31m错误：无效选项\e[0m"
-        read -n 1 -p "按任意键以继续"
+        read -n 1 -p "按任意按键以继续"
         sudo ${local_dir1}/${script_name}
         ;;
     esac
@@ -147,7 +148,7 @@ PasswordAuthentication yes" >> /etc/ssh/sshd_config
     ;;
   *)
     echo -e "\e[1m\e[31m错误：无效选项\e[0m"
-    read -n 1 -p "按任意键以继续"
+    read -n 1 -p "按任意按键以继续"
     sudo ${local_dir1}/${script_name}
     ;;
 esac
