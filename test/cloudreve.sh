@@ -25,7 +25,7 @@ WantedBy=multi-user.target" >> /usr/lib/systemd/system/cloudreve.service
 systemctl daemon-reload
 systemctl start cloudreve
 systemctl enable cloudreve
-
+sudo apt install -y libreoffice libvips-tools ffmpeg
 
 systemctl start cloudreve
 
