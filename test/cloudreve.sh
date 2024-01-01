@@ -1,7 +1,6 @@
 sudo wget https://github.com/cloudreve/Cloudreve/releases/download/3.8.3/cloudreve_3.8.3_linux_amd64.tar.gz
 tar -zxvf cloudreve_3.8.3_linux_amd64.tar.gz
 chmod +x ./cloudreve
-./cloudreve
 echo "
 [Unit]
 Description=Cloudreve
