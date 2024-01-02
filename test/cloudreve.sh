@@ -33,3 +33,6 @@ systemctl stop cloudreve
 systemctl restart cloudreve
 
 systemctl status cloudreve
+
+
+./cloudreve
