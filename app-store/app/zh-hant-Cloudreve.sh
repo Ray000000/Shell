@@ -10,6 +10,7 @@ local_dir_lang="./xray-shell/app-store/${language}"
 local_dir0="./xray-shell/app-store/app"
 local_dir1="./xray-shell/app-store/app-bak"
 local_dir2="./xray-shell/file"
+local_dir3="./xray-shell/app-store/app-bak/cloudreve"
 
 if [ ! -d "${local_dir_lang}" ]; then
   mkdir -p ${local_dir_lang}
@@ -35,6 +36,12 @@ if [ ! -d "${local_dir2}" ]; then
 else
   chmod +x ${local_dir2}
 fi
+if [ ! -d "${local_dir3}" ]; then
+  mkdir -p ${local_dir3}
+  chmod +x ${local_dir3}
+else
+  chmod +x ${local_dir3}
+fi
 
 curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/app/${script_name} -o ${local_dir0}/${script_name} && chmod +x ${local_dir0}/${script_name}
 curl -sS https://raw.githubusercontent.com/Ray000000/Shell/main/app-store/${language}/store.sh -o ${local_dir_lang}/store.sh && chmod +x ${local_dir_lang}/store.sh
@@ -52,7 +59,7 @@ Cloudreve 的優點包括：
 Cloudreve 適合需要搭建私有或公用網盤系統的人使用。"
 echo -e "\e[1m\e[34m----------------------------------------\e[0m"
 
-logs=$(docker exec -it cloudreve ./cloudreve --database-script ResetAdminPassword)
+logs=$(./cloudreve --database-script ResetAdminPassword)
 password=$(echo "$logs" | awk '/Initial admin user password changed to:/ {gsub("to:", ""); print $NF}')
 external_ip=$(curl -s ipv4.ip.sb)
 aria2_rpc_file="${local_dir2}/aria2_rpc.txt"
@@ -77,8 +84,7 @@ echo -e "\e[1m\e[93m
 請選擇您要執行的任務：
 \e[0m"
 echo "1. 安裝"
-echo "2. 更新"
-echo -e "\e[1m\e[31m3. 解除安裝（不保存資料）\e[0m"
+echo -e "\e[1m\e[31m2. 解除安裝（不保存資料）\e[0m"
 echo -e "\e[1m\e[32m0. Back\e[0m"
 
 read -p "請輸入：" choice
@@ -88,13 +94,9 @@ if [[ $choice == "1" ]]; then
   echo -e "\e[1m\e[31mN. 取消安裝\e[0m"
   read -p "請輸入：" yn_choice
 elif [[ $choice == "2" ]]; then
-  echo -e "\e[1m\e[34mY. 確認更新\e[0m"
-  echo -e "\e[1m\e[31mN. 取消更新\e[0m"
-  read -p "請輸入：" yn2_choice
-elif [[ $choice == "3" ]]; then
   echo -e "\e[1m\e[34mY. 確認解除安裝\e[0m"
   echo -e "\e[1m\e[31mN. 取消解除安裝\e[0m"
-  read -p "請輸入：" yn3_choice
+  read -p "請輸入：" yn2_choice
 elif [[ $choice == "0" ]]; then
   sudo ${local_dir_lang}/store.sh
 else
@@ -105,63 +107,38 @@ fi
 
 case $yn_choice in
   [Yy])
-    if ! command -v docker &>/dev/null; then
-      curl -fsSL https://get.docker.com | sh
-      curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-      chmod +x /usr/local/bin/docker-compose
-      systemctl start docker
-      systemctl enable docker
-    else
-      echo "Docker 已安裝"
-    fi
-      read -p "請輸入 aria2 的 RPC Token：" choice1
-      mkdir -vp ${dir0}/cloudreve/{uploads,avatar} \
-      && touch ${dir0}/cloudreve/conf.ini \
-      && touch ${dir0}/cloudreve/cloudreve.db \
-      && mkdir -p ${dir0}/cloudreve/aria2/config \
-      && mkdir -p ${dir0}/cloudreve/data/aria2 \
-      && chmod -R 777 ${dir0}/cloudreve/data/aria2
-      cd ${dir0}/cloudreve
-      echo "
-version: '3.8'
-services:
-  cloudreve:
-    container_name: 'cloudreve'
-    image: 'cloudreve/cloudreve:latest'
-    restart: unless-stopped
-    ports:
-      - '5212:5212'
-    volumes:
-      - ${dir0}/cloudreve/temp_data:/data
-      - ${dir0}/cloudreve/uploads:/cloudreve/uploads
-      - ${dir0}/cloudreve/conf.ini:/cloudreve/conf.ini
-      - ${dir0}/cloudreve/cloudreve.db:/cloudreve/cloudreve.db
-      - ${dir0}/cloudreve/avatar:/cloudreve/avatar
-    depends_on:
-      - aria2-pro
-  aria2-pro:
-    container_name: aria2-pro
-    image: 'p3terx/aria2-pro'
-    restart: unless-stopped
-    environment:
-      - RPC_SECRET=$choice1
-      - RPC_PORT=6800
-    volumes:
-      - ${dir0}/cloudreve/aria2/config:/config
-      - ${dir0}/cloudreve/aria2/temp_data:/data
-volumes:
-  temp_data:
-    driver: local
-    driver_opts:
-      type: none
-      device: $PWD/data
-      o: bind" >> docker-compose.yml
-    docker-compose up -d
-    docker update --restart=always cloudreve aria2-pro
-    cd
-    echo "$choice1" > ${local_dir2}/aria2_rpc.txt
-    sudo apt install -y ffmpeg
-    sudo apt install -y libvips-tools
+    sudo wget https://github.com/cloudreve/Cloudreve/releases/download/3.8.3/cloudreve_3.8.3_linux_amd64.tar.gz
+    tar -zxvf cloudreve_3.8.3_linux_amd64.tar.gz
+    chmod +x ./cloudreve
+    systemctl stop cloudreve
+    rm -rf /usr/lib/systemd/system/cloudreve.service
+    echo "
+[Unit]
+Description=Cloudreve
+Documentation=https://docs.cloudreve.org
+After=network.target
+After=mysqld.service
+Wants=network.target
+
+[Service]
+WorkingDirectory=/root
+ExecStart=/root/cloudreve
+Restart=on-abnormal
+RestartSec=5s
+KillMode=mixed
+
+StandardOutput=null
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target" >> /usr/lib/systemd/system/cloudreve.service
+    systemctl daemon-reload
+    systemctl start cloudreve
+    systemctl enable cloudreve
+    systemctl start cloudreve
+    sudo apt install -y libvips-tools ffmpeg
+    rm -rf cloudreve_3.8.3_linux_amd64.tar.gz
+    ./cloudreve
   
     read -n 1 -p "按任意按鍵以繼續"
     sudo ${local_dir0}/${script_name}
@@ -170,32 +147,12 @@ volumes:
     sudo ${local_dir0}/${script_name}
     ;;
 esac
-  
+
 case $yn2_choice in
   [Yy])
-    cd ${dir0}/cloudreve
-    docker-compose down
-    mkdir -p ${dir1}/cloudreve
-    cp ${dir1}/cloudreve ${dir0}/cloudreve
-    docker-compose pull cloudreve/cloudreve p3terx/aria2-pro
-    docker-compose up -d
-
-    read -n 1 -p "按任意按鍵以繼續"
-    sudo ${local_dir0}/${script_name}
-    ;;
-  [Nn])
-    sudo ${local_dir0}/${script_name}
-    ;;
-esac
-
-case $yn3_choice in
-  [Yy])
     cd
-    docker stop cloudreve aria2-pro
-    docker rm cloudreve aria2-pro
-    cd ${dir0}/cloudreve
-    docker-compose down
-    rm -rf ${dir0}/cloudreve
+    systemctl stop cloudreve
+    rm -rf /usr/lib/systemd/system/cloudreve.service
     cd
 
     read -n 1 -p "按任意按鍵以繼續"
