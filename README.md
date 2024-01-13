@@ -18,14 +18,11 @@
 >Xray-Shell
 >>System
 >>>Debian (10, 11, 12)
-
 >>>Ubuntu (20.04, 22.04)
 
 >>Languages
 >>>English
-
 >>>繁體中文
-
 >>>简体中文
 
 ***
